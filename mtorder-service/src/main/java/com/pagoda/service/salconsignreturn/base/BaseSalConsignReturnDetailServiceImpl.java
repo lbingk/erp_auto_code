@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsignreturn.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsignreturn.*;
-import com.pagoda.api.salconsignreturn.*;
-import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsignreturn.*;
+import com.pagoda.api.dto.salconsignreturn.*;
+import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.repo.salconsignreturn.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -239,6 +241,32 @@ public abstract class BaseSalConsignReturnDetailServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignReturnDetail.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "getSCRDetailsByReturnId", notes = "通过退货单头表id获取退货单明细")
+  @Override
+  public Page<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
+      @ApiParam("return_id") Long returnId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.getSCRDetailsByReturnId(returnId, creatorOrgCode, codeList, pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "deleteDetailByReturnId", notes = "根据returnId删除退货单明细")
+  @Override
+  @Transactional(rollbackFor = ServiceException.class)
+  public Integer deleteDetailByReturnId(@ApiParam("return_id") Long returnId) {
+    try {
+      return repository.deleteDetailByReturnId(returnId);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

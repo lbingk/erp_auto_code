@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: @package.environment@
   application:
     name: mtorder  
     index: ${random.uuid}

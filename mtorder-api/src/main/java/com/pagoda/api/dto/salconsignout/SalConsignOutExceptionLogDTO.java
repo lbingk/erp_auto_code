@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsignout;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 

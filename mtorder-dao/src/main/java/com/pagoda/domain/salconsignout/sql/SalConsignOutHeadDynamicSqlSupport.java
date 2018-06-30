@@ -1,8 +1,10 @@
 package com.pagoda.domain.salconsignout.sql;
 
-import com.pagoda.domain.salconsignout.*;
+import lombok.Data;
 import java.sql.JDBCType;
 import java.util.Date;
+
+import com.pagoda.domain.salconsignout.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 

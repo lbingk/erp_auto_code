@@ -1,5 +1,8 @@
 package com.pagoda.api;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salorderhead;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -198,8 +198,8 @@ public class SalOrderHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -225,7 +225,7 @@ public class SalOrderHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "发货出库单号",
+    value = "调价单号[adjustNo]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c207"
   )
@@ -522,8 +522,8 @@ public class SalOrderHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -549,7 +549,7 @@ public class SalOrderHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "totalAmt",
-    value = "总金额",
+    value = "总金额[配送价*数量]",
     dataType = "",
     notes = "5b35d2b49d2feff19b40cb44"
   )

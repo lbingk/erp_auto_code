@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.purapplyorder;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -270,8 +270,8 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "purUnitId",
     scene = "",
-    nameCN = "采购计量单位ID",
-    comment = "采购计量单位ID",
+    nameCN = "采购单位ID",
+    comment = "采购单位ID",
     nameEN = "pur_unit_id",
     type = "长整型",
     format = "",
@@ -297,7 +297,7 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "purUnitId",
-    value = "采购计量单位ID",
+    value = "采购单位ID",
     dataType = "",
     notes = "5b35d7329d2feff19b413980"
   )
@@ -306,8 +306,8 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "purUnitCode",
     scene = "",
-    nameCN = "采购计量单位代码[冗余]",
-    comment = "采购计量单位代码[冗余]",
+    nameCN = "采购单位代码[冗余]",
+    comment = "采购单位代码[冗余]",
     nameEN = "pur_unit_code",
     type = "字符串",
     format = "",
@@ -333,7 +333,7 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "purUnitCode",
-    value = "采购计量单位代码[冗余]",
+    value = "采购单位代码[冗余]",
     dataType = "",
     notes = "5b35d7329d2feff19b41398b"
   )
@@ -342,8 +342,8 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "purUnitName",
     scene = "",
-    nameCN = "采购计量单位名称[冗余]",
-    comment = "采购计量单位名称[冗余]",
+    nameCN = "采购单位名称[冗余]",
+    comment = "采购单位名称[冗余]",
     nameEN = "pur_unit_name",
     type = "字符串",
     format = "",
@@ -369,7 +369,7 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "purUnitName",
-    value = "采购计量单位名称[冗余]",
+    value = "采购单位名称[冗余]",
     dataType = "",
     notes = "5b35d7329d2feff19b413987"
   )
@@ -378,8 +378,8 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "basUnitId",
     scene = "",
-    nameCN = "基础计量单位ID",
-    comment = "基础计量单位ID",
+    nameCN = "基本单位ID(即最小单位)",
+    comment = "基本单位ID(即最小单位)",
     nameEN = "bas_unit_id",
     type = "长整型",
     format = "",
@@ -405,7 +405,7 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "basUnitId",
-    value = "基础计量单位ID",
+    value = "基本单位ID(即最小单位)",
     dataType = "",
     notes = "5b35d7329d2feff19b413991"
   )
@@ -414,8 +414,8 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "basUnitCode",
     scene = "",
-    nameCN = "基础计量单位代码[冗余]",
-    comment = "基础计量单位代码[冗余]",
+    nameCN = "基本单位代码[冗余]",
+    comment = "基本单位代码[冗余]",
     nameEN = "bas_unit_code",
     type = "字符串",
     format = "",
@@ -441,7 +441,7 @@ public class PurApplyDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "basUnitCode",
-    value = "基础计量单位代码[冗余]",
+    value = "基本单位代码[冗余]",
     dataType = "",
     notes = "5b35d7329d2feff19b41398f"
   )

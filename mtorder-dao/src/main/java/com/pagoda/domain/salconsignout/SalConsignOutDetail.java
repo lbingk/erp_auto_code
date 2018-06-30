@@ -1,16 +1,10 @@
 package com.pagoda.domain.salconsignout;
 
-import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salconsignout.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 发货出库单明细表实体定义
@@ -263,8 +267,8 @@ public class SalConsignOutDetail extends SalConsignOutDetailDTO implements Seria
   @FieldMeta(
     name = "salUnitId",
     scene = "",
-    nameCN = "销售计量单位ID",
-    comment = "销售计量单位ID",
+    nameCN = "销售单位ID",
+    comment = "销售单位ID",
     nameEN = "sal_unit_id",
     type = "长整型",
     format = "",
@@ -293,7 +297,7 @@ public class SalConsignOutDetail extends SalConsignOutDetailDTO implements Seria
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '销售计量单位ID'"
+    columnDefinition = "BIGINT   COMMENT '销售单位ID'"
   )
   private Long salUnitId;
 
@@ -448,8 +452,8 @@ public class SalConsignOutDetail extends SalConsignOutDetailDTO implements Seria
   @FieldMeta(
     name = "note",
     scene = "",
-    nameCN = "提示信息[用于回写出库审核时记录异常出库失败的原因]",
-    comment = "提示信息[用于回写出库审核时记录异常出库失败的原因]",
+    nameCN = "提示信息",
+    comment = "提示信息",
     nameEN = "note",
     type = "字符串",
     format = "",
@@ -478,7 +482,7 @@ public class SalConsignOutDetail extends SalConsignOutDetailDTO implements Seria
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(300)   COMMENT '提示信息[用于回写出库审核时记录异常出库失败的原因]'"
+    columnDefinition = "varchar(300)   COMMENT '提示信息'"
   )
   private String note;
 

@@ -1,17 +1,19 @@
 package com.pagoda.service.salorderhead.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salorderhead.*;
-import com.pagoda.api.salorderhead.*;
-import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salorderhead.*;
+import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.domain.salorderhead.*;
 import com.pagoda.repo.salorderhead.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -289,13 +291,13 @@ public abstract class BaseSalPreOrderDetailServiceImpl
   @ApiOperation(value = "findDetailForAppend", notes = "查询追加预订单的明细")
   @Override
   public Page<SalPreOrderDetailDTO> findDetailForAppend(
-      @ApiParam("sal_pre_order_id") String salPreOrderId,
-      @ApiParam("detail_status") Integer detailStatus,
-      @ApiParam("preArrivalDate") String preArrivalDate,
+      @ApiParam("pre_order_id") List<Long> preOrderId,
+      @ApiParam("detail_status") List<Integer> detailStatus,
+      @ApiParam("pre_arrival_date") java.util.Date preArrivalDate,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
-      return repository.findDetailForAppend(salPreOrderId, detailStatus, preArrivalDate, pageable);
+      return repository.findDetailForAppend(preOrderId, detailStatus, preArrivalDate, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

@@ -1,16 +1,10 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salorderhead.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售预订单明细表实体定义
@@ -929,8 +933,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "basUnitId",
     scene = "",
-    nameCN = "基础计量单位ID",
-    comment = "基础计量单位ID",
+    nameCN = "基本单位ID(即最小单位)",
+    comment = "基本单位ID(即最小单位)",
     nameEN = "bas_unit_id",
     type = "长整型",
     format = "",
@@ -959,15 +963,15 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '基础计量单位ID'"
+    columnDefinition = "BIGINT   COMMENT '基本单位ID(即最小单位)'"
   )
   private Long basUnitId;
 
   @FieldMeta(
     name = "basUnitCode",
     scene = "",
-    nameCN = "基础计量单位代码[冗余]",
-    comment = "基础计量单位代码[冗余]",
+    nameCN = "基本单位代码[冗余]",
+    comment = "基本单位代码[冗余]",
     nameEN = "bas_unit_code",
     type = "字符串",
     format = "",
@@ -996,7 +1000,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '基础计量单位代码[冗余]'"
+    columnDefinition = "varchar(35)   COMMENT '基本单位代码[冗余]'"
   )
   private String basUnitCode;
 
@@ -1114,8 +1118,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "报价(采购价)",
-    comment = "报价(采购价)",
+    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -1144,15 +1148,15 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '报价(采购价)'"
+    columnDefinition = "decimal(18,10)   COMMENT '配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]'"
   )
   private java.math.BigDecimal price;
 
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -1181,7 +1185,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总金额'"
+    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
   )
   private java.math.BigDecimal totalAmt;
 

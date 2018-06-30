@@ -1,16 +1,10 @@
 package com.pagoda.domain.salconsign;
 
-import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salconsign.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 发货单明细表实体定义
@@ -522,8 +526,8 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
   @FieldMeta(
     name = "salConOutDepotId",
     scene = "",
-    nameCN = "默认销售出库库房",
-    comment = "默认销售出库库房",
+    nameCN = "默认销售出库库房ID",
+    comment = "默认销售出库库房ID",
     nameEN = "sal_con_out_depot_id",
     type = "长整型",
     format = "",
@@ -552,7 +556,7 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '默认销售出库库房'"
+    columnDefinition = "BIGINT   COMMENT '默认销售出库库房ID'"
   )
   private Long salConOutDepotId;
 
@@ -781,8 +785,8 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
   @FieldMeta(
     name = "taxRate",
     scene = "",
-    nameCN = "机构商品税率",
-    comment = "机构商品税率",
+    nameCN = "税率",
+    comment = "税率",
     nameEN = "tax_rate",
     type = "小数",
     format = "",
@@ -810,16 +814,16 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
     name = "\"tax_rate\"",
     nullable = true,
     precision = 0,
-    scale = 6,
-    columnDefinition = "decimal(10,10)   COMMENT '机构商品税率'"
+    scale = 4,
+    columnDefinition = "decimal(10,10)   COMMENT '税率'"
   )
   private java.math.BigDecimal taxRate;
 
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "报价(采购价)",
-    comment = "报价(采购价)",
+    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -848,15 +852,15 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '报价(采购价)'"
+    columnDefinition = "decimal(18,10)   COMMENT '配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]'"
   )
   private java.math.BigDecimal price;
 
   @FieldMeta(
     name = "discountRate",
     scene = "",
-    nameCN = "折扣率[1为原价,0.9为9折]",
-    comment = "折扣率[1为原价,0.9为9折]",
+    nameCN = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
+    comment = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
     nameEN = "discount_rate",
     type = "小数",
     format = "",
@@ -885,7 +889,7 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
     nullable = true,
     precision = 0,
     scale = 4,
-    columnDefinition = "decimal(10,10)   COMMENT '折扣率[1为原价,0.9为9折]'"
+    columnDefinition = "decimal(10,10)   COMMENT '折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]'"
   )
   private java.math.BigDecimal discountRate;
 
@@ -929,8 +933,8 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
   @FieldMeta(
     name = "discountPrice",
     scene = "",
-    nameCN = "折后单价[含税]",
-    comment = "折后单价[含税]",
+    nameCN = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
+    comment = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
     nameEN = "discount_price",
     type = "小数",
     format = "",
@@ -959,7 +963,7 @@ public class SalConsignDetail extends SalConsignDetailDTO implements Serializabl
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '折后单价[含税]'"
+    columnDefinition = "decimal(18,10)   COMMENT '折后单价(含优惠)[=已发货单价*折扣，四舍五入]'"
   )
   private java.math.BigDecimal discountPrice;
 

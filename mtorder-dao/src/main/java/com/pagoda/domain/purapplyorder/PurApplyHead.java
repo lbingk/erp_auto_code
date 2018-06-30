@@ -1,16 +1,10 @@
 package com.pagoda.domain.purapplyorder;
 
-import com.pagoda.api.dto.purapplyorder.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.purapplyorder.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 采购请购单头表实体定义
@@ -189,8 +193,8 @@ public class PurApplyHead extends PurApplyHeadDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -219,7 +223,7 @@ public class PurApplyHead extends PurApplyHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '发货出库单号'"
+    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
   )
   private String seqno;
 

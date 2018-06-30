@@ -1,11 +1,14 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salorderhead.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -200,7 +203,7 @@ public interface BaseSalPreOrderDetailService {
   /**
    * 查询追加预订单的明细
    *
-   * @param salPreOrderId
+   * @param preOrderId
    * @param detailStatus
    * @param preArrivalDate
    * @param pageable
@@ -209,9 +212,9 @@ public interface BaseSalPreOrderDetailService {
    */
   @ApiOperation(value = "findDetailForAppend", notes = "")
   Page<SalPreOrderDetailDTO> findDetailForAppend(
-      @ApiParam("sal_pre_order_id") String salPreOrderId,
-      @ApiParam("detail_status") Integer detailStatus,
-      @ApiParam("preArrivalDate") String preArrivalDate,
+      @ApiParam("pre_order_id") List<Long> preOrderId,
+      @ApiParam("detail_status") List<Integer> detailStatus,
+      @ApiParam("pre_arrival_date") java.util.Date preArrivalDate,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

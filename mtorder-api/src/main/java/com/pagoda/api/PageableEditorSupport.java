@@ -2,8 +2,9 @@ package com.pagoda.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import java.beans.PropertyEditorSupport;
 import org.springframework.util.StringUtils;
+
+import java.beans.PropertyEditorSupport;
 
 /**
  * PageParam转换器，将http请求的字符串转换成PageParam

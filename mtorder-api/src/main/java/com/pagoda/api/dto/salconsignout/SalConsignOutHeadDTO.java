@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsignout;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -162,8 +162,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -189,7 +189,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "发货出库单号",
+    value = "调价单号[adjustNo]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c207"
   )
@@ -234,8 +234,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "conId",
     scene = "",
-    nameCN = "发货单ID",
-    comment = "发货单ID",
+    nameCN = "发货单ID[conId]",
+    comment = "发货单ID[conId]",
     nameEN = "con_id",
     type = "长整型",
     format = "",
@@ -261,7 +261,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "conId",
-    value = "发货单ID",
+    value = "发货单ID[conId]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c209"
   )
@@ -270,8 +270,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "conSeqno",
     scene = "",
-    nameCN = "发货单号[冗余]",
-    comment = "发货单号[冗余]",
+    nameCN = "发货单号",
+    comment = "发货单号",
     nameEN = "con_seqno",
     type = "字符串",
     format = "",
@@ -297,7 +297,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "conSeqno",
-    value = "发货单号[冗余]",
+    value = "发货单号",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c20b"
   )
@@ -594,8 +594,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "实发数量",
-    comment = "实发数量",
+    nameCN = "已发数量",
+    comment = "已发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -621,7 +621,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedQty",
-    value = "实发数量",
+    value = "已发数量",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21d"
   )
@@ -630,8 +630,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedGrossWeight",
     scene = "",
-    nameCN = "实发毛重",
-    comment = "实发毛重",
+    nameCN = "已发毛重",
+    comment = "已发毛重",
     nameEN = "shipped_gross_weight",
     type = "小数",
     format = "",
@@ -657,7 +657,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedGrossWeight",
-    value = "实发毛重",
+    value = "已发毛重",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c221"
   )
@@ -666,8 +666,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedNetWeight",
     scene = "",
-    nameCN = "实发净重",
-    comment = "实发净重",
+    nameCN = "已发净重",
+    comment = "已发净重",
     nameEN = "shipped_net_weight",
     type = "小数",
     format = "",
@@ -693,7 +693,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedNetWeight",
-    value = "实发净重",
+    value = "已发净重",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21f"
   )
@@ -702,8 +702,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedVolume",
     scene = "",
-    nameCN = "实发体积",
-    comment = "实发体积",
+    nameCN = "已发体积",
+    comment = "已发体积",
     nameEN = "shipped_volume",
     type = "小数",
     format = "",
@@ -729,7 +729,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedVolume",
-    value = "实发体积",
+    value = "已发体积",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c223"
   )
@@ -738,8 +738,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "实发金额[实发数量*实发单价]",
-    comment = "实发金额[实发数量*实发单价]",
+    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -765,7 +765,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedAmt",
-    value = "实发金额[实发数量*实发单价]",
+    value = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c227"
   )

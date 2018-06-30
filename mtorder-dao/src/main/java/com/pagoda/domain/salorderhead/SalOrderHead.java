@@ -1,16 +1,10 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salorderhead.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售订单实体定义
@@ -226,8 +230,8 @@ public class SalOrderHead extends SalOrderHeadDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -256,7 +260,7 @@ public class SalOrderHead extends SalOrderHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '发货出库单号'"
+    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
   )
   private String seqno;
 
@@ -560,8 +564,8 @@ public class SalOrderHead extends SalOrderHeadDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -590,7 +594,7 @@ public class SalOrderHead extends SalOrderHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总金额'"
+    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
   )
   private java.math.BigDecimal totalAmt;
 

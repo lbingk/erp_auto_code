@@ -128,6 +128,8 @@ public class SalPreOrderHeadController {
    * @param cusOrgName
    * @param remark
    * @param entryDate
+   * @param totalAmt
+   * @param totalRequestQty
    * @param pageable
    * @return
    */
@@ -147,6 +149,9 @@ public class SalPreOrderHeadController {
       @RequestParam(required = false, value = "cusOrgName") String cusOrgName,
       @RequestParam(required = false, value = "remark") String remark,
       @RequestParam(required = false, value = "entryDate") java.sql.Timestamp entryDate,
+      @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
+      @RequestParam(required = false, value = "totalRequestQty")
+          java.math.BigDecimal totalRequestQty,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salPreOrderHeadService.findBy(
         preOrderType,
@@ -161,6 +166,8 @@ public class SalPreOrderHeadController {
         cusOrgName,
         remark,
         entryDate,
+        totalAmt,
+        totalRequestQty,
         pageable);
   }
 }

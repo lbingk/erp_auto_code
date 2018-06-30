@@ -1,17 +1,20 @@
 package com.pagoda.repo.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
-import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.annotation.SqlTemplate;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.domain.salorderhead.*;
 import com.pagoda.repo.salorderhead.custom.*;
+
 import java.util.*;
 import java.util.concurrent.*;
+
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * SalOrderHead 数据访问接口
@@ -21,6 +24,44 @@ import org.springframework.data.repository.query.*;
  */
 public interface SalOrderHeadRepository
     extends SalOrderHeadRepositoryCustom, PagodaJpaRepository<SalOrderHead, Long> {
+
+  /**
+   * 查询出录入日期为当天的订单List
+   *
+   * @param version
+   * @param calDateTimeSub
+   * @param calDateTimeAdd
+   * @param pageable
+   * @return
+   */
+  @SqlTemplate(
+    name = "findSalOrderHeadBetween",
+    sql =
+        "select * from sal_order_head where {{#version}} version=:version and {{/version}}{{#calDateTimeSub}} entry_date>=:calDateTimeSub and {{/calDateTimeSub}} {{#calDateTimeAdd}} entry_date<=:calDateTimeAdd {{/calDateTimeAdd}}"
+  )
+  Page<SalOrderHeadDTO> findSalOrderHeadBetween(
+      @Param("version") Integer version,
+      @Param("calDateTimeSub") java.sql.Timestamp calDateTimeSub,
+      @Param("calDateTimeAdd") java.sql.Timestamp calDateTimeAdd,
+      @Param("pageable") Pageable pageable);
+
+  /**
+   * 查询出录入日期为当天的订单List
+   *
+   * @param version
+   * @param calDateTimeSub
+   * @param calDateTimeAdd
+   * @return
+   */
+  @SqlTemplate(
+    name = "findSalOrderHeadBetween",
+    sql =
+        "select * from sal_order_head where {{#version}} version=:version and {{/version}}{{#calDateTimeSub}} entry_date>=:calDateTimeSub and {{/calDateTimeSub}} {{#calDateTimeAdd}} entry_date<=:calDateTimeAdd {{/calDateTimeAdd}}"
+  )
+  List<SalOrderHeadDTO> findSalOrderHeadBetween(
+      @Param("version") Integer version,
+      @Param("calDateTimeSub") java.sql.Timestamp calDateTimeSub,
+      @Param("calDateTimeAdd") java.sql.Timestamp calDateTimeAdd);
 
   /**
    * 动态执行一个无参数的sql,返回分页的结果

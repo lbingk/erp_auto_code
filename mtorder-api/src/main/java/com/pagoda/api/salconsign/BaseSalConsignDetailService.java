@@ -1,11 +1,14 @@
 package com.pagoda.api.salconsign;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salconsign.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -182,6 +185,42 @@ public interface BaseSalConsignDetailService {
       @ApiParam("discountPrice") java.math.BigDecimal discountPrice,
       @ApiParam("shippedPrice") java.math.BigDecimal shippedPrice,
       @ApiParam("shippedCount") Integer shippedCount,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 根据发货单id查询明细,用于发货时操作
+   *
+   * @param conId
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findSalConsignDetail", notes = "")
+  Page<SalConsignDetailDTO> findSalConsignDetail(
+      @ApiParam("con_id") Long conId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 通过发货单id查看明细商品更多信息
+   *
+   * @param conId
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findSalConsignAllDetails", notes = "")
+  Page<SalConsignDetailDTO> findSalConsignAllDetails(
+      @ApiParam("con_id") Long conId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

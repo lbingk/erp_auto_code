@@ -1,11 +1,14 @@
 package com.pagoda.api.salconsignout;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salconsignout.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -188,6 +191,78 @@ public interface BaseSalConsignOutHeadService {
       @ApiParam("confirmUserCode") String confirmUserCode,
       @ApiParam("confirmUserName") String confirmUserName,
       @ApiParam("confirmTime") java.sql.Timestamp confirmTime,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 根据相关条件查询发货出库单单头部数据
+   *
+   * @param conSeqno
+   * @param seqno
+   * @param conOrgCode
+   * @param conOrgName
+   * @param cusOrgCode
+   * @param cusOrgName
+   * @param transitLineNo
+   * @param preArrivalDate1
+   * @param preArrivalDate2
+   * @param goodsCode
+   * @param goodsName
+   * @param stockoutStatus
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findSalConsignOutHead", notes = "")
+  Page<FindSalConsignOutHeadDTO> findSalConsignOutHead(
+      @ApiParam("con_seqno") String conSeqno,
+      @ApiParam("seqno") String seqno,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("goods_code") String goodsCode,
+      @ApiParam("goods_name") String goodsName,
+      @ApiParam("stockout_status") Integer stockoutStatus,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 确认到货页面查询
+   *
+   * @param seqno
+   * @param conOrgCode
+   * @param conOrgName
+   * @param cusOrgCode
+   * @param cusOrgName
+   * @param preArrivalDate1
+   * @param preArrivalDate2
+   * @param stockoutStatus
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findConfirmGoodsList", notes = "")
+  Page<SalConsignOutHeadDTO> findConfirmGoodsList(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("stockout_status") Integer stockoutStatus,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

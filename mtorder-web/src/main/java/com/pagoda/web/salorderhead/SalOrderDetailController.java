@@ -141,6 +141,9 @@ public class SalOrderDetailController {
    * @param goodsAmt
    * @param totalAmt
    * @param remark
+   * @param sourceType
+   * @param sourceId
+   * @param sourceNo
    * @param pageable
    * @return
    */
@@ -173,6 +176,9 @@ public class SalOrderDetailController {
       @RequestParam(required = false, value = "goodsAmt") java.math.BigDecimal goodsAmt,
       @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
       @RequestParam(required = false, value = "remark") String remark,
+      @RequestParam(required = false, value = "sourceType") Integer sourceType,
+      @RequestParam(required = false, value = "sourceId") Long sourceId,
+      @RequestParam(required = false, value = "sourceNo") String sourceNo,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salOrderDetailService.findBy(
         orderId,
@@ -200,6 +206,9 @@ public class SalOrderDetailController {
         goodsAmt,
         totalAmt,
         remark,
+        sourceType,
+        sourceId,
+        sourceNo,
         pageable);
   }
 }

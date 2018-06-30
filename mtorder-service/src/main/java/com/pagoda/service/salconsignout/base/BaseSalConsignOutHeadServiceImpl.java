@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsignout.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsignout.*;
-import com.pagoda.api.salconsignout.*;
-import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsignout.*;
+import com.pagoda.api.dto.salconsignout.*;
+import com.pagoda.domain.salconsignout.*;
 import com.pagoda.repo.salconsignout.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -275,6 +277,80 @@ public abstract class BaseSalConsignOutHeadServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignOutHead.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignOutHead", notes = "根据相关条件查询发货出库单单头部数据")
+  @Override
+  public Page<FindSalConsignOutHeadDTO> findSalConsignOutHead(
+      @ApiParam("con_seqno") String conSeqno,
+      @ApiParam("seqno") String seqno,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("goods_code") String goodsCode,
+      @ApiParam("goods_name") String goodsName,
+      @ApiParam("stockout_status") Integer stockoutStatus,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignOutHead(
+          conSeqno,
+          seqno,
+          conOrgCode,
+          conOrgName,
+          cusOrgCode,
+          cusOrgName,
+          transitLineNo,
+          preArrivalDate1,
+          preArrivalDate2,
+          goodsCode,
+          goodsName,
+          stockoutStatus,
+          creatorOrgCode,
+          codeList,
+          pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findConfirmGoodsList", notes = "确认到货页面查询")
+  @Override
+  public Page<SalConsignOutHeadDTO> findConfirmGoodsList(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("stockout_status") Integer stockoutStatus,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findConfirmGoodsList(
+          seqno,
+          conOrgCode,
+          conOrgName,
+          cusOrgCode,
+          cusOrgName,
+          preArrivalDate1,
+          preArrivalDate2,
+          stockoutStatus,
+          creatorOrgCode,
+          codeList,
+          pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

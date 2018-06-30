@@ -1,11 +1,14 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salorderhead.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -141,6 +144,8 @@ public interface BaseSalPreOrderHeadService {
    * @param cusOrgName
    * @param remark
    * @param entryDate
+   * @param totalAmt
+   * @param totalRequestQty
    * @param pageable
    * @return
    * @throws ServiceException
@@ -159,6 +164,8 @@ public interface BaseSalPreOrderHeadService {
       @ApiParam("cusOrgName") String cusOrgName,
       @ApiParam("remark") String remark,
       @ApiParam("entryDate") java.sql.Timestamp entryDate,
+      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
+      @ApiParam("totalRequestQty") java.math.BigDecimal totalRequestQty,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

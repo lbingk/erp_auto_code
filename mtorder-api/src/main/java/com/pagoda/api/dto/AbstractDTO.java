@@ -3,6 +3,7 @@ package com.pagoda.api.dto;
 import com.pagoda.platform.jms.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
+
 import org.springframework.validation.*;
 
 /**

@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsignreturn;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -486,8 +486,8 @@ public class SalConsignReturnHeadDTO extends AbstractDTO implements Serializable
   @FieldMeta(
     name = "status",
     scene = "",
-    nameCN = "状态( 10-新单据,20-已生效 30-已停用)",
-    comment = "状态( 10-新单据,20-已生效 30-已停用)",
+    nameCN = "状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}",
+    comment = "状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}",
     nameEN = "status",
     type = "整型",
     format = "",
@@ -513,7 +513,7 @@ public class SalConsignReturnHeadDTO extends AbstractDTO implements Serializable
   )
   @ApiModelProperty(
     name = "status",
-    value = "状态( 10-新单据,20-已生效 30-已停用)",
+    value = "状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}",
     dataType = "",
     notes = "5b35de069d2feff19b42d5f8"
   )

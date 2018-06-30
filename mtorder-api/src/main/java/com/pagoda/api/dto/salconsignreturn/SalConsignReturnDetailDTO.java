@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsignreturn;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -378,8 +378,8 @@ public class SalConsignReturnDetailDTO extends AbstractDTO implements Serializab
   @FieldMeta(
     name = "returnPrice",
     scene = "",
-    nameCN = "退货单价",
-    comment = "退货单价",
+    nameCN = "退货价格",
+    comment = "退货价格",
     nameEN = "return_price",
     type = "小数",
     format = "",
@@ -405,7 +405,7 @@ public class SalConsignReturnDetailDTO extends AbstractDTO implements Serializab
   )
   @ApiModelProperty(
     name = "returnPrice",
-    value = "退货单价",
+    value = "退货价格",
     dataType = "",
     notes = "5b35de169d2feff19b42dc46"
   )

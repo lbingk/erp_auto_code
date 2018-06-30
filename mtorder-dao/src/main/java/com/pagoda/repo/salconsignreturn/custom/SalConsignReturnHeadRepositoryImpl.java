@@ -3,10 +3,14 @@ package com.pagoda.repo.salconsignreturn.custom;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
-import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * SalConsignReturnHead扩展数据访问接口实现类

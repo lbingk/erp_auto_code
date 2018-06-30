@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsignout.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsignout.*;
-import com.pagoda.api.salconsignout.*;
-import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsignout.*;
+import com.pagoda.api.dto.salconsignout.*;
+import com.pagoda.domain.salconsignout.*;
 import com.pagoda.repo.salconsignout.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -240,6 +242,37 @@ public abstract class BaseSalConsignOutDetailServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignOutDetail.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignOutDetail", notes = "查询发货出库单详情")
+  @Override
+  public Page<SalConsignOutDetailDTO> findSalConsignOutDetail(
+      @ApiParam("stockout_seqno") String stockoutSeqno,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignOutDetail(stockoutSeqno, creatorOrgCode, codeList, pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findGoodsOutDetail", notes = "查询单个商品发货详情")
+  @Override
+  public Page<SalConsignOutDetailDTO> findGoodsOutDetail(
+      @ApiParam("con_id") Long conId,
+      @ApiParam("goods_id") Long goodsId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findGoodsOutDetail(conId, goodsId, creatorOrgCode, codeList, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

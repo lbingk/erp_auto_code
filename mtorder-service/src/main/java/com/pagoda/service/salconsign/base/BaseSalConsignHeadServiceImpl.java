@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsign.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsign.*;
-import com.pagoda.api.salconsign.*;
-import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsign.*;
+import com.pagoda.api.dto.salconsign.*;
+import com.pagoda.domain.salconsign.*;
 import com.pagoda.repo.salconsign.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -269,6 +271,76 @@ public abstract class BaseSalConsignHeadServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignHead.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignHead", notes = "根据相关条件查询发货单头部数据")
+  @Override
+  public Page<SalConsignHeadDTO> findSalConsignHead(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("wave_no") String waveNo,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("con_status") Integer conStatus,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignHead(
+          seqno,
+          conOrgCode,
+          conOrgName,
+          cusOrgCode,
+          cusOrgName,
+          waveNo,
+          transitLineNo,
+          preArrivalDate1,
+          preArrivalDate2,
+          conStatus,
+          codeList,
+          pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "updatePrintCount", notes = "点击打印时符合条件的所有发货单打印次数加1")
+  @Override
+  @Transactional(rollbackFor = ServiceException.class)
+  public Integer updatePrintCount(
+      @ApiParam("con_no") String conNo,
+      @ApiParam("con_org_code") String conOrgCode,
+      @ApiParam("con_org_name") String conOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("wave_no") String waveNo,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("con_status") Integer conStatus,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList) {
+    try {
+      return repository.updatePrintCount(
+          conNo,
+          conOrgCode,
+          conOrgName,
+          cusOrgCode,
+          cusOrgName,
+          waveNo,
+          transitLineNo,
+          preArrivalDate1,
+          preArrivalDate2,
+          conStatus,
+          creatorOrgCode,
+          codeList);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

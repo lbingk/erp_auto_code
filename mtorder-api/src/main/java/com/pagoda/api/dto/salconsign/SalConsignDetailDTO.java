@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsign;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -486,8 +486,8 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "salConOutDepotId",
     scene = "",
-    nameCN = "默认销售出库库房",
-    comment = "默认销售出库库房",
+    nameCN = "默认销售出库库房ID",
+    comment = "默认销售出库库房ID",
     nameEN = "sal_con_out_depot_id",
     type = "长整型",
     format = "",
@@ -513,7 +513,7 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "salConOutDepotId",
-    value = "默认销售出库库房",
+    value = "默认销售出库库房ID",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d97c"
   )
@@ -733,8 +733,8 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "taxRate",
     scene = "",
-    nameCN = "机构商品税率",
-    comment = "机构商品税率",
+    nameCN = "税率",
+    comment = "税率",
     nameEN = "tax_rate",
     type = "小数",
     format = "",
@@ -760,7 +760,7 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "taxRate",
-    value = "机构商品税率",
+    value = "税率",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d98f"
   )
@@ -769,8 +769,8 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "报价(采购价)",
-    comment = "报价(采购价)",
+    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -796,7 +796,7 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "price",
-    value = "报价(采购价)",
+    value = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d991"
   )
@@ -805,8 +805,8 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "discountRate",
     scene = "",
-    nameCN = "折扣率[1为原价,0.9为9折]",
-    comment = "折扣率[1为原价,0.9为9折]",
+    nameCN = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
+    comment = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
     nameEN = "discount_rate",
     type = "小数",
     format = "",
@@ -832,7 +832,7 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "discountRate",
-    value = "折扣率[1为原价,0.9为9折]",
+    value = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d993"
   )
@@ -877,8 +877,8 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "discountPrice",
     scene = "",
-    nameCN = "折后单价[含税]",
-    comment = "折后单价[含税]",
+    nameCN = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
+    comment = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
     nameEN = "discount_price",
     type = "小数",
     format = "",
@@ -904,7 +904,7 @@ public class SalConsignDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "discountPrice",
-    value = "折后单价[含税]",
+    value = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d999"
   )

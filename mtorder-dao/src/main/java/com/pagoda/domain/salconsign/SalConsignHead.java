@@ -1,16 +1,10 @@
 package com.pagoda.domain.salconsign;
 
-import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salconsign.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 发货单头表实体定义
@@ -337,8 +341,8 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -367,7 +371,7 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总金额'"
+    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
   )
   private java.math.BigDecimal totalAmt;
 
@@ -522,8 +526,8 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -552,7 +556,7 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '发货出库单号'"
+    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
   )
   private String seqno;
 
@@ -892,8 +896,8 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "实发数量",
-    comment = "实发数量",
+    nameCN = "已发数量",
+    comment = "已发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -922,15 +926,15 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '实发数量'"
+    columnDefinition = "decimal(18,10)   COMMENT '已发数量'"
   )
   private java.math.BigDecimal shippedQty;
 
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "实发金额[实发数量*实发单价]",
-    comment = "实发金额[实发数量*实发单价]",
+    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -959,7 +963,7 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '实发金额[实发数量*实发单价]'"
+    columnDefinition = "decimal(18,10)   COMMENT '已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]'"
   )
   private java.math.BigDecimal shippedAmt;
 

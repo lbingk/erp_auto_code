@@ -142,6 +142,36 @@ public class MtorderDubboApplication {
           new DtoSerializer(
               com.pagoda.api.dto.salorderhead.SalOrderDetailGoodsQtyDTO.class,
               serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pripurchase.PriceAdjustPurHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pripurchase.PriceAdjustPurHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pridistribution.PriceCatalogSalDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pridistribution.PriceCatalogSalDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pridistribution.PriceCatalogSalHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pridistribution.PriceCatalogSalHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pridistribution.PriceAdjustSalDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pridistribution.PriceAdjustSalDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pridistribution.PriceAdjustSalHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pridistribution.PriceAdjustSalHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pripurchase.PriceAdjustPurDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pripurchase.PriceAdjustPurDetailDTO.class,
+              serializerFactory.getClassLoader()));
     } catch (Exception e) {
       log.error("addDubboSerializer", e);
     }

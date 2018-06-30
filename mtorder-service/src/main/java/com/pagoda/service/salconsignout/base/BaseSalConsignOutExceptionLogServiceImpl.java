@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsignout.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsignout.*;
-import com.pagoda.api.salconsignout.*;
-import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsignout.*;
+import com.pagoda.api.dto.salconsignout.*;
+import com.pagoda.domain.salconsignout.*;
 import com.pagoda.repo.salconsignout.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;

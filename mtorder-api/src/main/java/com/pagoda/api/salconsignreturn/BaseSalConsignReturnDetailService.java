@@ -1,11 +1,14 @@
 package com.pagoda.api.salconsignreturn;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salconsignreturn.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -154,4 +157,32 @@ public interface BaseSalConsignReturnDetailService {
       @ApiParam("returnPrice") java.math.BigDecimal returnPrice,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
+
+  /**
+   * 通过退货单头表id获取退货单明细
+   *
+   * @param returnId
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "getSCRDetailsByReturnId", notes = "")
+  Page<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
+      @ApiParam("return_id") Long returnId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 根据returnId删除退货单明细
+   *
+   * @param returnId
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "deleteDetailByReturnId", notes = "")
+  Integer deleteDetailByReturnId(@ApiParam("return_id") Long returnId) throws ServiceException;
 }

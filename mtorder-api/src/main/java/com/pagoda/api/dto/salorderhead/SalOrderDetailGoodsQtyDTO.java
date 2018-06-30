@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salorderhead;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -198,8 +198,8 @@ public class SalOrderDetailGoodsQtyDTO extends AbstractDTO implements Serializab
   @FieldMeta(
     name = "sourceId",
     scene = "",
-    nameCN = "来源单据ID",
-    comment = "来源单据ID",
+    nameCN = "来源ID（目录为部门的，关联为bas_org.orgid,其他为空）",
+    comment = "来源ID（目录为部门的，关联为bas_org.orgid,其他为空）",
     nameEN = "source_id",
     type = "长整型",
     format = "",
@@ -225,7 +225,7 @@ public class SalOrderDetailGoodsQtyDTO extends AbstractDTO implements Serializab
   )
   @ApiModelProperty(
     name = "sourceId",
-    value = "来源单据ID",
+    value = "来源ID（目录为部门的，关联为bas_org.orgid,其他为空）",
     dataType = "",
     notes = "5b35e0d49d2feff19b43e4d7"
   )

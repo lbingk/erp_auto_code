@@ -1,16 +1,10 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salorderhead.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售订单明细表实体定义
@@ -781,8 +785,8 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "报价(采购价)",
-    comment = "报价(采购价)",
+    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -811,15 +815,15 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '报价(采购价)'"
+    columnDefinition = "decimal(18,10)   COMMENT '配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]'"
   )
   private java.math.BigDecimal price;
 
   @FieldMeta(
     name = "discountPrice",
     scene = "",
-    nameCN = "折后单价[含税]",
-    comment = "折后单价[含税]",
+    nameCN = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
+    comment = "折后单价(含优惠)[=已发货单价*折扣，四舍五入]",
     nameEN = "discount_price",
     type = "小数",
     format = "",
@@ -848,15 +852,15 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '折后单价[含税]'"
+    columnDefinition = "decimal(18,10)   COMMENT '折后单价(含优惠)[=已发货单价*折扣，四舍五入]'"
   )
   private java.math.BigDecimal discountPrice;
 
   @FieldMeta(
     name = "discountRate",
     scene = "",
-    nameCN = "折扣率[1为原价,0.9为9折]",
-    comment = "折扣率[1为原价,0.9为9折]",
+    nameCN = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
+    comment = "折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]",
     nameEN = "discount_rate",
     type = "小数",
     format = "",
@@ -885,7 +889,7 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 4,
-    columnDefinition = "decimal(10,10)   COMMENT '折扣率[1为原价,0.9为9折]'"
+    columnDefinition = "decimal(10,10)   COMMENT '折扣[发货机构下鲜果统一折扣，数据来源虚拟机构组定义]'"
   )
   private java.math.BigDecimal discountRate;
 
@@ -929,8 +933,8 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
   @FieldMeta(
     name = "taxRate",
     scene = "",
-    nameCN = "机构商品税率",
-    comment = "机构商品税率",
+    nameCN = "税率",
+    comment = "税率",
     nameEN = "tax_rate",
     type = "小数",
     format = "",
@@ -958,8 +962,8 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     name = "\"tax_rate\"",
     nullable = true,
     precision = 0,
-    scale = 6,
-    columnDefinition = "decimal(10,10)   COMMENT '机构商品税率'"
+    scale = 4,
+    columnDefinition = "decimal(10,10)   COMMENT '税率'"
   )
   private java.math.BigDecimal taxRate;
 
@@ -1040,8 +1044,8 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -1070,7 +1074,7 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总金额'"
+    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
   )
   private java.math.BigDecimal totalAmt;
 
@@ -1110,6 +1114,117 @@ public class SalOrderDetail extends SalOrderDetailDTO implements Serializable {
     columnDefinition = "varchar(300)   COMMENT '备注'"
   )
   private String remark;
+
+  @FieldMeta(
+    name = "sourceType",
+    scene = "",
+    nameCN = "订单明细来源类型",
+    comment = "订单明细来源类型",
+    nameEN = "source_Type",
+    type = "整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"source_type\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "INTEGER   COMMENT '订单明细来源类型'"
+  )
+  private Integer sourceType;
+
+  @FieldMeta(
+    name = "sourceId",
+    scene = "",
+    nameCN = "订单明细来源Id",
+    comment = "订单明细来源Id",
+    nameEN = "source_Id",
+    type = "长整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"source_id\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "BIGINT   COMMENT '订单明细来源Id'"
+  )
+  private Long sourceId;
+
+  @FieldMeta(
+    name = "sourceNo",
+    scene = "",
+    nameCN = "来源单据号",
+    comment = "来源单据号",
+    nameEN = "source_no",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"source_no\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "varchar(35)   COMMENT '来源单据号'"
+  )
+  private String sourceNo;
 
   static MapperFacade mapper;
 

@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsignout;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -234,8 +234,8 @@ public class SalConsignOutDetailDTO extends AbstractDTO implements Serializable 
   @FieldMeta(
     name = "salUnitId",
     scene = "",
-    nameCN = "销售计量单位ID",
-    comment = "销售计量单位ID",
+    nameCN = "销售单位ID",
+    comment = "销售单位ID",
     nameEN = "sal_unit_id",
     type = "长整型",
     format = "",
@@ -261,7 +261,7 @@ public class SalConsignOutDetailDTO extends AbstractDTO implements Serializable 
   )
   @ApiModelProperty(
     name = "salUnitId",
-    value = "销售计量单位ID",
+    value = "销售单位ID",
     dataType = "",
     notes = "5b35dd7c9d2feff19b42a6db"
   )
@@ -414,8 +414,8 @@ public class SalConsignOutDetailDTO extends AbstractDTO implements Serializable 
   @FieldMeta(
     name = "note",
     scene = "",
-    nameCN = "提示信息[用于回写出库审核时记录异常出库失败的原因]",
-    comment = "提示信息[用于回写出库审核时记录异常出库失败的原因]",
+    nameCN = "提示信息",
+    comment = "提示信息",
     nameEN = "note",
     type = "字符串",
     format = "",
@@ -441,7 +441,7 @@ public class SalConsignOutDetailDTO extends AbstractDTO implements Serializable 
   )
   @ApiModelProperty(
     name = "note",
-    value = "提示信息[用于回写出库审核时记录异常出库失败的原因]",
+    value = "提示信息",
     dataType = "",
     notes = "5b35dd7c9d2feff19b42a6e4"
   )

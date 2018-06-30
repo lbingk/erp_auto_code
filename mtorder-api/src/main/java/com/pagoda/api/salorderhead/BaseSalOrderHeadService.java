@@ -1,11 +1,14 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salorderhead.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -173,6 +176,24 @@ public interface BaseSalOrderHeadService {
       @ApiParam("isFinish") Integer isFinish,
       @ApiParam("remark") String remark,
       @ApiParam("entryDate") java.sql.Timestamp entryDate,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 查询出录入日期为当天的订单List
+   *
+   * @param version
+   * @param calDateTimeSub
+   * @param calDateTimeAdd
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findSalOrderHeadBetween", notes = "")
+  Page<SalOrderHeadDTO> findSalOrderHeadBetween(
+      @ApiParam("version") Integer version,
+      @ApiParam("calDateTimeSub") java.sql.Timestamp calDateTimeSub,
+      @ApiParam("calDateTimeAdd") java.sql.Timestamp calDateTimeAdd,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

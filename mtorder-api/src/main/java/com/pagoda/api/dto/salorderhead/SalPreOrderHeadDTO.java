@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salorderhead;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -270,8 +270,8 @@ public class SalPreOrderHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -297,7 +297,7 @@ public class SalPreOrderHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "发货出库单号",
+    value = "调价单号[adjustNo]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c207"
   )
@@ -590,6 +590,78 @@ public class SalPreOrderHeadDTO extends AbstractDTO implements Serializable {
     notes = "5b35d2b49d2feff19b40cb46"
   )
   private java.sql.Timestamp entryDate;
+
+  @FieldMeta(
+    name = "totalAmt",
+    scene = "",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
+    nameEN = "total_amt",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = true,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = true,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @ApiModelProperty(
+    name = "totalAmt",
+    value = "总金额[配送价*数量]",
+    dataType = "",
+    notes = "5b35d2b49d2feff19b40cb44"
+  )
+  private java.math.BigDecimal totalAmt;
+
+  @FieldMeta(
+    name = "totalRequestQty",
+    scene = "",
+    nameCN = "总需求量",
+    comment = "总需求量",
+    nameEN = "total_request_qty",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = true,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @ApiModelProperty(
+    name = "totalRequestQty",
+    value = "总需求量",
+    dataType = "",
+    notes = "5b35dbc79d2feff19b4223a5"
+  )
+  private java.math.BigDecimal totalRequestQty;
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

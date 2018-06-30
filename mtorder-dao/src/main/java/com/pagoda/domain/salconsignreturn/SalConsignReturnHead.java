@@ -1,16 +1,10 @@
 package com.pagoda.domain.salconsignreturn;
 
-import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salconsignreturn.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 退货单头表实体定义
@@ -522,8 +526,8 @@ public class SalConsignReturnHead extends SalConsignReturnHeadDTO implements Ser
   @FieldMeta(
     name = "status",
     scene = "",
-    nameCN = "状态( 10-新单据,20-已生效 30-已停用)",
-    comment = "状态( 10-新单据,20-已生效 30-已停用)",
+    nameCN = "状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}",
+    comment = "状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}",
     nameEN = "status",
     type = "整型",
     format = "",
@@ -552,7 +556,7 @@ public class SalConsignReturnHead extends SalConsignReturnHeadDTO implements Ser
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "INTEGER   COMMENT '状态( 10-新单据,20-已生效 30-已停用)'"
+    columnDefinition = "INTEGER   COMMENT '状态{10:新录入,20:录入完成 ,30:审核通过,40: 已生效 ,50:已作废}'"
   )
   private Integer status;
 

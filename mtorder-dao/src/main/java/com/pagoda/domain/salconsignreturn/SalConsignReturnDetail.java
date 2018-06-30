@@ -1,16 +1,10 @@
 package com.pagoda.domain.salconsignreturn;
 
-import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salconsignreturn.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 退货单明细表实体定义
@@ -292,7 +296,7 @@ public class SalConsignReturnDetail extends SalConsignReturnDetailDTO implements
     name = "\"sal_rate\"",
     nullable = true,
     precision = 0,
-    scale = 4,
+    scale = 6,
     columnDefinition = "decimal(10,10)   COMMENT '销售单位转换比(销售单位转为基础单位转换比)'"
   )
   private java.math.BigDecimal salRate;
@@ -411,8 +415,8 @@ public class SalConsignReturnDetail extends SalConsignReturnDetailDTO implements
   @FieldMeta(
     name = "returnPrice",
     scene = "",
-    nameCN = "退货单价",
-    comment = "退货单价",
+    nameCN = "退货价格",
+    comment = "退货价格",
     nameEN = "return_price",
     type = "小数",
     format = "",
@@ -441,7 +445,7 @@ public class SalConsignReturnDetail extends SalConsignReturnDetailDTO implements
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '退货单价'"
+    columnDefinition = "decimal(18,10)   COMMENT '退货价格'"
   )
   private java.math.BigDecimal returnPrice;
 

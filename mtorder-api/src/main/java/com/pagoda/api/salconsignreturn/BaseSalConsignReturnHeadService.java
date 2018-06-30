@@ -1,11 +1,14 @@
 package com.pagoda.api.salconsignreturn;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salconsignreturn.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -158,5 +161,75 @@ public interface BaseSalConsignReturnHeadService {
       @ApiParam("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
       @ApiParam("status") Integer status,
       @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 退货单及退货单审核列表查询
+   *
+   * @param seqno
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgCode
+   * @param cusOrgName
+   * @param returnType
+   * @param status
+   * @param transitLineNo
+   * @param preArrivalDate1
+   * @param preArrivalDate2
+   * @param creatorOrgCode
+   * @param codeList
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findSalConsignReturnHead", notes = "")
+  Page<SalConsignReturnHeadDTO> findSalConsignReturnHead(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_code") String arrOrgCode,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("return_type") Integer returnType,
+      @ApiParam("status") Integer status,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 修改打印次数
+   *
+   * @param seqno
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgCode
+   * @param cusOrgName
+   * @param returnType
+   * @param status
+   * @param transitLineNo
+   * @param preArrivalDate1
+   * @param preArrivalDate2
+   * @param creatorOrgCode
+   * @param codeList
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "updatePrintCount", notes = "")
+  Integer updatePrintCount(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_code") String arrOrgCode,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("return_type") Integer returnType,
+      @ApiParam("status") Integer status,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList)
       throws ServiceException;
 }

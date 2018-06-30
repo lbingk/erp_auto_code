@@ -1,16 +1,10 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salorderhead.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售预订单实体定义
@@ -300,8 +304,8 @@ public class SalPreOrderHead extends SalPreOrderHeadDTO implements Serializable 
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -330,7 +334,7 @@ public class SalPreOrderHead extends SalPreOrderHeadDTO implements Serializable 
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '发货出库单号'"
+    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
   )
   private String seqno;
 
@@ -629,6 +633,80 @@ public class SalPreOrderHead extends SalPreOrderHeadDTO implements Serializable 
     columnDefinition = "TIMESTAMP  NOT NULL   COMMENT '录入完成日期'"
   )
   private java.sql.Timestamp entryDate;
+
+  @FieldMeta(
+    name = "totalAmt",
+    scene = "",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
+    nameEN = "total_amt",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = true,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = true,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"total_amt\"",
+    nullable = false,
+    precision = 0,
+    scale = 6,
+    columnDefinition = "decimal(18,10)  NOT NULL   COMMENT '总金额[配送价*数量]'"
+  )
+  private java.math.BigDecimal totalAmt;
+
+  @FieldMeta(
+    name = "totalRequestQty",
+    scene = "",
+    nameCN = "总需求量",
+    comment = "总需求量",
+    nameEN = "total_request_qty",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = true,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"total_request_qty\"",
+    nullable = false,
+    precision = 0,
+    scale = 6,
+    columnDefinition = "decimal(18,10)  NOT NULL   COMMENT '总需求量'"
+  )
+  private java.math.BigDecimal totalRequestQty;
 
   static MapperFacade mapper;
 

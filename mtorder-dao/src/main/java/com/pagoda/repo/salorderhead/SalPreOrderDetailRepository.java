@@ -1,17 +1,20 @@
 package com.pagoda.repo.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
-import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.annotation.SqlTemplate;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.domain.salorderhead.*;
 import com.pagoda.repo.salorderhead.custom.*;
+
 import java.util.*;
 import java.util.concurrent.*;
+
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * SalPreOrderDetail 数据访问接口
@@ -25,7 +28,7 @@ public interface SalPreOrderDetailRepository
   /**
    * 查询追加预订单的明细
    *
-   * @param salPreOrderId
+   * @param preOrderId
    * @param detailStatus
    * @param preArrivalDate
    * @param pageable
@@ -34,18 +37,18 @@ public interface SalPreOrderDetailRepository
   @SqlTemplate(
     name = "findDetailForAppend",
     sql =
-        "select * from sal_pre_order_detail where salPreOrderId in ({{#sal_pre_order_id}}{{^-first}}, {{/-first}}\"{{this}}\"{{/sal_pre_order_id}}) and detailStatus in ({{#detail_status}}{{^-first}}, {{/-first}}\"{{this}}\"{{/detail_status}}) and preArrivalDate=:preArrivalDate"
+        "select * from sal_pre_order_detail where pre_order_id in ({{#pre_order_id}}{{^-first}}, {{/-first}}{{this}}{{/pre_order_id}}) and detail_status in ({{#detail_status}}{{^-first}}, {{/-first}}{{this}}{{/detail_status}}) and pre_arrival_date=:pre_arrival_date"
   )
   Page<SalPreOrderDetailDTO> findDetailForAppend(
-      @Param("sal_pre_order_id") String salPreOrderId,
-      @Param("detail_status") Integer detailStatus,
-      @Param("preArrivalDate") String preArrivalDate,
+      @Param("pre_order_id") List<Long> preOrderId,
+      @Param("detail_status") List<Integer> detailStatus,
+      @Param("pre_arrival_date") java.util.Date preArrivalDate,
       @Param("pageable") Pageable pageable);
 
   /**
    * 查询追加预订单的明细
    *
-   * @param salPreOrderId
+   * @param preOrderId
    * @param detailStatus
    * @param preArrivalDate
    * @return
@@ -53,12 +56,12 @@ public interface SalPreOrderDetailRepository
   @SqlTemplate(
     name = "findDetailForAppend",
     sql =
-        "select * from sal_pre_order_detail where salPreOrderId in ({{#sal_pre_order_id}}{{^-first}}, {{/-first}}\"{{this}}\"{{/sal_pre_order_id}}) and detailStatus in ({{#detail_status}}{{^-first}}, {{/-first}}\"{{this}}\"{{/detail_status}}) and preArrivalDate=:preArrivalDate"
+        "select * from sal_pre_order_detail where pre_order_id in ({{#pre_order_id}}{{^-first}}, {{/-first}}{{this}}{{/pre_order_id}}) and detail_status in ({{#detail_status}}{{^-first}}, {{/-first}}{{this}}{{/detail_status}}) and pre_arrival_date=:pre_arrival_date"
   )
   List<SalPreOrderDetailDTO> findDetailForAppend(
-      @Param("sal_pre_order_id") String salPreOrderId,
-      @Param("detail_status") Integer detailStatus,
-      @Param("preArrivalDate") String preArrivalDate);
+      @Param("pre_order_id") List<Long> preOrderId,
+      @Param("detail_status") List<Integer> detailStatus,
+      @Param("pre_arrival_date") java.util.Date preArrivalDate);
 
   /**
    * 动态执行一个无参数的sql,返回分页的结果

@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salconsign;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -306,8 +306,8 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -333,7 +333,7 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "totalAmt",
-    value = "总金额",
+    value = "总金额[配送价*数量]",
     dataType = "",
     notes = "5b35d2b49d2feff19b40cb44"
   )
@@ -486,8 +486,8 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "seqno",
     scene = "",
-    nameCN = "发货出库单号",
-    comment = "发货出库单号",
+    nameCN = "调价单号[adjustNo]",
+    comment = "调价单号[adjustNo]",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -513,7 +513,7 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "发货出库单号",
+    value = "调价单号[adjustNo]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c207"
   )
@@ -846,8 +846,8 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "实发数量",
-    comment = "实发数量",
+    nameCN = "已发数量",
+    comment = "已发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -873,7 +873,7 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedQty",
-    value = "实发数量",
+    value = "已发数量",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21d"
   )
@@ -882,8 +882,8 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "实发金额[实发数量*实发单价]",
-    comment = "实发金额[实发数量*实发单价]",
+    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -909,7 +909,7 @@ public class SalConsignHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedAmt",
-    value = "实发金额[实发数量*实发单价]",
+    value = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c227"
   )

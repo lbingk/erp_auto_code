@@ -1,8 +1,10 @@
 package com.pagoda.api.salconsign;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.salconsign.*;
+import com.pagoda.api.*;
 import io.swagger.annotations.*;
+
+import java.io.Serializable;
 import java.rmi.Remote;
 import org.springframework.validation.annotation.Validated;
 

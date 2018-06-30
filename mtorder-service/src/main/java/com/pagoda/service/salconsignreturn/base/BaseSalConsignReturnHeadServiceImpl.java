@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsignreturn.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsignreturn.*;
-import com.pagoda.api.salconsignreturn.*;
-import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsignreturn.*;
+import com.pagoda.api.dto.salconsignreturn.*;
+import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.repo.salconsignreturn.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -244,6 +246,78 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignReturnHead.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignReturnHead", notes = "退货单及退货单审核列表查询")
+  @Override
+  public Page<SalConsignReturnHeadDTO> findSalConsignReturnHead(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_code") String arrOrgCode,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("return_type") Integer returnType,
+      @ApiParam("status") Integer status,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignReturnHead(
+          seqno,
+          arrOrgCode,
+          arrOrgName,
+          cusOrgCode,
+          cusOrgName,
+          returnType,
+          status,
+          transitLineNo,
+          preArrivalDate1,
+          preArrivalDate2,
+          creatorOrgCode,
+          codeList,
+          pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "updatePrintCount", notes = "修改打印次数")
+  @Override
+  @Transactional(rollbackFor = ServiceException.class)
+  public Integer updatePrintCount(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_code") String arrOrgCode,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("cus_org_code") String cusOrgCode,
+      @ApiParam("cus_org_name") String cusOrgName,
+      @ApiParam("return_type") Integer returnType,
+      @ApiParam("status") Integer status,
+      @ApiParam("transit_line_no") String transitLineNo,
+      @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
+      @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList) {
+    try {
+      return repository.updatePrintCount(
+          seqno,
+          arrOrgCode,
+          arrOrgName,
+          cusOrgCode,
+          cusOrgName,
+          returnType,
+          status,
+          transitLineNo,
+          preArrivalDate1,
+          preArrivalDate2,
+          creatorOrgCode,
+          codeList);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

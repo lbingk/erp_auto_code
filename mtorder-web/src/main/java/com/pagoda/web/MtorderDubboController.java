@@ -43,19 +43,28 @@ public class MtorderDubboController {
   public static final Map<String, String> DTO_PACKAGES = new HashMap<>();
 
   static {
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pripurchase.FindGoodsLastPriceAdjustDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsign.sal_consign_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salorderhead.sal_order_detail_goods_qtyDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.purapplyorder.pur_apply_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salorderhead.sal_order_detailDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salorderhead.sal_pre_order_headDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pridistribution.price_adjust_sal_headDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignout.FindSalConsignOutHeadDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignout.sal_consign_out_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignreturn.sal_consign_return_detailDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pridistribution.price_catalog_sal_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignout.sal_consign_out_exception_logDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pridistribution.price_adjust_sal_detailDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignreturn.sal_consign_return_headDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pripurchase.price_adjust_pur_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsign.sal_consign_detailDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pridistribution.price_catalog_sal_detailDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salorderhead.sal_order_headDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salconsignout.sal_consign_out_detailDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.salorderhead.sal_pre_order_detailDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pripurchase.price_adjust_pur_detailDTO");
+    putInMap(DTO_PACKAGES, "com.pagoda.api.dto.pripurchase.FindPriceAdjustPurListDTO");
     putInMap(DTO_PACKAGES, "com.pagoda.api.dto.purapplyorder.pur_apply_detailDTO");
   }
 
@@ -64,19 +73,25 @@ public class MtorderDubboController {
 
   static {
     putInMap(API_PACKAGES, "com.pagoda.api.purapplyorder.pur_apply_detailService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pripurchase.price_adjust_pur_headService");
     putInMap(API_PACKAGES, "com.pagoda.api.salorderhead.sal_order_detailService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pridistribution.price_catalog_sal_detailService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pridistribution.price_adjust_sal_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salorderhead.sal_pre_order_headService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pridistribution.price_adjust_sal_headService");
     putInMap(API_PACKAGES, "com.pagoda.api.purapplyorder.pur_apply_headService");
     putInMap(API_PACKAGES, "com.pagoda.api.salorderhead.sal_pre_order_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsignout.sal_consign_out_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsignreturn.sal_consign_return_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsignout.sal_consign_out_exception_logService");
     putInMap(API_PACKAGES, "com.pagoda.api.salorderhead.sal_order_headService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pripurchase.price_adjust_pur_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsignreturn.sal_consign_return_headService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsign.sal_consign_detailService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsignout.sal_consign_out_headService");
     putInMap(API_PACKAGES, "com.pagoda.api.salorderhead.sal_order_detail_goods_qtyService");
     putInMap(API_PACKAGES, "com.pagoda.api.salconsign.sal_consign_headService");
+    putInMap(API_PACKAGES, "com.pagoda.api.pridistribution.price_catalog_sal_headService");
   }
 
   /** 查询方法名 * */

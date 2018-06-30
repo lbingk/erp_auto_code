@@ -1,17 +1,19 @@
 package com.pagoda.service.salorderhead.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salorderhead.*;
-import com.pagoda.api.salorderhead.*;
-import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salorderhead.*;
+import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.domain.salorderhead.*;
 import com.pagoda.repo.salorderhead.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -210,6 +212,8 @@ public abstract class BaseSalPreOrderHeadServiceImpl
       @ApiParam("cusOrgName") String cusOrgName,
       @ApiParam("remark") String remark,
       @ApiParam("entryDate") java.sql.Timestamp entryDate,
+      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
+      @ApiParam("totalRequestQty") java.math.BigDecimal totalRequestQty,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -226,6 +230,8 @@ public abstract class BaseSalPreOrderHeadServiceImpl
           cusOrgName,
           remark,
           entryDate,
+          totalAmt,
+          totalRequestQty,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);

@@ -1,17 +1,19 @@
 package com.pagoda.service.salconsign.base;
 
-import com.pagoda.api.*;
-import com.pagoda.api.dto.salconsign.*;
-import com.pagoda.api.salconsign.*;
-import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
+import com.pagoda.api.*;
+import com.pagoda.api.salconsign.*;
+import com.pagoda.api.dto.salconsign.*;
+import com.pagoda.domain.salconsign.*;
 import com.pagoda.repo.salconsign.*;
-import io.swagger.annotations.*;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -269,6 +271,36 @@ public abstract class BaseSalConsignDetailServiceImpl
       throws ServiceException {
     try {
       return repository.findByExample(SalConsignDetail.convertDTO(example), pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignDetail", notes = "根据发货单id查询明细,用于发货时操作")
+  @Override
+  public Page<SalConsignDetailDTO> findSalConsignDetail(
+      @ApiParam("con_id") Long conId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignDetail(conId, creatorOrgCode, codeList, pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findSalConsignAllDetails", notes = "通过发货单id查看明细商品更多信息")
+  @Override
+  public Page<SalConsignDetailDTO> findSalConsignAllDetails(
+      @ApiParam("con_id") Long conId,
+      @ApiParam("creator_org_code") String creatorOrgCode,
+      @ApiParam("codeList") String codeList,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findSalConsignAllDetails(conId, creatorOrgCode, codeList, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

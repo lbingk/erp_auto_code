@@ -1,16 +1,10 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
 import com.pagoda.platform.jms.jpa.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.pagoda.api.dto.salorderhead.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -22,6 +16,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售订单明细来源商品数量表实体定义
@@ -231,8 +235,8 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
   @FieldMeta(
     name = "sourceId",
     scene = "",
-    nameCN = "来源单据ID",
-    comment = "来源单据ID",
+    nameCN = "来源ID（目录为部门的，关联为bas_org.orgid,其他为空）",
+    comment = "来源ID（目录为部门的，关联为bas_org.orgid,其他为空）",
     nameEN = "source_id",
     type = "长整型",
     format = "",
@@ -261,7 +265,7 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '来源单据ID'"
+    columnDefinition = "BIGINT   COMMENT '来源ID（目录为部门的，关联为bas_org.orgid,其他为空）'"
   )
   private Long sourceId;
 

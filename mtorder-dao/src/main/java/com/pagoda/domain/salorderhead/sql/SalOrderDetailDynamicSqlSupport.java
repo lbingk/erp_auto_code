@@ -1,8 +1,10 @@
 package com.pagoda.domain.salorderhead.sql;
 
-import com.pagoda.domain.salorderhead.*;
+import lombok.Data;
 import java.sql.JDBCType;
 import java.util.Date;
+
+import com.pagoda.domain.salorderhead.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -51,6 +53,9 @@ public class SalOrderDetailDynamicSqlSupport {
   public static SqlColumn<java.math.BigDecimal> goodsAmt = salOrderDetailTable.goodsAmt;
   public static SqlColumn<java.math.BigDecimal> totalAmt = salOrderDetailTable.totalAmt;
   public static SqlColumn<String> remark = salOrderDetailTable.remark;
+  public static SqlColumn<Integer> sourceType = salOrderDetailTable.sourceType;
+  public static SqlColumn<Long> sourceId = salOrderDetailTable.sourceId;
+  public static SqlColumn<String> sourceNo = salOrderDetailTable.sourceNo;
 
   public static final class SalOrderDetailTable extends SqlTable {
     public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -99,6 +104,9 @@ public class SalOrderDetailDynamicSqlSupport {
     public final SqlColumn<java.math.BigDecimal> goodsAmt = column("goods_amt", JDBCType.DECIMAL);
     public final SqlColumn<java.math.BigDecimal> totalAmt = column("total_amt", JDBCType.DECIMAL);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
+    public final SqlColumn<Integer> sourceType = column("source_type", JDBCType.INTEGER);
+    public final SqlColumn<Long> sourceId = column("source_id", JDBCType.BIGINT);
+    public final SqlColumn<String> sourceNo = column("source_no", JDBCType.VARCHAR);
 
     public SalOrderDetailTable() {
       super("SalOrderDetail");

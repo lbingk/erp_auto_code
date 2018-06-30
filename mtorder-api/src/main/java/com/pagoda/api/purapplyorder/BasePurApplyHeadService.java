@@ -1,11 +1,14 @@
 package com.pagoda.api.purapplyorder;
 
-import com.pagoda.api.*;
 import com.pagoda.api.dto.purapplyorder.*;
-import io.swagger.annotations.*;
+import com.pagoda.api.*;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 

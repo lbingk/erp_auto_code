@@ -1,14 +1,14 @@
 package com.pagoda.api.dto.salorderhead;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.api.dto.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pagoda.platform.jms.annotation.*;
-import io.swagger.annotations.*;
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import java.lang.reflect.*;
+import java.io.Serializable;
+import java.util.*;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -882,8 +882,8 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "basUnitId",
     scene = "",
-    nameCN = "基础计量单位ID",
-    comment = "基础计量单位ID",
+    nameCN = "基本单位ID(即最小单位)",
+    comment = "基本单位ID(即最小单位)",
     nameEN = "bas_unit_id",
     type = "长整型",
     format = "",
@@ -909,7 +909,7 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "basUnitId",
-    value = "基础计量单位ID",
+    value = "基本单位ID(即最小单位)",
     dataType = "",
     notes = "5b35d7329d2feff19b413991"
   )
@@ -918,8 +918,8 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "basUnitCode",
     scene = "",
-    nameCN = "基础计量单位代码[冗余]",
-    comment = "基础计量单位代码[冗余]",
+    nameCN = "基本单位代码[冗余]",
+    comment = "基本单位代码[冗余]",
     nameEN = "bas_unit_code",
     type = "字符串",
     format = "",
@@ -945,7 +945,7 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "basUnitCode",
-    value = "基础计量单位代码[冗余]",
+    value = "基本单位代码[冗余]",
     dataType = "",
     notes = "5b35d7329d2feff19b41398f"
   )
@@ -1062,8 +1062,8 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "报价(采购价)",
-    comment = "报价(采购价)",
+    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -1089,7 +1089,7 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "price",
-    value = "报价(采购价)",
+    value = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d991"
   )
@@ -1098,8 +1098,8 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "totalAmt",
     scene = "",
-    nameCN = "总金额",
-    comment = "总金额",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
     nameEN = "total_amt",
     type = "小数",
     format = "",
@@ -1125,7 +1125,7 @@ public class SalPreOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "totalAmt",
-    value = "总金额",
+    value = "总金额[配送价*数量]",
     dataType = "",
     notes = "5b35d2b49d2feff19b40cb44"
   )

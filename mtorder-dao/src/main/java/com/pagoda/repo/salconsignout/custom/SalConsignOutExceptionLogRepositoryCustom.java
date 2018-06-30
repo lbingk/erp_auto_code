@@ -3,10 +3,12 @@ package com.pagoda.repo.salconsignout.custom;
 import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
-import java.util.*;
+
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
+
+import java.util.*;
 
 /**
  * SalConsignOutExceptionLog扩展数据访问接口
