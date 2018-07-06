@@ -3,12 +3,10 @@ package com.pagoda.repo.salconsignout.custom;
 import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalConsignOutHead扩展数据访问接口
@@ -72,11 +70,11 @@ public interface SalConsignOutHeadRepositoryCustom {
       @Param("stockoutStatus") Integer stockoutStatus,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("remark") String remark,
       @Param("confirmUserCode") String confirmUserCode,
       @Param("confirmUserName") String confirmUserName,
-      @Param("confirmTime") java.sql.Timestamp confirmTime,
+      @Param("confirmTime") java.util.Date confirmTime,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -132,11 +130,11 @@ public interface SalConsignOutHeadRepositoryCustom {
       @Param("stockoutStatus") Integer stockoutStatus,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("remark") String remark,
       @Param("confirmUserCode") String confirmUserCode,
       @Param("confirmUserName") String confirmUserName,
-      @Param("confirmTime") java.sql.Timestamp confirmTime);
+      @Param("confirmTime") java.util.Date confirmTime);
 
   /**
    * 通用分页查询，用于后台查询
@@ -180,7 +178,7 @@ public interface SalConsignOutHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

@@ -1,10 +1,8 @@
 package com.pagoda.domain.salconsignout.sql;
 
-import lombok.Data;
+import com.pagoda.domain.salconsignout.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.salconsignout.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -52,11 +50,11 @@ public class SalConsignOutHeadDynamicSqlSupport {
   public static SqlColumn<Integer> stockoutStatus = salConsignOutHeadTable.stockoutStatus;
   public static SqlColumn<String> auditorCode = salConsignOutHeadTable.auditorCode;
   public static SqlColumn<String> auditorName = salConsignOutHeadTable.auditorName;
-  public static SqlColumn<java.sql.Timestamp> auditTime = salConsignOutHeadTable.auditTime;
+  public static SqlColumn<java.util.Date> auditTime = salConsignOutHeadTable.auditTime;
   public static SqlColumn<String> remark = salConsignOutHeadTable.remark;
   public static SqlColumn<String> confirmUserCode = salConsignOutHeadTable.confirmUserCode;
   public static SqlColumn<String> confirmUserName = salConsignOutHeadTable.confirmUserName;
-  public static SqlColumn<java.sql.Timestamp> confirmTime = salConsignOutHeadTable.confirmTime;
+  public static SqlColumn<java.util.Date> confirmTime = salConsignOutHeadTable.confirmTime;
 
   public static final class SalConsignOutHeadTable extends SqlTable {
     public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -100,12 +98,11 @@ public class SalConsignOutHeadDynamicSqlSupport {
     public final SqlColumn<Integer> stockoutStatus = column("stockout_status", JDBCType.INTEGER);
     public final SqlColumn<String> auditorCode = column("auditor_code", JDBCType.VARCHAR);
     public final SqlColumn<String> auditorName = column("auditor_name", JDBCType.VARCHAR);
-    public final SqlColumn<java.sql.Timestamp> auditTime = column("audit_time", JDBCType.TIMESTAMP);
+    public final SqlColumn<java.util.Date> auditTime = column("audit_time", JDBCType.DATE);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
     public final SqlColumn<String> confirmUserCode = column("confirm_user_code", JDBCType.VARCHAR);
     public final SqlColumn<String> confirmUserName = column("confirm_user_name", JDBCType.VARCHAR);
-    public final SqlColumn<java.sql.Timestamp> confirmTime =
-        column("confirm_time", JDBCType.TIMESTAMP);
+    public final SqlColumn<java.util.Date> confirmTime = column("confirm_time", JDBCType.DATE);
 
     public SalConsignOutHeadTable() {
       super("SalConsignOutHead");

@@ -2,14 +2,12 @@ package com.pagoda.service.config;
 
 import com.xxl.job.core.executor.XxlJobExecutor;
 import com.xxl.job.core.handler.IJobHandler;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
-import org.springframework.boot.autoconfigure.condition.*;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.context.annotation.*;
 
 /**
  * xxl-job config

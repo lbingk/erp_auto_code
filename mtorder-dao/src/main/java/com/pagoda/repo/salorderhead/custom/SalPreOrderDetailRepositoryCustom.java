@@ -3,12 +3,10 @@ package com.pagoda.repo.salorderhead.custom;
 import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalPreOrderDetail扩展数据访问接口
@@ -192,7 +190,7 @@ public interface SalPreOrderDetailRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

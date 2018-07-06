@@ -3,14 +3,10 @@ package com.pagoda.repo.salorderhead.custom;
 import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalOrderDetail扩展数据访问接口实现类
@@ -53,9 +49,6 @@ public class SalOrderDetailRepositoryImpl extends BaseRepositoryCustomImpl<SalOr
       @Param("goodsAmt") java.math.BigDecimal goodsAmt,
       @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("remark") String remark,
-      @Param("sourceType") Integer sourceType,
-      @Param("sourceId") Long sourceId,
-      @Param("sourceNo") String sourceNo,
       @Param("pageable") Pageable pageable) {
     SalOrderDetail obj = SalOrderDetail.toExample();
     obj.setOrderId(orderId);
@@ -83,9 +76,6 @@ public class SalOrderDetailRepositoryImpl extends BaseRepositoryCustomImpl<SalOr
     obj.setGoodsAmt(goodsAmt);
     obj.setTotalAmt(totalAmt);
     obj.setRemark(remark);
-    obj.setSourceType(sourceType);
-    obj.setSourceId(sourceId);
-    obj.setSourceNo(sourceNo);
     Example<SalOrderDetail> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalOrderDetail.DTO_CONVERTER);
@@ -117,10 +107,7 @@ public class SalOrderDetailRepositoryImpl extends BaseRepositoryCustomImpl<SalOr
       @Param("taxAmt") java.math.BigDecimal taxAmt,
       @Param("goodsAmt") java.math.BigDecimal goodsAmt,
       @Param("totalAmt") java.math.BigDecimal totalAmt,
-      @Param("remark") String remark,
-      @Param("sourceType") Integer sourceType,
-      @Param("sourceId") Long sourceId,
-      @Param("sourceNo") String sourceNo) {
+      @Param("remark") String remark) {
     SalOrderDetail obj = SalOrderDetail.toExample();
     obj.setOrderId(orderId);
     obj.setOrderSeqno(orderSeqno);
@@ -147,9 +134,6 @@ public class SalOrderDetailRepositoryImpl extends BaseRepositoryCustomImpl<SalOr
     obj.setGoodsAmt(goodsAmt);
     obj.setTotalAmt(totalAmt);
     obj.setRemark(remark);
-    obj.setSourceType(sourceType);
-    obj.setSourceId(sourceId);
-    obj.setSourceNo(sourceNo);
     Example<SalOrderDetail> example = Example.of(obj);
     return findAll(example, null).map(SalOrderDetail.DTO_CONVERTER).getContent();
   }
@@ -188,10 +172,10 @@ public class SalOrderDetailRepositoryImpl extends BaseRepositoryCustomImpl<SalOr
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

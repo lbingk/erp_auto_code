@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsignreturn.SalConsignReturnDetailDTO.Getters.*;
 
 /**
  * 模型SalConsignReturnDetail对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalConsignReturnDetailService")
 @Slf4j
-public class SalConsignReturnDetailController {
+public class SalConsignReturnDetailController implements InitializingBean {
   @Autowired private SalConsignReturnDetailService salConsignReturnDetailService;
 
   @Autowired private SalConsignReturnDetailValidator salConsignReturnDetailValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -118,11 +128,29 @@ public class SalConsignReturnDetailController {
    *
    * @param returnId
    * @param returnSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsName
+   * @param goodsSpec
+   * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
    * @param salRate
    * @param salRetInDepotId
    * @param salRetInDepotCode
    * @param salRetInDepotName
+   * @param returnQty
+   * @param stockinQty
+   * @param stockinNetWeight
+   * @param stockinGrossWeight
+   * @param price
    * @param returnPrice
+   * @param taxRate
+   * @param taxAmt
+   * @param totalReturnAmt
+   * @param totalStockinAmt
+   * @param remark
    * @param pageable
    * @return
    */
@@ -132,20 +160,59 @@ public class SalConsignReturnDetailController {
   public Page<SalConsignReturnDetailDTO> findBy(
       @RequestParam(required = false, value = "returnId") Long returnId,
       @RequestParam(required = false, value = "returnSeqno") String returnSeqno,
+      @RequestParam(required = false, value = "entId") Long entId,
+      @RequestParam(required = false, value = "goodsId") Long goodsId,
+      @RequestParam(required = false, value = "goodsCode") String goodsCode,
+      @RequestParam(required = false, value = "goodsName") String goodsName,
+      @RequestParam(required = false, value = "goodsSpec") String goodsSpec,
+      @RequestParam(required = false, value = "salUnitId") Long salUnitId,
+      @RequestParam(required = false, value = "salUnitCode") String salUnitCode,
+      @RequestParam(required = false, value = "salUnitName") String salUnitName,
       @RequestParam(required = false, value = "salRate") java.math.BigDecimal salRate,
       @RequestParam(required = false, value = "salRetInDepotId") Long salRetInDepotId,
       @RequestParam(required = false, value = "salRetInDepotCode") String salRetInDepotCode,
       @RequestParam(required = false, value = "salRetInDepotName") String salRetInDepotName,
+      @RequestParam(required = false, value = "returnQty") java.math.BigDecimal returnQty,
+      @RequestParam(required = false, value = "stockinQty") java.math.BigDecimal stockinQty,
+      @RequestParam(required = false, value = "stockinNetWeight")
+          java.math.BigDecimal stockinNetWeight,
+      @RequestParam(required = false, value = "stockinGrossWeight")
+          java.math.BigDecimal stockinGrossWeight,
+      @RequestParam(required = false, value = "price") java.math.BigDecimal price,
       @RequestParam(required = false, value = "returnPrice") java.math.BigDecimal returnPrice,
+      @RequestParam(required = false, value = "taxRate") java.math.BigDecimal taxRate,
+      @RequestParam(required = false, value = "taxAmt") java.math.BigDecimal taxAmt,
+      @RequestParam(required = false, value = "totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @RequestParam(required = false, value = "totalStockinAmt")
+          java.math.BigDecimal totalStockinAmt,
+      @RequestParam(required = false, value = "remark") String remark,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salConsignReturnDetailService.findBy(
         returnId,
         returnSeqno,
+        entId,
+        goodsId,
+        goodsCode,
+        goodsName,
+        goodsSpec,
+        salUnitId,
+        salUnitCode,
+        salUnitName,
         salRate,
         salRetInDepotId,
         salRetInDepotCode,
         salRetInDepotName,
+        returnQty,
+        stockinQty,
+        stockinNetWeight,
+        stockinGrossWeight,
+        price,
         returnPrice,
+        taxRate,
+        taxAmt,
+        totalReturnAmt,
+        totalStockinAmt,
+        remark,
         pageable);
   }
 }

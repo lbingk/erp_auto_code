@@ -1,10 +1,8 @@
 package com.pagoda.domain.salorderhead.sql;
 
-import lombok.Data;
+import com.pagoda.domain.salorderhead.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.salorderhead.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 

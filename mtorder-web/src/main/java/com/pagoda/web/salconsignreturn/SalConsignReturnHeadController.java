@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsignreturn.SalConsignReturnHeadDTO.Getters.*;
 
 /**
  * 模型SalConsignReturnHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalConsignReturnHeadService")
 @Slf4j
-public class SalConsignReturnHeadController {
+public class SalConsignReturnHeadController implements InitializingBean {
   @Autowired private SalConsignReturnHeadService salConsignReturnHeadService;
 
   @Autowired private SalConsignReturnHeadValidator salConsignReturnHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -116,9 +126,18 @@ public class SalConsignReturnHeadController {
    * "说明") @RequiresResource(@ResourceFilter(resourceCode = "资源属性代码", model = "需要权限过滤的模型", field =
    * "资源属性对应的模型字段"))
    *
+   * @param seqno
+   * @param entId
+   * @param arrOrgId
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgId
+   * @param cusOrgCode
+   * @param cusOrgName
    * @param returnType
    * @param returnDate
    * @param returnQty
+   * @param transitLineNo
    * @param stockinQty
    * @param stockinGrossWeight
    * @param stockinNetWeight
@@ -126,6 +145,12 @@ public class SalConsignReturnHeadController {
    * @param totalReturnAmt
    * @param totalStockinAmt
    * @param status
+   * @param printCount
+   * @param auditorCode
+   * @param auditorName
+   * @param auditTime
+   * @param remark
+   * @param note
    * @param pageable
    * @return
    */
@@ -133,9 +158,18 @@ public class SalConsignReturnHeadController {
   @ApiOperation(value = "findBy", notes = "前端页面查询接口, 包含所有可查询的字段")
   @GetMapping(value = "/findBy")
   public Page<SalConsignReturnHeadDTO> findBy(
+      @RequestParam(required = false, value = "seqno") String seqno,
+      @RequestParam(required = false, value = "entId") Long entId,
+      @RequestParam(required = false, value = "arrOrgId") Long arrOrgId,
+      @RequestParam(required = false, value = "arrOrgCode") String arrOrgCode,
+      @RequestParam(required = false, value = "arrOrgName") String arrOrgName,
+      @RequestParam(required = false, value = "cusOrgId") Long cusOrgId,
+      @RequestParam(required = false, value = "cusOrgCode") String cusOrgCode,
+      @RequestParam(required = false, value = "cusOrgName") String cusOrgName,
       @RequestParam(required = false, value = "returnType") Integer returnType,
-      @RequestParam(required = false, value = "returnDate") java.sql.Timestamp returnDate,
+      @RequestParam(required = false, value = "returnDate") java.util.Date returnDate,
       @RequestParam(required = false, value = "returnQty") java.math.BigDecimal returnQty,
+      @RequestParam(required = false, value = "transitLineNo") String transitLineNo,
       @RequestParam(required = false, value = "stockinQty") java.math.BigDecimal stockinQty,
       @RequestParam(required = false, value = "stockinGrossWeight")
           java.math.BigDecimal stockinGrossWeight,
@@ -146,11 +180,26 @@ public class SalConsignReturnHeadController {
       @RequestParam(required = false, value = "totalStockinAmt")
           java.math.BigDecimal totalStockinAmt,
       @RequestParam(required = false, value = "status") Integer status,
+      @RequestParam(required = false, value = "printCount") Integer printCount,
+      @RequestParam(required = false, value = "auditorCode") String auditorCode,
+      @RequestParam(required = false, value = "auditorName") String auditorName,
+      @RequestParam(required = false, value = "auditTime") java.util.Date auditTime,
+      @RequestParam(required = false, value = "remark") String remark,
+      @RequestParam(required = false, value = "note") String note,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salConsignReturnHeadService.findBy(
+        seqno,
+        entId,
+        arrOrgId,
+        arrOrgCode,
+        arrOrgName,
+        cusOrgId,
+        cusOrgCode,
+        cusOrgName,
         returnType,
         returnDate,
         returnQty,
+        transitLineNo,
         stockinQty,
         stockinGrossWeight,
         stockinNetWeight,
@@ -158,6 +207,12 @@ public class SalConsignReturnHeadController {
         totalReturnAmt,
         totalStockinAmt,
         status,
+        printCount,
+        auditorCode,
+        auditorName,
+        auditTime,
+        remark,
+        note,
         pageable);
   }
 }

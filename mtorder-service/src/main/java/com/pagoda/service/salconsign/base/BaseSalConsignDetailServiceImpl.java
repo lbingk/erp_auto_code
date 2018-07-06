@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsign.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsign.*;
 import com.pagoda.api.dto.salconsign.*;
+import com.pagoda.api.salconsign.*;
 import com.pagoda.domain.salconsign.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsign.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignDetailServiceImpl
-    implements SalConsignDetailService, InitializingBean {
+    implements BaseSalConsignDetailService, InitializingBean {
 
   @Autowired protected SalConsignDetailRepository repository;
 
@@ -200,7 +198,11 @@ public abstract class BaseSalConsignDetailServiceImpl
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   @Override
   public Page<SalConsignDetailDTO> findBy(
+      @ApiParam("conId") Long conId,
+      @ApiParam("conSeqno") String conSeqno,
+      @ApiParam("orderId") Long orderId,
       @ApiParam("orderSeqno") String orderSeqno,
+      @ApiParam("entId") Long entId,
       @ApiParam("goodsId") Long goodsId,
       @ApiParam("goodsCode") String goodsCode,
       @ApiParam("goodsName") String goodsName,
@@ -213,21 +215,33 @@ public abstract class BaseSalConsignDetailServiceImpl
       @ApiParam("salConOutDepotCode") String salConOutDepotCode,
       @ApiParam("salConOutDepotName") String salConOutDepotName,
       @ApiParam("grossWeight") java.math.BigDecimal grossWeight,
+      @ApiParam("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
       @ApiParam("netWeight") java.math.BigDecimal netWeight,
+      @ApiParam("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
       @ApiParam("qty") java.math.BigDecimal qty,
+      @ApiParam("shippedQty") java.math.BigDecimal shippedQty,
       @ApiParam("volume") java.math.BigDecimal volume,
+      @ApiParam("shippedVolume") java.math.BigDecimal shippedVolume,
       @ApiParam("taxRate") java.math.BigDecimal taxRate,
+      @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
       @ApiParam("price") java.math.BigDecimal price,
+      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
       @ApiParam("discountRate") java.math.BigDecimal discountRate,
       @ApiParam("actualAmt") java.math.BigDecimal actualAmt,
       @ApiParam("discountPrice") java.math.BigDecimal discountPrice,
       @ApiParam("shippedPrice") java.math.BigDecimal shippedPrice,
       @ApiParam("shippedCount") Integer shippedCount,
+      @ApiParam("shippedAmt") java.math.BigDecimal shippedAmt,
+      @ApiParam("remark") String remark,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
       return repository.findBy(
+          conId,
+          conSeqno,
+          orderId,
           orderSeqno,
+          entId,
           goodsId,
           goodsCode,
           goodsName,
@@ -240,16 +254,24 @@ public abstract class BaseSalConsignDetailServiceImpl
           salConOutDepotCode,
           salConOutDepotName,
           grossWeight,
+          shippedGrossWeight,
           netWeight,
+          shippedNetWeight,
           qty,
+          shippedQty,
           volume,
+          shippedVolume,
           taxRate,
+          taxAmt,
           price,
+          totalAmt,
           discountRate,
           actualAmt,
           discountPrice,
           shippedPrice,
           shippedCount,
+          shippedAmt,
+          remark,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -281,11 +303,10 @@ public abstract class BaseSalConsignDetailServiceImpl
   public Page<SalConsignDetailDTO> findSalConsignDetail(
       @ApiParam("con_id") Long conId,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
-      return repository.findSalConsignDetail(conId, creatorOrgCode, codeList, pageable);
+      return repository.findSalConsignDetail(conId, creatorOrgCode, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }
@@ -296,11 +317,10 @@ public abstract class BaseSalConsignDetailServiceImpl
   public Page<SalConsignDetailDTO> findSalConsignAllDetails(
       @ApiParam("con_id") Long conId,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
-      return repository.findSalConsignAllDetails(conId, creatorOrgCode, codeList, pageable);
+      return repository.findSalConsignAllDetails(conId, creatorOrgCode, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

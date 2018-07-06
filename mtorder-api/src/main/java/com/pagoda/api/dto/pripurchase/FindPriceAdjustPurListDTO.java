@@ -1,14 +1,12 @@
 package com.pagoda.api.dto.pripurchase;
 
-import com.pagoda.api.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import io.swagger.annotations.*;
 
 /**
  * 查询方法返回的DTO对象
@@ -102,8 +100,8 @@ public class FindPriceAdjustPurListDTO implements Serializable {
   @FieldMeta(
     name = "modifierName",
     scene = "",
-    nameCN = "最近修改人name",
-    comment = "最近修改人name",
+    nameCN = "最后修改人名称",
+    comment = "最后修改人名称",
     nameEN = "",
     type = "字符串",
     format = "",
@@ -127,7 +125,7 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "", notes = "")
   private String modifierName;
 
   @FieldMeta(
@@ -169,8 +167,8 @@ public class FindPriceAdjustPurListDTO implements Serializable {
   @FieldMeta(
     name = "createdAt",
     scene = "",
-    nameCN = "创建时间",
-    comment = "创建时间",
+    nameCN = "录入时间",
+    comment = "录入时间",
     nameEN = "",
     type = "时间",
     format = "",
@@ -194,39 +192,8 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "", notes = "")
-  private java.sql.Timestamp createdAt;
-
-  @FieldMeta(
-    name = "creatorName",
-    scene = "",
-    nameCN = "创建人名称",
-    comment = "创建人名称",
-    nameEN = "",
-    type = "字符串",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = false,
-    readOnly = true,
-    required = true,
-    visible = false,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = -1
-  )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "", notes = "")
-  private String creatorName;
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "", notes = "")
+  private java.util.Date createdAt;
 
   @FieldMeta(
     name = "remark",
@@ -276,11 +243,11 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     formSize = "",
     constraint = "",
     constraintParams = "",
-    persistent = false,
-    canQuery = false,
+    persistent = true,
+    canQuery = true,
     readOnly = false,
     required = false,
-    visible = false,
+    visible = true,
     defaultValue = "",
     tag = "",
     sortable = false,
@@ -290,7 +257,7 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     constraintParamsExtra = "",
     fixed = "",
     sensitive = false,
-    index = -1
+    index = 0
   )
   @ApiModelProperty(
     name = "venOrgName",
@@ -335,6 +302,99 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     notes = "5b36e5099d2feff19b29c39c"
   )
   private String venOrgCode;
+
+  @FieldMeta(
+    name = "lastModifiedAt",
+    scene = "",
+    nameCN = "最后修改时间",
+    comment = "最后修改时间",
+    nameEN = "",
+    type = "时间",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = false,
+    readOnly = true,
+    required = true,
+    visible = false,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = -1
+  )
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "", notes = "")
+  private java.util.Date lastModifiedAt;
+
+  @FieldMeta(
+    name = "creatorName",
+    scene = "",
+    nameCN = "录入人名称",
+    comment = "录入人名称",
+    nameEN = "",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = false,
+    readOnly = true,
+    required = true,
+    visible = false,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = -1
+  )
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "", notes = "")
+  private String creatorName;
+
+  @FieldMeta(
+    name = "id",
+    scene = "",
+    nameCN = "主键id",
+    comment = "主键id",
+    nameEN = "",
+    type = "长整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = false,
+    readOnly = true,
+    required = true,
+    visible = false,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = -1
+  )
+  @ApiModelProperty(name = "id", value = "主键id", dataType = "", notes = "")
+  private Long id;
 
   @FieldMeta(
     name = "arrOrgName",
@@ -407,35 +467,4 @@ public class FindPriceAdjustPurListDTO implements Serializable {
     notes = "5b36e56a9d2feff19b2a262e"
   )
   private Integer status;
-
-  @FieldMeta(
-    name = "lastModifiedAt",
-    scene = "",
-    nameCN = "最近修改时间",
-    comment = "最近修改时间",
-    nameEN = "",
-    type = "时间",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = false,
-    readOnly = true,
-    required = true,
-    visible = false,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = -1
-  )
-  @ApiModelProperty(name = "lastModifiedAt", value = "最近修改时间", dataType = "", notes = "")
-  private java.sql.Timestamp lastModifiedAt;
 }

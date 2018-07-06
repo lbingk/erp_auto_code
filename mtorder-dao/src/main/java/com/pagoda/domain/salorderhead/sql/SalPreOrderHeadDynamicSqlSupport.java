@@ -1,10 +1,8 @@
 package com.pagoda.domain.salorderhead.sql;
 
-import lombok.Data;
+import com.pagoda.domain.salorderhead.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.salorderhead.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -39,7 +37,6 @@ public class SalPreOrderHeadDynamicSqlSupport {
   public static SqlColumn<String> cusOrgCode = salPreOrderHeadTable.cusOrgCode;
   public static SqlColumn<String> cusOrgName = salPreOrderHeadTable.cusOrgName;
   public static SqlColumn<String> remark = salPreOrderHeadTable.remark;
-  public static SqlColumn<java.sql.Timestamp> entryDate = salPreOrderHeadTable.entryDate;
   public static SqlColumn<java.math.BigDecimal> totalAmt = salPreOrderHeadTable.totalAmt;
   public static SqlColumn<java.math.BigDecimal> totalRequestQty =
       salPreOrderHeadTable.totalRequestQty;
@@ -70,7 +67,6 @@ public class SalPreOrderHeadDynamicSqlSupport {
     public final SqlColumn<String> cusOrgCode = column("cus_org_code", JDBCType.VARCHAR);
     public final SqlColumn<String> cusOrgName = column("cus_org_name", JDBCType.VARCHAR);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
-    public final SqlColumn<java.sql.Timestamp> entryDate = column("entry_date", JDBCType.TIMESTAMP);
     public final SqlColumn<java.math.BigDecimal> totalAmt = column("total_amt", JDBCType.DECIMAL);
     public final SqlColumn<java.math.BigDecimal> totalRequestQty =
         column("total_request_qty", JDBCType.DECIMAL);

@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsign.custom;
 import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignDetail扩展数据访问接口实现类
@@ -28,7 +24,11 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
 
   @Override
   public Page<SalConsignDetailDTO> findBy(
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
       @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
       @Param("goodsId") Long goodsId,
       @Param("goodsCode") String goodsCode,
       @Param("goodsName") String goodsName,
@@ -41,19 +41,31 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
       @Param("salConOutDepotCode") String salConOutDepotCode,
       @Param("salConOutDepotName") String salConOutDepotName,
       @Param("grossWeight") java.math.BigDecimal grossWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
       @Param("netWeight") java.math.BigDecimal netWeight,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
       @Param("qty") java.math.BigDecimal qty,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("volume") java.math.BigDecimal volume,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
       @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
       @Param("price") java.math.BigDecimal price,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("discountRate") java.math.BigDecimal discountRate,
       @Param("actualAmt") java.math.BigDecimal actualAmt,
       @Param("discountPrice") java.math.BigDecimal discountPrice,
       @Param("shippedPrice") java.math.BigDecimal shippedPrice,
       @Param("shippedCount") Integer shippedCount,
+      @Param("shippedAmt") java.math.BigDecimal shippedAmt,
+      @Param("remark") String remark,
       @Param("pageable") Pageable pageable) {
     SalConsignDetail obj = SalConsignDetail.toExample();
+    obj.setConId(conId);
+    obj.setConSeqno(conSeqno);
+    obj.setOrderId(orderId);
     obj.setOrderSeqno(orderSeqno);
+    obj.setEntId(entId);
     obj.setGoodsId(goodsId);
     obj.setGoodsCode(goodsCode);
     obj.setGoodsName(goodsName);
@@ -66,16 +78,24 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
     obj.setSalConOutDepotCode(salConOutDepotCode);
     obj.setSalConOutDepotName(salConOutDepotName);
     obj.setGrossWeight(grossWeight);
+    obj.setShippedGrossWeight(shippedGrossWeight);
     obj.setNetWeight(netWeight);
+    obj.setShippedNetWeight(shippedNetWeight);
     obj.setQty(qty);
+    obj.setShippedQty(shippedQty);
     obj.setVolume(volume);
+    obj.setShippedVolume(shippedVolume);
     obj.setTaxRate(taxRate);
+    obj.setTaxAmt(taxAmt);
     obj.setPrice(price);
+    obj.setTotalAmt(totalAmt);
     obj.setDiscountRate(discountRate);
     obj.setActualAmt(actualAmt);
     obj.setDiscountPrice(discountPrice);
     obj.setShippedPrice(shippedPrice);
     obj.setShippedCount(shippedCount);
+    obj.setShippedAmt(shippedAmt);
+    obj.setRemark(remark);
     Example<SalConsignDetail> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalConsignDetail.DTO_CONVERTER);
@@ -83,7 +103,11 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
 
   @Override
   public List<SalConsignDetailDTO> findBy(
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
       @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
       @Param("goodsId") Long goodsId,
       @Param("goodsCode") String goodsCode,
       @Param("goodsName") String goodsName,
@@ -96,18 +120,30 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
       @Param("salConOutDepotCode") String salConOutDepotCode,
       @Param("salConOutDepotName") String salConOutDepotName,
       @Param("grossWeight") java.math.BigDecimal grossWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
       @Param("netWeight") java.math.BigDecimal netWeight,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
       @Param("qty") java.math.BigDecimal qty,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("volume") java.math.BigDecimal volume,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
       @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
       @Param("price") java.math.BigDecimal price,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("discountRate") java.math.BigDecimal discountRate,
       @Param("actualAmt") java.math.BigDecimal actualAmt,
       @Param("discountPrice") java.math.BigDecimal discountPrice,
       @Param("shippedPrice") java.math.BigDecimal shippedPrice,
-      @Param("shippedCount") Integer shippedCount) {
+      @Param("shippedCount") Integer shippedCount,
+      @Param("shippedAmt") java.math.BigDecimal shippedAmt,
+      @Param("remark") String remark) {
     SalConsignDetail obj = SalConsignDetail.toExample();
+    obj.setConId(conId);
+    obj.setConSeqno(conSeqno);
+    obj.setOrderId(orderId);
     obj.setOrderSeqno(orderSeqno);
+    obj.setEntId(entId);
     obj.setGoodsId(goodsId);
     obj.setGoodsCode(goodsCode);
     obj.setGoodsName(goodsName);
@@ -120,16 +156,24 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
     obj.setSalConOutDepotCode(salConOutDepotCode);
     obj.setSalConOutDepotName(salConOutDepotName);
     obj.setGrossWeight(grossWeight);
+    obj.setShippedGrossWeight(shippedGrossWeight);
     obj.setNetWeight(netWeight);
+    obj.setShippedNetWeight(shippedNetWeight);
     obj.setQty(qty);
+    obj.setShippedQty(shippedQty);
     obj.setVolume(volume);
+    obj.setShippedVolume(shippedVolume);
     obj.setTaxRate(taxRate);
+    obj.setTaxAmt(taxAmt);
     obj.setPrice(price);
+    obj.setTotalAmt(totalAmt);
     obj.setDiscountRate(discountRate);
     obj.setActualAmt(actualAmt);
     obj.setDiscountPrice(discountPrice);
     obj.setShippedPrice(shippedPrice);
     obj.setShippedCount(shippedCount);
+    obj.setShippedAmt(shippedAmt);
+    obj.setRemark(remark);
     Example<SalConsignDetail> example = Example.of(obj);
     return findAll(example, null).map(SalConsignDetail.DTO_CONVERTER).getContent();
   }
@@ -168,10 +212,10 @@ public class SalConsignDetailRepositoryImpl extends BaseRepositoryCustomImpl<Sal
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

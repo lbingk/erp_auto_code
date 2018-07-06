@@ -3,12 +3,10 @@ package com.pagoda.repo.salorderhead.custom;
 import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalOrderHead扩展数据访问接口
@@ -38,9 +36,7 @@ public interface SalOrderHeadRepositoryCustom {
    * @param orderType
    * @param inputMode
    * @param orderStatus
-   * @param isFinish
    * @param remark
-   * @param entryDate
    * @param pageable
    * @return
    */
@@ -62,9 +58,7 @@ public interface SalOrderHeadRepositoryCustom {
       @Param("orderType") Integer orderType,
       @Param("inputMode") Integer inputMode,
       @Param("orderStatus") Integer orderStatus,
-      @Param("isFinish") Integer isFinish,
       @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -87,9 +81,7 @@ public interface SalOrderHeadRepositoryCustom {
    * @param orderType
    * @param inputMode
    * @param orderStatus
-   * @param isFinish
    * @param remark
-   * @param entryDate
    * @return
    */
   List<SalOrderHeadDTO> findBy(
@@ -110,9 +102,7 @@ public interface SalOrderHeadRepositoryCustom {
       @Param("orderType") Integer orderType,
       @Param("inputMode") Integer inputMode,
       @Param("orderStatus") Integer orderStatus,
-      @Param("isFinish") Integer isFinish,
-      @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate);
+      @Param("remark") String remark);
 
   /**
    * 通用分页查询，用于后台查询
@@ -156,7 +146,7 @@ public interface SalOrderHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

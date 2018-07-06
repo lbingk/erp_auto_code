@@ -1,14 +1,18 @@
 package com.pagoda.api.dto.salconsignout;
 
-import com.pagoda.api.dto.*;
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsignout.SalConsignOutHeadDTO.Getters.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.dto.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.lang.reflect.*;
-import java.io.Serializable;
-import java.util.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -33,7 +37,7 @@ import org.springframework.validation.*;
   auditable = true,
   traceable = true,
   approvalRequired = false,
-  requestUrl = "",
+  requestUrl = "/SalConsignOutHeadService/findSalConsignOutHeadList",
   tableMultiSelect = false
 )
 public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
@@ -62,90 +66,90 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
 
   @FieldMeta(
     name = "createdAt",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "datetime", notes = "")
   private Date createdAt;
 
   @FieldMeta(
     name = "creatorCode",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorCode", value = "创建人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorCode", value = "录入人代码", dataType = "string", notes = "")
   private String creatorCode;
 
   @FieldMeta(
     name = "creatorName",
-    nameCN = "创建人名称",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "string", notes = "")
   private String creatorName;
 
   @FieldMeta(
     name = "creatorOrgCode",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorOrgCode", value = "创建人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorOrgCode", value = "录入人机构代码", dataType = "string", notes = "")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "lastModifiedAt",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "lastModifiedAt", value = "", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "datetime", notes = "")
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifierCode",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierCode", value = "最近修改人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierCode", value = "最后修改人代码", dataType = "string", notes = "")
   private String modifierCode;
 
   @FieldMeta(
     name = "modifierName",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "string", notes = "")
   private String modifierName;
 
   @FieldMeta(
     name = "modifierOrgCode",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierOrgCode", value = "修改人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierOrgCode", value = "最后修改人机构代码", dataType = "string", notes = "")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -161,9 +165,9 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
 
   @FieldMeta(
     name = "seqno",
-    scene = "",
-    nameCN = "调价单号[adjustNo]",
-    comment = "调价单号[adjustNo]",
+    scene = "price",
+    nameCN = "调价单号",
+    comment = "调价单号",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -189,17 +193,17 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "调价单号[adjustNo]",
+    value = "调价单号",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c207"
+    notes = "5b36e3bf9d2feff19b287d2f"
   )
   private String seqno;
 
   @FieldMeta(
     name = "entId",
-    scene = "",
-    nameCN = "企业ID",
-    comment = "企业ID",
+    scene = "price",
+    nameCN = "企业id",
+    comment = "企业id",
     nameEN = "ent_id",
     type = "长整型",
     format = "",
@@ -225,17 +229,17 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "entId",
-    value = "企业ID",
+    value = "企业id",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c205"
+    notes = "5b36e41b9d2feff19b28d81c"
   )
   private Long entId;
 
   @FieldMeta(
     name = "conId",
     scene = "",
-    nameCN = "发货单ID[conId]",
-    comment = "发货单ID[conId]",
+    nameCN = "发货单ID",
+    comment = "发货单ID",
     nameEN = "con_id",
     type = "长整型",
     format = "",
@@ -261,7 +265,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "conId",
-    value = "发货单ID[conId]",
+    value = "发货单ID",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c209"
   )
@@ -270,8 +274,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "conSeqno",
     scene = "",
-    nameCN = "发货单号",
-    comment = "发货单号",
+    nameCN = "发货单号[冗余]",
+    comment = "发货单号[冗余]",
     nameEN = "con_seqno",
     type = "字符串",
     format = "",
@@ -297,7 +301,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "conSeqno",
-    value = "发货单号",
+    value = "发货单号[冗余]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c20b"
   )
@@ -594,8 +598,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "已发数量",
-    comment = "已发数量",
+    nameCN = "实发数量",
+    comment = "实发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -621,7 +625,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedQty",
-    value = "已发数量",
+    value = "实发数量",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21d"
   )
@@ -630,8 +634,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedGrossWeight",
     scene = "",
-    nameCN = "已发毛重",
-    comment = "已发毛重",
+    nameCN = "实发毛重",
+    comment = "实发毛重",
     nameEN = "shipped_gross_weight",
     type = "小数",
     format = "",
@@ -657,7 +661,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedGrossWeight",
-    value = "已发毛重",
+    value = "实发毛重",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c221"
   )
@@ -666,8 +670,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedNetWeight",
     scene = "",
-    nameCN = "已发净重",
-    comment = "已发净重",
+    nameCN = "实发净重",
+    comment = "实发净重",
     nameEN = "shipped_net_weight",
     type = "小数",
     format = "",
@@ -693,7 +697,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedNetWeight",
-    value = "已发净重",
+    value = "实发净重",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21f"
   )
@@ -702,8 +706,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedVolume",
     scene = "",
-    nameCN = "已发体积",
-    comment = "已发体积",
+    nameCN = "实发体积",
+    comment = "实发体积",
     nameEN = "shipped_volume",
     type = "小数",
     format = "",
@@ -729,7 +733,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedVolume",
-    value = "已发体积",
+    value = "实发体积",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c223"
   )
@@ -738,8 +742,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
-    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    nameCN = "实发金额[实发数量*实发单价]",
+    comment = "实发金额[实发数量*实发单价]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -765,7 +769,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedAmt",
-    value = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    value = "实发金额[实发数量*实发单价]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c227"
   )
@@ -774,8 +778,8 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "taxAmt",
     scene = "",
-    nameCN = "税金[税率*实际总金额]",
-    comment = "税金[税率*实际总金额]",
+    nameCN = "税金",
+    comment = "税金",
     nameEN = "tax_amt",
     type = "小数",
     format = "",
@@ -801,7 +805,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "taxAmt",
-    value = "税金[税率*实际总金额]",
+    value = "税金",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c225"
   )
@@ -845,7 +849,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
 
   @FieldMeta(
     name = "auditorCode",
-    scene = "",
+    scene = "price",
     nameCN = "审核人代码",
     comment = "审核人代码",
     nameEN = "auditor_code",
@@ -875,13 +879,13 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
     name = "auditorCode",
     value = "审核人代码",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c22b"
+    notes = "5b36e6009d2feff19b2abd25"
   )
   private String auditorCode;
 
   @FieldMeta(
     name = "auditorName",
-    scene = "",
+    scene = "price",
     nameCN = "审核人姓名",
     comment = "审核人姓名",
     nameEN = "auditor_name",
@@ -911,13 +915,13 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
     name = "auditorName",
     value = "审核人姓名",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c22d"
+    notes = "5b36e62d9d2feff19b2aea97"
   )
   private String auditorName;
 
   @FieldMeta(
     name = "auditTime",
-    scene = "",
+    scene = "purt",
     nameCN = "审核时间",
     comment = "审核时间",
     nameEN = "audit_time",
@@ -947,13 +951,13 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
     name = "auditTime",
     value = "审核时间",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c22f"
+    notes = "5b36e5e69d2feff19b2aa2d9"
   )
-  private java.sql.Timestamp auditTime;
+  private java.util.Date auditTime;
 
   @FieldMeta(
     name = "remark",
-    scene = "",
+    scene = "price",
     nameCN = "备注",
     comment = "备注",
     nameEN = "remark",
@@ -983,7 +987,7 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
     name = "remark",
     value = "备注",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c231"
+    notes = "5b36e6a39d2feff19b2b62b5"
   )
   private String remark;
 
@@ -1093,7 +1097,78 @@ public class SalConsignOutHeadDTO extends AbstractDTO implements Serializable {
     dataType = "",
     notes = "5b35d1c89d2feff19b40c237"
   )
-  private java.sql.Timestamp confirmTime;
+  private java.util.Date confirmTime;
+
+  /** DTO字段的getter */
+  public static class Getters {
+    public static final Function<SalConsignOutHeadDTO, Long> _id = o -> o.getId();
+    public static final Function<SalConsignOutHeadDTO, Long> _deleted = o -> o.getDeleted();
+
+    public static final Function<SalConsignOutHeadDTO, Date> _createdAt = o -> o.getCreatedAt();
+    public static final Function<SalConsignOutHeadDTO, String> _creatorCode =
+        o -> o.getCreatorCode();
+    public static final Function<SalConsignOutHeadDTO, String> _creatorName =
+        o -> o.getCreatorName();
+    public static final Function<SalConsignOutHeadDTO, String> _creatorOrgCode =
+        o -> o.getCreatorOrgCode();
+    public static final Function<SalConsignOutHeadDTO, Date> _lastModifiedAt =
+        o -> o.getLastModifiedAt();
+    public static final Function<SalConsignOutHeadDTO, String> _modifierCode =
+        o -> o.getModifierCode();
+    public static final Function<SalConsignOutHeadDTO, String> _modifierName =
+        o -> o.getModifierName();
+    public static final Function<SalConsignOutHeadDTO, String> _modifierOrgCode =
+        o -> o.getModifierOrgCode();
+
+    public static final Function<SalConsignOutHeadDTO, Integer> _version = o -> o.getVersion();
+
+    public static final Function<SalConsignOutHeadDTO, String> _seqno = o -> o.getSeqno();
+    public static final Function<SalConsignOutHeadDTO, Long> _entId = o -> o.getEntId();
+    public static final Function<SalConsignOutHeadDTO, Long> _conId = o -> o.getConId();
+    public static final Function<SalConsignOutHeadDTO, String> _conSeqno = o -> o.getConSeqno();
+    public static final Function<SalConsignOutHeadDTO, java.util.Date> _preArrivalDate =
+        o -> o.getPreArrivalDate();
+    public static final Function<SalConsignOutHeadDTO, Long> _conOrgId = o -> o.getConOrgId();
+    public static final Function<SalConsignOutHeadDTO, String> _conOrgCode = o -> o.getConOrgCode();
+    public static final Function<SalConsignOutHeadDTO, String> _conOrgName = o -> o.getConOrgName();
+    public static final Function<SalConsignOutHeadDTO, Long> _cusOrgId = o -> o.getCusOrgId();
+    public static final Function<SalConsignOutHeadDTO, String> _cusOrgCode = o -> o.getCusOrgCode();
+    public static final Function<SalConsignOutHeadDTO, String> _cusOrgName = o -> o.getCusOrgName();
+    public static final Function<SalConsignOutHeadDTO, String> _transitLineNo =
+        o -> o.getTransitLineNo();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _shippedQty =
+        o -> o.getShippedQty();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _shippedGrossWeight =
+        o -> o.getShippedGrossWeight();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _shippedNetWeight =
+        o -> o.getShippedNetWeight();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _shippedVolume =
+        o -> o.getShippedVolume();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _shippedAmt =
+        o -> o.getShippedAmt();
+    public static final Function<SalConsignOutHeadDTO, java.math.BigDecimal> _taxAmt =
+        o -> o.getTaxAmt();
+    public static final Function<SalConsignOutHeadDTO, Integer> _stockoutStatus =
+        o -> o.getStockoutStatus();
+    public static final Function<SalConsignOutHeadDTO, String> _auditorCode =
+        o -> o.getAuditorCode();
+    public static final Function<SalConsignOutHeadDTO, String> _auditorName =
+        o -> o.getAuditorName();
+    public static final Function<SalConsignOutHeadDTO, java.util.Date> _auditTime =
+        o -> o.getAuditTime();
+    public static final Function<SalConsignOutHeadDTO, String> _remark = o -> o.getRemark();
+    public static final Function<SalConsignOutHeadDTO, String> _confirmUserCode =
+        o -> o.getConfirmUserCode();
+    public static final Function<SalConsignOutHeadDTO, String> _confirmUserName =
+        o -> o.getConfirmUserName();
+    public static final Function<SalConsignOutHeadDTO, java.util.Date> _confirmTime =
+        o -> o.getConfirmTime();
+  }
+
+  public static ValidatorBuilder<SalConsignOutHeadDTO> validatorExample() {
+    ValidatorBuilder<SalConsignOutHeadDTO> builder = new ValidatorBuilder<>();
+    return builder;
+  }
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

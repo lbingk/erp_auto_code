@@ -3,12 +3,10 @@ package com.pagoda.repo.pridistribution.custom;
 import com.pagoda.api.dto.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * PriceAdjustSalHead扩展数据访问接口
@@ -27,13 +25,13 @@ public interface PriceAdjustSalHeadRepositoryCustom {
    * @param priceCatCode
    * @param priceCatId
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditTime
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param note
+   * @param commitTime
    * @param pageable
    * @return
    */
@@ -44,13 +42,13 @@ public interface PriceAdjustSalHeadRepositoryCustom {
       @Param("priceCatCode") String priceCatCode,
       @Param("priceCatId") Long priceCatId,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
       @Param("note") String note,
+      @Param("commitTime") java.util.Date commitTime,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -62,13 +60,13 @@ public interface PriceAdjustSalHeadRepositoryCustom {
    * @param priceCatCode
    * @param priceCatId
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditTime
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param note
+   * @param commitTime
    * @return
    */
   List<PriceAdjustSalHeadDTO> findBy(
@@ -78,13 +76,13 @@ public interface PriceAdjustSalHeadRepositoryCustom {
       @Param("priceCatCode") String priceCatCode,
       @Param("priceCatId") Long priceCatId,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("note") String note);
+      @Param("note") String note,
+      @Param("commitTime") java.util.Date commitTime);
 
   /**
    * 通用分页查询，用于后台查询
@@ -128,7 +126,7 @@ public interface PriceAdjustSalHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

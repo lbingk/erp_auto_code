@@ -1,10 +1,16 @@
 package com.pagoda.domain.salconsignout;
 
-import com.pagoda.platform.jms.annotation.*;
-import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salconsignout.*;
-
+import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.jpa.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -16,16 +22,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.domain.AbstractAggregateRoot;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.lang.reflect.*;
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * 发货出库单头表实体定义
@@ -54,7 +50,7 @@ import java.util.List;
   auditable = true,
   traceable = true,
   approvalRequired = false,
-  requestUrl = "",
+  requestUrl = "/SalConsignOutHeadService/findSalConsignOutHeadList",
   tableMultiSelect = false
 )
 public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializable {
@@ -88,94 +84,94 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
 
   @FieldMeta(
     name = "created_at",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '创建时间'")
+  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '录入时间'")
   @CreatedDate
   private Date createdAt;
 
   @FieldMeta(
     name = "creator_code",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '创建人code'")
+  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '录入人代码'")
   @CreatedBy
   private String creatorCode;
 
   @FieldMeta(
     name = "creator_name",
-    nameCN = "创建人name",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '创建人name'")
+  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '录入人名称'")
   private String creatorName;
 
   @FieldMeta(
     name = "creator_org_code",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '创建人所属部门'")
+  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '录入人机构代码'")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "last_modified_at",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最近修改时间'")
+  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最后修改时间'")
   @LastModifiedDate
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifier_code",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最近修改人code'")
+  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最后修改人代码'")
   @LastModifiedBy
   private String modifierCode;
 
   @FieldMeta(
     name = "modifier_name",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最近修改人name'")
+  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最后修改人名称'")
   private String modifierName;
 
   @FieldMeta(
     name = "modifier_org_code",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '修改人所属部门'")
+  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '最后修改人机构代码'")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -192,9 +188,9 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
 
   @FieldMeta(
     name = "seqno",
-    scene = "",
-    nameCN = "调价单号[adjustNo]",
-    comment = "调价单号[adjustNo]",
+    scene = "price",
+    nameCN = "调价单号",
+    comment = "调价单号",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -223,15 +219,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
+    columnDefinition = "varchar(35)   COMMENT '调价单号'"
   )
   private String seqno;
 
   @FieldMeta(
     name = "entId",
-    scene = "",
-    nameCN = "企业ID",
-    comment = "企业ID",
+    scene = "price",
+    nameCN = "企业id",
+    comment = "企业id",
     nameEN = "ent_id",
     type = "长整型",
     format = "",
@@ -260,15 +256,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '企业ID'"
+    columnDefinition = "BIGINT   COMMENT '企业id'"
   )
   private Long entId;
 
   @FieldMeta(
     name = "conId",
     scene = "",
-    nameCN = "发货单ID[conId]",
-    comment = "发货单ID[conId]",
+    nameCN = "发货单ID",
+    comment = "发货单ID",
     nameEN = "con_id",
     type = "长整型",
     format = "",
@@ -297,15 +293,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '发货单ID[conId]'"
+    columnDefinition = "BIGINT   COMMENT '发货单ID'"
   )
   private Long conId;
 
   @FieldMeta(
     name = "conSeqno",
     scene = "",
-    nameCN = "发货单号",
-    comment = "发货单号",
+    nameCN = "发货单号[冗余]",
+    comment = "发货单号[冗余]",
     nameEN = "con_seqno",
     type = "字符串",
     format = "",
@@ -334,7 +330,7 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '发货单号'"
+    columnDefinition = "varchar(35)   COMMENT '发货单号[冗余]'"
   )
   private String conSeqno;
 
@@ -638,8 +634,8 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "已发数量",
-    comment = "已发数量",
+    nameCN = "实发数量",
+    comment = "实发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -668,15 +664,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发数量'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发数量'"
   )
   private java.math.BigDecimal shippedQty;
 
   @FieldMeta(
     name = "shippedGrossWeight",
     scene = "",
-    nameCN = "已发毛重",
-    comment = "已发毛重",
+    nameCN = "实发毛重",
+    comment = "实发毛重",
     nameEN = "shipped_gross_weight",
     type = "小数",
     format = "",
@@ -705,15 +701,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发毛重'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发毛重'"
   )
   private java.math.BigDecimal shippedGrossWeight;
 
   @FieldMeta(
     name = "shippedNetWeight",
     scene = "",
-    nameCN = "已发净重",
-    comment = "已发净重",
+    nameCN = "实发净重",
+    comment = "实发净重",
     nameEN = "shipped_net_weight",
     type = "小数",
     format = "",
@@ -742,15 +738,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发净重'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发净重'"
   )
   private java.math.BigDecimal shippedNetWeight;
 
   @FieldMeta(
     name = "shippedVolume",
     scene = "",
-    nameCN = "已发体积",
-    comment = "已发体积",
+    nameCN = "实发体积",
+    comment = "实发体积",
     nameEN = "shipped_volume",
     type = "小数",
     format = "",
@@ -779,15 +775,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发体积'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发体积'"
   )
   private java.math.BigDecimal shippedVolume;
 
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
-    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    nameCN = "实发金额[实发数量*实发单价]",
+    comment = "实发金额[实发数量*实发单价]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -816,15 +812,15 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发金额[实发数量*实发单价]'"
   )
   private java.math.BigDecimal shippedAmt;
 
   @FieldMeta(
     name = "taxAmt",
     scene = "",
-    nameCN = "税金[税率*实际总金额]",
-    comment = "税金[税率*实际总金额]",
+    nameCN = "税金",
+    comment = "税金",
     nameEN = "tax_amt",
     type = "小数",
     format = "",
@@ -853,7 +849,7 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '税金[税率*实际总金额]'"
+    columnDefinition = "decimal(18,10)   COMMENT '税金'"
   )
   private java.math.BigDecimal taxAmt;
 
@@ -896,7 +892,7 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
 
   @FieldMeta(
     name = "auditorCode",
-    scene = "",
+    scene = "price",
     nameCN = "审核人代码",
     comment = "审核人代码",
     nameEN = "auditor_code",
@@ -933,7 +929,7 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
 
   @FieldMeta(
     name = "auditorName",
-    scene = "",
+    scene = "price",
     nameCN = "审核人姓名",
     comment = "审核人姓名",
     nameEN = "auditor_name",
@@ -970,7 +966,7 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
 
   @FieldMeta(
     name = "auditTime",
-    scene = "",
+    scene = "purt",
     nameCN = "审核时间",
     comment = "审核时间",
     nameEN = "audit_time",
@@ -1001,13 +997,14 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "TIMESTAMP   COMMENT '审核时间'"
+    columnDefinition = "DATE   COMMENT '审核时间'"
   )
-  private java.sql.Timestamp auditTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private java.util.Date auditTime;
 
   @FieldMeta(
     name = "remark",
-    scene = "",
+    scene = "price",
     nameCN = "备注",
     comment = "备注",
     nameEN = "remark",
@@ -1149,9 +1146,10 @@ public class SalConsignOutHead extends SalConsignOutHeadDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "TIMESTAMP   COMMENT '确认到货时间'"
+    columnDefinition = "DATE   COMMENT '确认到货时间'"
   )
-  private java.sql.Timestamp confirmTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private java.util.Date confirmTime;
 
   static MapperFacade mapper;
 

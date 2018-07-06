@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsignout.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsignout.*;
 import com.pagoda.api.dto.salconsignout.*;
+import com.pagoda.api.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignout.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignOutExceptionLogServiceImpl
-    implements SalConsignOutExceptionLogService, InitializingBean {
+    implements BaseSalConsignOutExceptionLogService, InitializingBean {
 
   @Autowired protected SalConsignOutExceptionLogRepository repository;
 
@@ -202,10 +200,77 @@ public abstract class BaseSalConsignOutExceptionLogServiceImpl
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   @Override
   public Page<SalConsignOutExceptionLogDTO> findBy(
-      @ApiParam("amount") java.math.BigDecimal amount, @ApiParam("pageable") Pageable pageable)
+      @ApiParam("stockoutId") Long stockoutId,
+      @ApiParam("stockoutSeqno") String stockoutSeqno,
+      @ApiParam("conId") Long conId,
+      @ApiParam("conSeqno") String conSeqno,
+      @ApiParam("orderId") Long orderId,
+      @ApiParam("orderSeqno") String orderSeqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("goodsId") Long goodsId,
+      @ApiParam("goodsCode") String goodsCode,
+      @ApiParam("goodsSpec") String goodsSpec,
+      @ApiParam("salUnitId") Long salUnitId,
+      @ApiParam("salUnitCode") String salUnitCode,
+      @ApiParam("salUnitName") String salUnitName,
+      @ApiParam("salUnitRate") java.math.BigDecimal salUnitRate,
+      @ApiParam("salConOutDepotId") Long salConOutDepotId,
+      @ApiParam("salConOutDepotCode") String salConOutDepotCode,
+      @ApiParam("salConOutDepotName") String salConOutDepotName,
+      @ApiParam("shippedQty") java.math.BigDecimal shippedQty,
+      @ApiParam("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
+      @ApiParam("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
+      @ApiParam("shippedVolume") java.math.BigDecimal shippedVolume,
+      @ApiParam("price") java.math.BigDecimal price,
+      @ApiParam("amount") java.math.BigDecimal amount,
+      @ApiParam("shipSeq") Integer shipSeq,
+      @ApiParam("consignTime") java.util.Date consignTime,
+      @ApiParam("consignerId") Long consignerId,
+      @ApiParam("consignerName") String consignerName,
+      @ApiParam("stockoutStatus") Integer stockoutStatus,
+      @ApiParam("auditTime") java.util.Date auditTime,
+      @ApiParam("auditorCode") String auditorCode,
+      @ApiParam("auditorName") String auditorName,
+      @ApiParam("remark") String remark,
+      @ApiParam("note") String note,
+      @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
-      return repository.findBy(amount, pageable);
+      return repository.findBy(
+          stockoutId,
+          stockoutSeqno,
+          conId,
+          conSeqno,
+          orderId,
+          orderSeqno,
+          entId,
+          goodsId,
+          goodsCode,
+          goodsSpec,
+          salUnitId,
+          salUnitCode,
+          salUnitName,
+          salUnitRate,
+          salConOutDepotId,
+          salConOutDepotCode,
+          salConOutDepotName,
+          shippedQty,
+          shippedNetWeight,
+          shippedGrossWeight,
+          shippedVolume,
+          price,
+          amount,
+          shipSeq,
+          consignTime,
+          consignerId,
+          consignerName,
+          stockoutStatus,
+          auditTime,
+          auditorCode,
+          auditorName,
+          remark,
+          note,
+          pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

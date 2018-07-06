@@ -3,12 +3,10 @@ package com.pagoda.repo.pridistribution.custom;
 import com.pagoda.api.dto.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * PriceCatalogSalDetail扩展数据访问接口
@@ -136,7 +134,7 @@ public interface PriceCatalogSalDetailRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

@@ -1,19 +1,17 @@
 package com.pagoda.service.pridistribution.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.pridistribution.*;
 import com.pagoda.api.dto.pridistribution.*;
+import com.pagoda.api.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pridistribution.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BasePriceCatalogSalHeadServiceImpl
-    implements PriceCatalogSalHeadService, InitializingBean {
+    implements BasePriceCatalogSalHeadService, InitializingBean {
 
   @Autowired protected PriceCatalogSalHeadRepository repository;
 
@@ -255,10 +253,10 @@ public abstract class BasePriceCatalogSalHeadServiceImpl
       @ApiParam("name") String name,
       @ApiParam("bal_org_org_code") String balOrgOrgCode,
       @ApiParam("is_enable") Integer isEnable,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("creator_org_code") String creatorOrgCode,
       @ApiParam("creator_org_code_list") String creatorOrgCodeList,
       @ApiParam("code") String code,

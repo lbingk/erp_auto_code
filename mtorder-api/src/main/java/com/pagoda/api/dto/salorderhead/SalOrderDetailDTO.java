@@ -1,14 +1,18 @@
 package com.pagoda.api.dto.salorderhead;
 
-import com.pagoda.api.dto.*;
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salorderhead.SalOrderDetailDTO.Getters.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.dto.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.lang.reflect.*;
-import java.io.Serializable;
-import java.util.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -62,90 +66,90 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
 
   @FieldMeta(
     name = "createdAt",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "datetime", notes = "")
   private Date createdAt;
 
   @FieldMeta(
     name = "creatorCode",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorCode", value = "创建人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorCode", value = "录入人代码", dataType = "string", notes = "")
   private String creatorCode;
 
   @FieldMeta(
     name = "creatorName",
-    nameCN = "创建人名称",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "string", notes = "")
   private String creatorName;
 
   @FieldMeta(
     name = "creatorOrgCode",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorOrgCode", value = "创建人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorOrgCode", value = "录入人机构代码", dataType = "string", notes = "")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "lastModifiedAt",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "lastModifiedAt", value = "", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "datetime", notes = "")
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifierCode",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierCode", value = "最近修改人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierCode", value = "最后修改人代码", dataType = "string", notes = "")
   private String modifierCode;
 
   @FieldMeta(
     name = "modifierName",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "string", notes = "")
   private String modifierName;
 
   @FieldMeta(
     name = "modifierOrgCode",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierOrgCode", value = "修改人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierOrgCode", value = "最后修改人机构代码", dataType = "string", notes = "")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -198,8 +202,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "orderSeqno",
     scene = "",
-    nameCN = "订单号[冗余]",
-    comment = "订单号[冗余]",
+    nameCN = "采购订单号",
+    comment = "采购订单号",
     nameEN = "order_seqno",
     type = "字符串",
     format = "",
@@ -225,7 +229,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "orderSeqno",
-    value = "订单号[冗余]",
+    value = "采购订单号",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d96c"
   )
@@ -522,8 +526,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "salUnitCode",
     scene = "",
-    nameCN = "销售计量单位代码[冗余]",
-    comment = "销售计量单位代码[冗余]",
+    nameCN = "销售单位代码[冗余]",
+    comment = "销售单位代码[冗余]",
     nameEN = "sal_unit_code",
     type = "字符串",
     format = "",
@@ -549,7 +553,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "salUnitCode",
-    value = "销售计量单位代码[冗余]",
+    value = "销售单位代码[冗余]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d974"
   )
@@ -558,8 +562,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "salUnitName",
     scene = "",
-    nameCN = "销售计量单位名称[冗余]",
-    comment = "销售计量单位名称[冗余]",
+    nameCN = "销售单位名称[冗余]",
+    comment = "销售单位名称[冗余]",
     nameEN = "sal_unit_name",
     type = "字符串",
     format = "",
@@ -585,7 +589,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "salUnitName",
-    value = "销售计量单位名称[冗余]",
+    value = "销售单位名称[冗余]",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d97a"
   )
@@ -630,8 +634,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "requestQty",
     scene = "",
-    nameCN = "需求量",
-    comment = "需求量",
+    nameCN = "需求数量",
+    comment = "需求数量",
     nameEN = "request_qty",
     type = "小数",
     format = "",
@@ -657,7 +661,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "requestQty",
-    value = "需求量",
+    value = "需求数量",
     dataType = "",
     notes = "5b35d7329d2feff19b413993"
   )
@@ -738,8 +742,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
-    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    nameCN = "报价(采购价)",
+    comment = "报价(采购价)",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -765,7 +769,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "price",
-    value = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    value = "报价(采购价)",
     dataType = "",
     notes = "5b35d3a69d2feff19b40d991"
   )
@@ -846,8 +850,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "discountAmt",
     scene = "",
-    nameCN = "折扣金额[=originalAmt-totalAmt)][不使用*折扣率，防止出现尾差]",
-    comment = "折扣金额[=originalAmt-totalAmt)][不使用*折扣率，防止出现尾差]",
+    nameCN = "折扣额度",
+    comment = "折扣额度",
     nameEN = "discount_amt",
     type = "小数",
     format = "",
@@ -873,7 +877,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "discountAmt",
-    value = "折扣金额[=originalAmt-totalAmt)][不使用*折扣率，防止出现尾差]",
+    value = "折扣额度",
     dataType = "",
     notes = "5b35dad59d2feff19b41e99a"
   )
@@ -918,8 +922,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "taxAmt",
     scene = "",
-    nameCN = "税金[税率*实际总金额]",
-    comment = "税金[税率*实际总金额]",
+    nameCN = "税金",
+    comment = "税金",
     nameEN = "tax_amt",
     type = "小数",
     format = "",
@@ -945,7 +949,7 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "taxAmt",
-    value = "税金[税率*实际总金额]",
+    value = "税金",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c225"
   )
@@ -1026,8 +1030,8 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "remark",
     scene = "",
-    nameCN = "备注",
-    comment = "备注",
+    nameCN = "备注,需要时可由程序写值",
+    comment = "备注,需要时可由程序写值",
     nameEN = "remark",
     type = "字符串",
     format = "",
@@ -1053,119 +1057,77 @@ public class SalOrderDetailDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "remark",
-    value = "备注",
+    value = "备注,需要时可由程序写值",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c231"
   )
   private String remark;
 
-  @FieldMeta(
-    name = "sourceType",
-    scene = "",
-    nameCN = "订单明细来源类型",
-    comment = "订单明细来源类型",
-    nameEN = "source_Type",
-    type = "整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @ApiModelProperty(
-    name = "sourceType",
-    value = "订单明细来源类型",
-    dataType = "",
-    notes = "5b374ac59d2feff19ba91218"
-  )
-  private Integer sourceType;
+  /** DTO字段的getter */
+  public static class Getters {
+    public static final Function<SalOrderDetailDTO, Long> _id = o -> o.getId();
+    public static final Function<SalOrderDetailDTO, Long> _deleted = o -> o.getDeleted();
 
-  @FieldMeta(
-    name = "sourceId",
-    scene = "",
-    nameCN = "订单明细来源Id",
-    comment = "订单明细来源Id",
-    nameEN = "source_Id",
-    type = "长整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @ApiModelProperty(
-    name = "sourceId",
-    value = "订单明细来源Id",
-    dataType = "",
-    notes = "5b374a6b9d2feff19ba88fac"
-  )
-  private Long sourceId;
+    public static final Function<SalOrderDetailDTO, Date> _createdAt = o -> o.getCreatedAt();
+    public static final Function<SalOrderDetailDTO, String> _creatorCode = o -> o.getCreatorCode();
+    public static final Function<SalOrderDetailDTO, String> _creatorName = o -> o.getCreatorName();
+    public static final Function<SalOrderDetailDTO, String> _creatorOrgCode =
+        o -> o.getCreatorOrgCode();
+    public static final Function<SalOrderDetailDTO, Date> _lastModifiedAt =
+        o -> o.getLastModifiedAt();
+    public static final Function<SalOrderDetailDTO, String> _modifierCode =
+        o -> o.getModifierCode();
+    public static final Function<SalOrderDetailDTO, String> _modifierName =
+        o -> o.getModifierName();
+    public static final Function<SalOrderDetailDTO, String> _modifierOrgCode =
+        o -> o.getModifierOrgCode();
 
-  @FieldMeta(
-    name = "sourceNo",
-    scene = "",
-    nameCN = "来源单据号",
-    comment = "来源单据号",
-    nameEN = "source_no",
-    type = "字符串",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @ApiModelProperty(
-    name = "sourceNo",
-    value = "来源单据号",
-    dataType = "",
-    notes = "5b35e0d49d2feff19b43e4d9"
-  )
-  private String sourceNo;
+    public static final Function<SalOrderDetailDTO, Integer> _version = o -> o.getVersion();
+
+    public static final Function<SalOrderDetailDTO, Long> _orderId = o -> o.getOrderId();
+    public static final Function<SalOrderDetailDTO, String> _orderSeqno = o -> o.getOrderSeqno();
+    public static final Function<SalOrderDetailDTO, Long> _entId = o -> o.getEntId();
+    public static final Function<SalOrderDetailDTO, Long> _goodsVarId = o -> o.getGoodsVarId();
+    public static final Function<SalOrderDetailDTO, String> _goodsVarName =
+        o -> o.getGoodsVarName();
+    public static final Function<SalOrderDetailDTO, Long> _goodsId = o -> o.getGoodsId();
+    public static final Function<SalOrderDetailDTO, String> _goodsCode = o -> o.getGoodsCode();
+    public static final Function<SalOrderDetailDTO, String> _goodsName = o -> o.getGoodsName();
+    public static final Function<SalOrderDetailDTO, String> _goodsSpec = o -> o.getGoodsSpec();
+    public static final Function<SalOrderDetailDTO, Long> _salUnitid = o -> o.getSalUnitid();
+    public static final Function<SalOrderDetailDTO, String> _salUnitCode = o -> o.getSalUnitCode();
+    public static final Function<SalOrderDetailDTO, String> _salUnitName = o -> o.getSalUnitName();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _salUnitRate =
+        o -> o.getSalUnitRate();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _requestQty =
+        o -> o.getRequestQty();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _maxOrderQty =
+        o -> o.getMaxOrderQty();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _minOrderQty =
+        o -> o.getMinOrderQty();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _price =
+        o -> o.getPrice();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _discountPrice =
+        o -> o.getDiscountPrice();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _discountRate =
+        o -> o.getDiscountRate();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _discountAmt =
+        o -> o.getDiscountAmt();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _taxRate =
+        o -> o.getTaxRate();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _taxAmt =
+        o -> o.getTaxAmt();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _goodsAmt =
+        o -> o.getGoodsAmt();
+    public static final Function<SalOrderDetailDTO, java.math.BigDecimal> _totalAmt =
+        o -> o.getTotalAmt();
+    public static final Function<SalOrderDetailDTO, String> _remark = o -> o.getRemark();
+  }
+
+  public static ValidatorBuilder<SalOrderDetailDTO> validatorExample() {
+    ValidatorBuilder<SalOrderDetailDTO> builder = new ValidatorBuilder<>();
+    return builder;
+  }
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsignout.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsignout.*;
 import com.pagoda.api.dto.salconsignout.*;
+import com.pagoda.api.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignout.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignOutHeadServiceImpl
-    implements SalConsignOutHeadService, InitializingBean {
+    implements BaseSalConsignOutHeadService, InitializingBean {
 
   @Autowired protected SalConsignOutHeadRepository repository;
 
@@ -221,11 +219,11 @@ public abstract class BaseSalConsignOutHeadServiceImpl
       @ApiParam("stockoutStatus") Integer stockoutStatus,
       @ApiParam("auditorCode") String auditorCode,
       @ApiParam("auditorName") String auditorName,
-      @ApiParam("auditTime") java.sql.Timestamp auditTime,
+      @ApiParam("auditTime") java.util.Date auditTime,
       @ApiParam("remark") String remark,
       @ApiParam("confirmUserCode") String confirmUserCode,
       @ApiParam("confirmUserName") String confirmUserName,
-      @ApiParam("confirmTime") java.sql.Timestamp confirmTime,
+      @ApiParam("confirmTime") java.util.Date confirmTime,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -298,7 +296,6 @@ public abstract class BaseSalConsignOutHeadServiceImpl
       @ApiParam("goods_name") String goodsName,
       @ApiParam("stockout_status") Integer stockoutStatus,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -316,7 +313,6 @@ public abstract class BaseSalConsignOutHeadServiceImpl
           goodsName,
           stockoutStatus,
           creatorOrgCode,
-          codeList,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -335,7 +331,6 @@ public abstract class BaseSalConsignOutHeadServiceImpl
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("stockout_status") Integer stockoutStatus,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -349,7 +344,6 @@ public abstract class BaseSalConsignOutHeadServiceImpl
           preArrivalDate2,
           stockoutStatus,
           creatorOrgCode,
-          codeList,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);

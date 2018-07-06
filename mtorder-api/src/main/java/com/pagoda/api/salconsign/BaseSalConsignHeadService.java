@@ -1,14 +1,11 @@
 package com.pagoda.api.salconsign;
 
-import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salconsign.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -132,58 +129,56 @@ public interface BaseSalConsignHeadService {
   /**
    * 所有可查询的字段
    *
-   * @param orderId
-   * @param orderNo
-   * @param waveNo
-   * @param tatalQty
-   * @param totalAmt
-   * @param entryDate
-   * @param conStatus
-   * @param printStatus
-   * @param printCount
    * @param seqno
    * @param entId
+   * @param orderId
+   * @param orderNo
    * @param conOrgId
    * @param conOrgCode
    * @param conOrgName
    * @param cusOrgId
    * @param cusOrgCode
    * @param cusOrgName
+   * @param waveNo
    * @param transitLineNo
    * @param taxAmt
+   * @param totalAmt
    * @param shippedQty
    * @param shippedAmt
    * @param preArrivalDate
+   * @param conStatus
+   * @param printStatus
+   * @param printCount
    * @param remark
+   * @param totalQty
    * @param pageable
    * @return
    * @throws ServiceException
    */
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   Page<SalConsignHeadDTO> findBy(
-      @ApiParam("orderId") Long orderId,
-      @ApiParam("orderNo") String orderNo,
-      @ApiParam("waveNo") String waveNo,
-      @ApiParam("tatalQty") java.math.BigDecimal tatalQty,
-      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
-      @ApiParam("entryDate") java.sql.Timestamp entryDate,
-      @ApiParam("conStatus") Integer conStatus,
-      @ApiParam("printStatus") Integer printStatus,
-      @ApiParam("printCount") Integer printCount,
       @ApiParam("seqno") String seqno,
       @ApiParam("entId") Long entId,
+      @ApiParam("orderId") Long orderId,
+      @ApiParam("orderNo") String orderNo,
       @ApiParam("conOrgId") Long conOrgId,
       @ApiParam("conOrgCode") String conOrgCode,
       @ApiParam("conOrgName") String conOrgName,
       @ApiParam("cusOrgId") Long cusOrgId,
       @ApiParam("cusOrgCode") String cusOrgCode,
       @ApiParam("cusOrgName") String cusOrgName,
+      @ApiParam("waveNo") String waveNo,
       @ApiParam("transitLineNo") String transitLineNo,
       @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
+      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
       @ApiParam("shippedQty") java.math.BigDecimal shippedQty,
       @ApiParam("shippedAmt") java.math.BigDecimal shippedAmt,
       @ApiParam("preArrivalDate") java.util.Date preArrivalDate,
+      @ApiParam("conStatus") Integer conStatus,
+      @ApiParam("printStatus") Integer printStatus,
+      @ApiParam("printCount") Integer printCount,
       @ApiParam("remark") String remark,
+      @ApiParam("totalQty") java.math.BigDecimal totalQty,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -200,7 +195,7 @@ public interface BaseSalConsignHeadService {
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param conStatus
-   * @param codeList
+   * @param creatorOrgCode
    * @param pageable
    * @return
    * @throws ServiceException
@@ -217,7 +212,7 @@ public interface BaseSalConsignHeadService {
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("con_status") Integer conStatus,
-      @ApiParam("codeList") String codeList,
+      @ApiParam("creator_org_code") String creatorOrgCode,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -235,7 +230,6 @@ public interface BaseSalConsignHeadService {
    * @param preArrivalDate2
    * @param conStatus
    * @param creatorOrgCode
-   * @param codeList
    * @return
    * @throws ServiceException
    */
@@ -251,7 +245,6 @@ public interface BaseSalConsignHeadService {
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("con_status") Integer conStatus,
-      @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList)
+      @ApiParam("creator_org_code") String creatorOrgCode)
       throws ServiceException;
 }

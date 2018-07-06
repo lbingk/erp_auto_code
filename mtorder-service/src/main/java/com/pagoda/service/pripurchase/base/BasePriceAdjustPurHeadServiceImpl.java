@@ -1,19 +1,17 @@
 package com.pagoda.service.pripurchase.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.pripurchase.*;
 import com.pagoda.api.dto.pripurchase.*;
+import com.pagoda.api.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pripurchase.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BasePriceAdjustPurHeadServiceImpl
-    implements PriceAdjustPurHeadService, InitializingBean {
+    implements BasePriceAdjustPurHeadService, InitializingBean {
 
   @Autowired protected PriceAdjustPurHeadRepository repository;
 
@@ -209,13 +207,14 @@ public abstract class BasePriceAdjustPurHeadServiceImpl
       @ApiParam("venOrgId") Long venOrgId,
       @ApiParam("venOrgCode") String venOrgCode,
       @ApiParam("status") Integer status,
-      @ApiParam("entryTime") java.sql.Timestamp entryTime,
       @ApiParam("effectDate") java.util.Date effectDate,
       @ApiParam("auditorCode") String auditorCode,
       @ApiParam("auditorName") String auditorName,
       @ApiParam("remark") String remark,
-      @ApiParam("auditTime") java.sql.Timestamp auditTime,
+      @ApiParam("auditTime") java.util.Date auditTime,
       @ApiParam("note") String note,
+      @ApiParam("venOrgName") String venOrgName,
+      @ApiParam("commitTime") java.util.Date commitTime,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -228,13 +227,14 @@ public abstract class BasePriceAdjustPurHeadServiceImpl
           venOrgId,
           venOrgCode,
           status,
-          entryTime,
           effectDate,
           auditorCode,
           auditorName,
           remark,
           auditTime,
           note,
+          venOrgName,
+          commitTime,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -270,10 +270,10 @@ public abstract class BasePriceAdjustPurHeadServiceImpl
       @ApiParam("approve_status") Integer approveStatus,
       @ApiParam("effect_date1") java.util.Date effectDate1,
       @ApiParam("effect_date2") java.util.Date effectDate2,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("goods_name") String goodsName,
       @ApiParam("goods_code") String goodsCode,
       @ApiParam("creator_code") String creatorCode,
@@ -281,6 +281,45 @@ public abstract class BasePriceAdjustPurHeadServiceImpl
       throws ServiceException {
     try {
       return repository.findPriceAdjustPurList(
+          seqno,
+          arrOrgName,
+          venOrgCode,
+          approveStatus,
+          effectDate1,
+          effectDate2,
+          createdAt1,
+          createdAt2,
+          lastModifiedAt1,
+          lastModifiedAt2,
+          goodsName,
+          goodsCode,
+          creatorCode,
+          pageable);
+    } catch (Exception e) {
+      throw new ServiceException(e);
+    }
+  }
+
+  @ApiOperation(value = "findFinishedList", notes = "查询录入完成的调价单")
+  @Override
+  public Page<FindFinishedListDTO> findFinishedList(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("ven_org_code") String venOrgCode,
+      @ApiParam("approve_status") Integer approveStatus,
+      @ApiParam("effect_date1") java.util.Date effectDate1,
+      @ApiParam("effect_date2") java.util.Date effectDate2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
+      @ApiParam("goods_name") String goodsName,
+      @ApiParam("goods_code") String goodsCode,
+      @ApiParam("creator_code") String creatorCode,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException {
+    try {
+      return repository.findFinishedList(
           seqno,
           arrOrgName,
           venOrgCode,

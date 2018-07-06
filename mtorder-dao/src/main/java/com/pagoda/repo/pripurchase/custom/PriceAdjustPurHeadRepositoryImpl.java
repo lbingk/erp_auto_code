@@ -3,14 +3,10 @@ package com.pagoda.repo.pripurchase.custom;
 import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * PriceAdjustPurHead扩展数据访问接口实现类
@@ -37,13 +33,14 @@ public class PriceAdjustPurHeadRepositoryImpl
       @Param("venOrgId") Long venOrgId,
       @Param("venOrgCode") String venOrgCode,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("note") String note,
+      @Param("venOrgName") String venOrgName,
+      @Param("commitTime") java.util.Date commitTime,
       @Param("pageable") Pageable pageable) {
     PriceAdjustPurHead obj = PriceAdjustPurHead.toExample();
     obj.setSeqno(seqno);
@@ -54,13 +51,14 @@ public class PriceAdjustPurHeadRepositoryImpl
     obj.setVenOrgId(venOrgId);
     obj.setVenOrgCode(venOrgCode);
     obj.setStatus(status);
-    obj.setEntryTime(entryTime);
     obj.setEffectDate(effectDate);
     obj.setAuditorCode(auditorCode);
     obj.setAuditorName(auditorName);
     obj.setRemark(remark);
     obj.setAuditTime(auditTime);
     obj.setNote(note);
+    obj.setVenOrgName(venOrgName);
+    obj.setCommitTime(commitTime);
     Example<PriceAdjustPurHead> example = Example.of(obj);
 
     return findAll(example, pageable).map(PriceAdjustPurHead.DTO_CONVERTER);
@@ -76,13 +74,14 @@ public class PriceAdjustPurHeadRepositoryImpl
       @Param("venOrgId") Long venOrgId,
       @Param("venOrgCode") String venOrgCode,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("auditTime") java.sql.Timestamp auditTime,
-      @Param("note") String note) {
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("note") String note,
+      @Param("venOrgName") String venOrgName,
+      @Param("commitTime") java.util.Date commitTime) {
     PriceAdjustPurHead obj = PriceAdjustPurHead.toExample();
     obj.setSeqno(seqno);
     obj.setEntId(entId);
@@ -92,13 +91,14 @@ public class PriceAdjustPurHeadRepositoryImpl
     obj.setVenOrgId(venOrgId);
     obj.setVenOrgCode(venOrgCode);
     obj.setStatus(status);
-    obj.setEntryTime(entryTime);
     obj.setEffectDate(effectDate);
     obj.setAuditorCode(auditorCode);
     obj.setAuditorName(auditorName);
     obj.setRemark(remark);
     obj.setAuditTime(auditTime);
     obj.setNote(note);
+    obj.setVenOrgName(venOrgName);
+    obj.setCommitTime(commitTime);
     Example<PriceAdjustPurHead> example = Example.of(obj);
     return findAll(example, null).map(PriceAdjustPurHead.DTO_CONVERTER).getContent();
   }
@@ -137,10 +137,10 @@ public class PriceAdjustPurHeadRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

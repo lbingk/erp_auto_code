@@ -3,12 +3,10 @@ package com.pagoda.repo.pripurchase.custom;
 import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * PriceAdjustPurHead扩展数据访问接口
@@ -29,13 +27,14 @@ public interface PriceAdjustPurHeadRepositoryCustom {
    * @param venOrgId
    * @param venOrgCode
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param auditTime
    * @param note
+   * @param venOrgName
+   * @param commitTime
    * @param pageable
    * @return
    */
@@ -48,13 +47,14 @@ public interface PriceAdjustPurHeadRepositoryCustom {
       @Param("venOrgId") Long venOrgId,
       @Param("venOrgCode") String venOrgCode,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("note") String note,
+      @Param("venOrgName") String venOrgName,
+      @Param("commitTime") java.util.Date commitTime,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -68,13 +68,14 @@ public interface PriceAdjustPurHeadRepositoryCustom {
    * @param venOrgId
    * @param venOrgCode
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param auditTime
    * @param note
+   * @param venOrgName
+   * @param commitTime
    * @return
    */
   List<PriceAdjustPurHeadDTO> findBy(
@@ -86,13 +87,14 @@ public interface PriceAdjustPurHeadRepositoryCustom {
       @Param("venOrgId") Long venOrgId,
       @Param("venOrgCode") String venOrgCode,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("auditTime") java.sql.Timestamp auditTime,
-      @Param("note") String note);
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("note") String note,
+      @Param("venOrgName") String venOrgName,
+      @Param("commitTime") java.util.Date commitTime);
 
   /**
    * 通用分页查询，用于后台查询
@@ -136,7 +138,7 @@ public interface PriceAdjustPurHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

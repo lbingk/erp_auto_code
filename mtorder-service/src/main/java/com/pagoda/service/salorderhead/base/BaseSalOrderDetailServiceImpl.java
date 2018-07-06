@@ -1,19 +1,17 @@
 package com.pagoda.service.salorderhead.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salorderhead.*;
 import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.api.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salorderhead.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalOrderDetailServiceImpl
-    implements SalOrderDetailService, InitializingBean {
+    implements BaseSalOrderDetailService, InitializingBean {
 
   @Autowired protected SalOrderDetailRepository repository;
 
@@ -225,9 +223,6 @@ public abstract class BaseSalOrderDetailServiceImpl
       @ApiParam("goodsAmt") java.math.BigDecimal goodsAmt,
       @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
       @ApiParam("remark") String remark,
-      @ApiParam("sourceType") Integer sourceType,
-      @ApiParam("sourceId") Long sourceId,
-      @ApiParam("sourceNo") String sourceNo,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -257,9 +252,6 @@ public abstract class BaseSalOrderDetailServiceImpl
           goodsAmt,
           totalAmt,
           remark,
-          sourceType,
-          sourceId,
-          sourceNo,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);

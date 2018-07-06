@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsign.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsign.*;
 import com.pagoda.api.dto.salconsign.*;
+import com.pagoda.api.salconsign.*;
 import com.pagoda.domain.salconsign.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsign.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignHeadServiceImpl
-    implements SalConsignHeadService, InitializingBean {
+    implements BaseSalConsignHeadService, InitializingBean {
 
   @Autowired protected SalConsignHeadRepository repository;
 
@@ -200,56 +198,54 @@ public abstract class BaseSalConsignHeadServiceImpl
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   @Override
   public Page<SalConsignHeadDTO> findBy(
-      @ApiParam("orderId") Long orderId,
-      @ApiParam("orderNo") String orderNo,
-      @ApiParam("waveNo") String waveNo,
-      @ApiParam("tatalQty") java.math.BigDecimal tatalQty,
-      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
-      @ApiParam("entryDate") java.sql.Timestamp entryDate,
-      @ApiParam("conStatus") Integer conStatus,
-      @ApiParam("printStatus") Integer printStatus,
-      @ApiParam("printCount") Integer printCount,
       @ApiParam("seqno") String seqno,
       @ApiParam("entId") Long entId,
+      @ApiParam("orderId") Long orderId,
+      @ApiParam("orderNo") String orderNo,
       @ApiParam("conOrgId") Long conOrgId,
       @ApiParam("conOrgCode") String conOrgCode,
       @ApiParam("conOrgName") String conOrgName,
       @ApiParam("cusOrgId") Long cusOrgId,
       @ApiParam("cusOrgCode") String cusOrgCode,
       @ApiParam("cusOrgName") String cusOrgName,
+      @ApiParam("waveNo") String waveNo,
       @ApiParam("transitLineNo") String transitLineNo,
       @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
+      @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
       @ApiParam("shippedQty") java.math.BigDecimal shippedQty,
       @ApiParam("shippedAmt") java.math.BigDecimal shippedAmt,
       @ApiParam("preArrivalDate") java.util.Date preArrivalDate,
+      @ApiParam("conStatus") Integer conStatus,
+      @ApiParam("printStatus") Integer printStatus,
+      @ApiParam("printCount") Integer printCount,
       @ApiParam("remark") String remark,
+      @ApiParam("totalQty") java.math.BigDecimal totalQty,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
       return repository.findBy(
-          orderId,
-          orderNo,
-          waveNo,
-          tatalQty,
-          totalAmt,
-          entryDate,
-          conStatus,
-          printStatus,
-          printCount,
           seqno,
           entId,
+          orderId,
+          orderNo,
           conOrgId,
           conOrgCode,
           conOrgName,
           cusOrgId,
           cusOrgCode,
           cusOrgName,
+          waveNo,
           transitLineNo,
           taxAmt,
+          totalAmt,
           shippedQty,
           shippedAmt,
           preArrivalDate,
+          conStatus,
+          printStatus,
+          printCount,
           remark,
+          totalQty,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -289,7 +285,7 @@ public abstract class BaseSalConsignHeadServiceImpl
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("con_status") Integer conStatus,
-      @ApiParam("codeList") String codeList,
+      @ApiParam("creator_org_code") String creatorOrgCode,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -304,7 +300,7 @@ public abstract class BaseSalConsignHeadServiceImpl
           preArrivalDate1,
           preArrivalDate2,
           conStatus,
-          codeList,
+          creatorOrgCode,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -325,8 +321,7 @@ public abstract class BaseSalConsignHeadServiceImpl
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("con_status") Integer conStatus,
-      @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList) {
+      @ApiParam("creator_org_code") String creatorOrgCode) {
     try {
       return repository.updatePrintCount(
           conNo,
@@ -339,8 +334,7 @@ public abstract class BaseSalConsignHeadServiceImpl
           preArrivalDate1,
           preArrivalDate2,
           conStatus,
-          creatorOrgCode,
-          codeList);
+          creatorOrgCode);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

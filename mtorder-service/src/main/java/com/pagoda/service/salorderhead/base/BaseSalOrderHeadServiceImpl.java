@@ -1,19 +1,17 @@
 package com.pagoda.service.salorderhead.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salorderhead.*;
 import com.pagoda.api.dto.salorderhead.*;
+import com.pagoda.api.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salorderhead.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -27,7 +25,8 @@ import org.springframework.validation.annotation.Validated;
  * @generated
  */
 @Validated
-public abstract class BaseSalOrderHeadServiceImpl implements SalOrderHeadService, InitializingBean {
+public abstract class BaseSalOrderHeadServiceImpl
+    implements BaseSalOrderHeadService, InitializingBean {
 
   @Autowired protected SalOrderHeadRepository repository;
 
@@ -213,9 +212,7 @@ public abstract class BaseSalOrderHeadServiceImpl implements SalOrderHeadService
       @ApiParam("orderType") Integer orderType,
       @ApiParam("inputMode") Integer inputMode,
       @ApiParam("orderStatus") Integer orderStatus,
-      @ApiParam("isFinish") Integer isFinish,
       @ApiParam("remark") String remark,
-      @ApiParam("entryDate") java.sql.Timestamp entryDate,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -237,9 +234,7 @@ public abstract class BaseSalOrderHeadServiceImpl implements SalOrderHeadService
           orderType,
           inputMode,
           orderStatus,
-          isFinish,
           remark,
-          entryDate,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -270,8 +265,8 @@ public abstract class BaseSalOrderHeadServiceImpl implements SalOrderHeadService
   @Override
   public Page<SalOrderHeadDTO> findSalOrderHeadBetween(
       @ApiParam("version") Integer version,
-      @ApiParam("calDateTimeSub") java.sql.Timestamp calDateTimeSub,
-      @ApiParam("calDateTimeAdd") java.sql.Timestamp calDateTimeAdd,
+      @ApiParam("calDateTimeSub") java.util.Date calDateTimeSub,
+      @ApiParam("calDateTimeAdd") java.util.Date calDateTimeAdd,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {

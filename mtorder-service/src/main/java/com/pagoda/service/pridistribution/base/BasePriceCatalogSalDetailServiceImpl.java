@@ -1,19 +1,17 @@
 package com.pagoda.service.pridistribution.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.pridistribution.*;
 import com.pagoda.api.dto.pridistribution.*;
+import com.pagoda.api.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pridistribution.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BasePriceCatalogSalDetailServiceImpl
-    implements PriceCatalogSalDetailService, InitializingBean {
+    implements BasePriceCatalogSalDetailService, InitializingBean {
 
   @Autowired protected PriceCatalogSalDetailRepository repository;
 

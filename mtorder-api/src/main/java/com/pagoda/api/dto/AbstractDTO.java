@@ -3,7 +3,6 @@ package com.pagoda.api.dto;
 import com.pagoda.platform.jms.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
-
 import org.springframework.validation.*;
 
 /**
@@ -14,12 +13,43 @@ import org.springframework.validation.*;
  */
 public abstract class AbstractDTO {
   /**
+   * 查询字段元数据
+   *
+   * @param name
+   * @return
+   * @throws NoSuchFieldException
+   */
+  public Optional<FieldMeta> getFeildMeta(String name) throws NoSuchFieldException {
+    Field field = this.getClass().getDeclaredField(name);
+    if (field != null) {
+      FieldMeta meta = field.getAnnotation(FieldMeta.class);
+      return Optional.ofNullable(meta);
+    }
+    return Optional.empty();
+  }
+
+  /**
+   * 查询字段的中文名字
+   *
+   * @param name
+   * @return
+   * @throws NoSuchFieldException
+   */
+  public String getFieldName(String name) throws NoSuchFieldException {
+    Optional<FieldMeta> meta = getFeildMeta(name);
+    if (meta.isPresent()) {
+      return meta.get().nameCN();
+    }
+    return name;
+  }
+
+  /**
    * 验证必填字段
    *
    * @param errors
    * @return
    */
-  public boolean validate(Errors errors) throws IllegalAccessException {
+  public boolean validateFieldMeta(Errors errors) throws IllegalAccessException {
     boolean ok = true;
     Field[] fields = this.getClass().getDeclaredFields();
     if (fields != null) {

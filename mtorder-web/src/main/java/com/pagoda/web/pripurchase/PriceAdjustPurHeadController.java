@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pripurchase.PriceAdjustPurHeadDTO.Getters.*;
 
 /**
  * 模型PriceAdjustPurHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/PriceAdjustPurHeadService")
 @Slf4j
-public class PriceAdjustPurHeadController {
+public class PriceAdjustPurHeadController implements InitializingBean {
   @Autowired private PriceAdjustPurHeadService priceAdjustPurHeadService;
 
   @Autowired private PriceAdjustPurHeadValidator priceAdjustPurHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -124,13 +134,14 @@ public class PriceAdjustPurHeadController {
    * @param venOrgId
    * @param venOrgCode
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param auditTime
    * @param note
+   * @param venOrgName
+   * @param commitTime
    * @param pageable
    * @return
    */
@@ -146,13 +157,14 @@ public class PriceAdjustPurHeadController {
       @RequestParam(required = false, value = "venOrgId") Long venOrgId,
       @RequestParam(required = false, value = "venOrgCode") String venOrgCode,
       @RequestParam(required = false, value = "status") Integer status,
-      @RequestParam(required = false, value = "entryTime") java.sql.Timestamp entryTime,
       @RequestParam(required = false, value = "effectDate") java.util.Date effectDate,
       @RequestParam(required = false, value = "auditorCode") String auditorCode,
       @RequestParam(required = false, value = "auditorName") String auditorName,
       @RequestParam(required = false, value = "remark") String remark,
-      @RequestParam(required = false, value = "auditTime") java.sql.Timestamp auditTime,
+      @RequestParam(required = false, value = "auditTime") java.util.Date auditTime,
       @RequestParam(required = false, value = "note") String note,
+      @RequestParam(required = false, value = "venOrgName") String venOrgName,
+      @RequestParam(required = false, value = "commitTime") java.util.Date commitTime,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return priceAdjustPurHeadService.findBy(
         seqno,
@@ -163,13 +175,14 @@ public class PriceAdjustPurHeadController {
         venOrgId,
         venOrgCode,
         status,
-        entryTime,
         effectDate,
         auditorCode,
         auditorName,
         remark,
         auditTime,
         note,
+        venOrgName,
+        commitTime,
         pageable);
   }
 }

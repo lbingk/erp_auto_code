@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salorderhead.SalPreOrderHeadDTO.Getters.*;
 
 /**
  * 模型SalPreOrderHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalPreOrderHeadService")
 @Slf4j
-public class SalPreOrderHeadController {
+public class SalPreOrderHeadController implements InitializingBean {
   @Autowired private SalPreOrderHeadService salPreOrderHeadService;
 
   @Autowired private SalPreOrderHeadValidator salPreOrderHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -127,7 +137,6 @@ public class SalPreOrderHeadController {
    * @param cusOrgCode
    * @param cusOrgName
    * @param remark
-   * @param entryDate
    * @param totalAmt
    * @param totalRequestQty
    * @param pageable
@@ -148,7 +157,6 @@ public class SalPreOrderHeadController {
       @RequestParam(required = false, value = "cusOrgCode") String cusOrgCode,
       @RequestParam(required = false, value = "cusOrgName") String cusOrgName,
       @RequestParam(required = false, value = "remark") String remark,
-      @RequestParam(required = false, value = "entryDate") java.sql.Timestamp entryDate,
       @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
       @RequestParam(required = false, value = "totalRequestQty")
           java.math.BigDecimal totalRequestQty,
@@ -165,7 +173,6 @@ public class SalPreOrderHeadController {
         cusOrgCode,
         cusOrgName,
         remark,
-        entryDate,
         totalAmt,
         totalRequestQty,
         pageable);

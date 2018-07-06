@@ -3,14 +3,10 @@ package com.pagoda.repo.pripurchase.custom;
 import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * PriceAdjustPurDetail扩展数据访问接口实现类
@@ -142,10 +138,10 @@ public class PriceAdjustPurDetailRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

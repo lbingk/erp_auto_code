@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsignout.custom;
 import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignOutHead扩展数据访问接口实现类
@@ -50,11 +46,11 @@ public class SalConsignOutHeadRepositoryImpl
       @Param("stockoutStatus") Integer stockoutStatus,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("remark") String remark,
       @Param("confirmUserCode") String confirmUserCode,
       @Param("confirmUserName") String confirmUserName,
-      @Param("confirmTime") java.sql.Timestamp confirmTime,
+      @Param("confirmTime") java.util.Date confirmTime,
       @Param("pageable") Pageable pageable) {
     SalConsignOutHead obj = SalConsignOutHead.toExample();
     obj.setSeqno(seqno);
@@ -111,11 +107,11 @@ public class SalConsignOutHeadRepositoryImpl
       @Param("stockoutStatus") Integer stockoutStatus,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("remark") String remark,
       @Param("confirmUserCode") String confirmUserCode,
       @Param("confirmUserName") String confirmUserName,
-      @Param("confirmTime") java.sql.Timestamp confirmTime) {
+      @Param("confirmTime") java.util.Date confirmTime) {
     SalConsignOutHead obj = SalConsignOutHead.toExample();
     obj.setSeqno(seqno);
     obj.setEntId(entId);
@@ -181,10 +177,10 @@ public class SalConsignOutHeadRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

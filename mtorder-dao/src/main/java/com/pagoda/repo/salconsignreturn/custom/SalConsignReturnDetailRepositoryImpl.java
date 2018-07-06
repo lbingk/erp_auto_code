@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsignreturn.custom;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignReturnDetail扩展数据访问接口实现类
@@ -31,20 +27,56 @@ public class SalConsignReturnDetailRepositoryImpl
   public Page<SalConsignReturnDetailDTO> findBy(
       @Param("returnId") Long returnId,
       @Param("returnSeqno") String returnSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsName") String goodsName,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
       @Param("salRate") java.math.BigDecimal salRate,
       @Param("salRetInDepotId") Long salRetInDepotId,
       @Param("salRetInDepotCode") String salRetInDepotCode,
       @Param("salRetInDepotName") String salRetInDepotName,
+      @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("stockinQty") java.math.BigDecimal stockinQty,
+      @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @Param("price") java.math.BigDecimal price,
       @Param("returnPrice") java.math.BigDecimal returnPrice,
+      @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @Param("remark") String remark,
       @Param("pageable") Pageable pageable) {
     SalConsignReturnDetail obj = SalConsignReturnDetail.toExample();
     obj.setReturnId(returnId);
     obj.setReturnSeqno(returnSeqno);
+    obj.setEntId(entId);
+    obj.setGoodsId(goodsId);
+    obj.setGoodsCode(goodsCode);
+    obj.setGoodsName(goodsName);
+    obj.setGoodsSpec(goodsSpec);
+    obj.setSalUnitId(salUnitId);
+    obj.setSalUnitCode(salUnitCode);
+    obj.setSalUnitName(salUnitName);
     obj.setSalRate(salRate);
     obj.setSalRetInDepotId(salRetInDepotId);
     obj.setSalRetInDepotCode(salRetInDepotCode);
     obj.setSalRetInDepotName(salRetInDepotName);
+    obj.setReturnQty(returnQty);
+    obj.setStockinQty(stockinQty);
+    obj.setStockinNetWeight(stockinNetWeight);
+    obj.setStockinGrossWeight(stockinGrossWeight);
+    obj.setPrice(price);
     obj.setReturnPrice(returnPrice);
+    obj.setTaxRate(taxRate);
+    obj.setTaxAmt(taxAmt);
+    obj.setTotalReturnAmt(totalReturnAmt);
+    obj.setTotalStockinAmt(totalStockinAmt);
+    obj.setRemark(remark);
     Example<SalConsignReturnDetail> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalConsignReturnDetail.DTO_CONVERTER);
@@ -54,19 +86,55 @@ public class SalConsignReturnDetailRepositoryImpl
   public List<SalConsignReturnDetailDTO> findBy(
       @Param("returnId") Long returnId,
       @Param("returnSeqno") String returnSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsName") String goodsName,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
       @Param("salRate") java.math.BigDecimal salRate,
       @Param("salRetInDepotId") Long salRetInDepotId,
       @Param("salRetInDepotCode") String salRetInDepotCode,
       @Param("salRetInDepotName") String salRetInDepotName,
-      @Param("returnPrice") java.math.BigDecimal returnPrice) {
+      @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("stockinQty") java.math.BigDecimal stockinQty,
+      @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @Param("price") java.math.BigDecimal price,
+      @Param("returnPrice") java.math.BigDecimal returnPrice,
+      @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @Param("remark") String remark) {
     SalConsignReturnDetail obj = SalConsignReturnDetail.toExample();
     obj.setReturnId(returnId);
     obj.setReturnSeqno(returnSeqno);
+    obj.setEntId(entId);
+    obj.setGoodsId(goodsId);
+    obj.setGoodsCode(goodsCode);
+    obj.setGoodsName(goodsName);
+    obj.setGoodsSpec(goodsSpec);
+    obj.setSalUnitId(salUnitId);
+    obj.setSalUnitCode(salUnitCode);
+    obj.setSalUnitName(salUnitName);
     obj.setSalRate(salRate);
     obj.setSalRetInDepotId(salRetInDepotId);
     obj.setSalRetInDepotCode(salRetInDepotCode);
     obj.setSalRetInDepotName(salRetInDepotName);
+    obj.setReturnQty(returnQty);
+    obj.setStockinQty(stockinQty);
+    obj.setStockinNetWeight(stockinNetWeight);
+    obj.setStockinGrossWeight(stockinGrossWeight);
+    obj.setPrice(price);
     obj.setReturnPrice(returnPrice);
+    obj.setTaxRate(taxRate);
+    obj.setTaxAmt(taxAmt);
+    obj.setTotalReturnAmt(totalReturnAmt);
+    obj.setTotalStockinAmt(totalStockinAmt);
+    obj.setRemark(remark);
     Example<SalConsignReturnDetail> example = Example.of(obj);
     return findAll(example, null).map(SalConsignReturnDetail.DTO_CONVERTER).getContent();
   }
@@ -108,10 +176,10 @@ public class SalConsignReturnDetailRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

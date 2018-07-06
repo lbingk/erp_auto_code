@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsignreturn.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsignreturn.*;
 import com.pagoda.api.dto.salconsignreturn.*;
+import com.pagoda.api.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignreturn.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignReturnHeadServiceImpl
-    implements SalConsignReturnHeadService, InitializingBean {
+    implements BaseSalConsignReturnHeadService, InitializingBean {
 
   @Autowired protected SalConsignReturnHeadRepository repository;
 
@@ -201,9 +199,18 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   @Override
   public Page<SalConsignReturnHeadDTO> findBy(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("arrOrgId") Long arrOrgId,
+      @ApiParam("arrOrgCode") String arrOrgCode,
+      @ApiParam("arrOrgName") String arrOrgName,
+      @ApiParam("cusOrgId") Long cusOrgId,
+      @ApiParam("cusOrgCode") String cusOrgCode,
+      @ApiParam("cusOrgName") String cusOrgName,
       @ApiParam("returnType") Integer returnType,
-      @ApiParam("returnDate") java.sql.Timestamp returnDate,
+      @ApiParam("returnDate") java.util.Date returnDate,
       @ApiParam("returnQty") java.math.BigDecimal returnQty,
+      @ApiParam("transitLineNo") String transitLineNo,
       @ApiParam("stockinQty") java.math.BigDecimal stockinQty,
       @ApiParam("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @ApiParam("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
@@ -211,13 +218,28 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
       @ApiParam("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @ApiParam("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
       @ApiParam("status") Integer status,
+      @ApiParam("printCount") Integer printCount,
+      @ApiParam("auditorCode") String auditorCode,
+      @ApiParam("auditorName") String auditorName,
+      @ApiParam("auditTime") java.util.Date auditTime,
+      @ApiParam("remark") String remark,
+      @ApiParam("note") String note,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
       return repository.findBy(
+          seqno,
+          entId,
+          arrOrgId,
+          arrOrgCode,
+          arrOrgName,
+          cusOrgId,
+          cusOrgCode,
+          cusOrgName,
           returnType,
           returnDate,
           returnQty,
+          transitLineNo,
           stockinQty,
           stockinGrossWeight,
           stockinNetWeight,
@@ -225,6 +247,12 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
           totalReturnAmt,
           totalStockinAmt,
           status,
+          printCount,
+          auditorCode,
+          auditorName,
+          auditTime,
+          remark,
+          note,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -265,7 +293,6 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -281,7 +308,6 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
           preArrivalDate1,
           preArrivalDate2,
           creatorOrgCode,
-          codeList,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -302,8 +328,7 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
       @ApiParam("transit_line_no") String transitLineNo,
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
-      @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList) {
+      @ApiParam("creator_org_code") String creatorOrgCode) {
     try {
       return repository.updatePrintCount(
           seqno,
@@ -316,8 +341,7 @@ public abstract class BaseSalConsignReturnHeadServiceImpl
           transitLineNo,
           preArrivalDate1,
           preArrivalDate2,
-          creatorOrgCode,
-          codeList);
+          creatorOrgCode);
     } catch (Exception e) {
       throw new ServiceException(e);
     }

@@ -1,11 +1,11 @@
 package com.pagoda.service.config;
 
+import javax.validation.Validator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import javax.validation.Validator;
 
 /**
  * 数据校验配置类.

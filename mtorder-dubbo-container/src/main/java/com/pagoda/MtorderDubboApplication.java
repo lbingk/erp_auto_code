@@ -73,24 +73,14 @@ public class MtorderDubboApplication {
       staticDeserializerMap.put(Sort.class, SortParamDeserializer.instance);
       // 处理DTO序列化
       staticSerializerMap.put(
-          com.pagoda.domain.salconsign.SalConsignHead.class,
+          com.pagoda.domain.purapply.PurApplyHead.class,
           new DtoSerializer(
-              com.pagoda.api.dto.salconsign.SalConsignHeadDTO.class,
+              com.pagoda.api.dto.purapply.PurApplyHeadDTO.class,
               serializerFactory.getClassLoader()));
       staticSerializerMap.put(
-          com.pagoda.domain.salconsign.SalConsignDetail.class,
+          com.pagoda.domain.purapply.PurApplyDetail.class,
           new DtoSerializer(
-              com.pagoda.api.dto.salconsign.SalConsignDetailDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.purapplyorder.PurApplyHead.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.purapplyorder.PurApplyHeadDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.purapplyorder.PurApplyDetail.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.purapplyorder.PurApplyDetailDTO.class,
+              com.pagoda.api.dto.purapply.PurApplyDetailDTO.class,
               serializerFactory.getClassLoader()));
       staticSerializerMap.put(
           com.pagoda.domain.salorderhead.SalOrderDetail.class,
@@ -111,31 +101,6 @@ public class MtorderDubboApplication {
           com.pagoda.domain.salorderhead.SalPreOrderHead.class,
           new DtoSerializer(
               com.pagoda.api.dto.salorderhead.SalPreOrderHeadDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.salconsignout.SalConsignOutHead.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.salconsignout.SalConsignOutHeadDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.salconsignout.SalConsignOutDetail.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.salconsignout.SalConsignOutDetailDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.salconsignout.SalConsignOutExceptionLog.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.salconsignout.SalConsignOutExceptionLogDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.salconsignreturn.SalConsignReturnHead.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.salconsignreturn.SalConsignReturnHeadDTO.class,
-              serializerFactory.getClassLoader()));
-      staticSerializerMap.put(
-          com.pagoda.domain.salconsignreturn.SalConsignReturnDetail.class,
-          new DtoSerializer(
-              com.pagoda.api.dto.salconsignreturn.SalConsignReturnDetailDTO.class,
               serializerFactory.getClassLoader()));
       staticSerializerMap.put(
           com.pagoda.domain.salorderhead.SalOrderDetailGoodsQty.class,
@@ -171,6 +136,105 @@ public class MtorderDubboApplication {
           com.pagoda.domain.pripurchase.PriceAdjustPurDetail.class,
           new DtoSerializer(
               com.pagoda.api.dto.pripurchase.PriceAdjustPurDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsign.SalConsignHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsign.SalConsignHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsign.SalConsignDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsign.SalConsignDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsignout.SalConsignOutHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsignout.SalConsignOutHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsignout.SalConsignOutDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsignout.SalConsignOutDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsignout.SalConsignOutExceptionLog.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsignout.SalConsignOutExceptionLogDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsignreturn.SalConsignReturnHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsignreturn.SalConsignReturnHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.salconsignreturn.SalConsignReturnDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.salconsignreturn.SalConsignReturnDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorder.PurOrderHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorder.PurOrderHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorder.PurOrderDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorder.PurOrderDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.pridistribution.SalOrgCus.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.pridistribution.SalOrgCusDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorgven.PurOrgVen.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorgven.PurOrgVenDTO.class, serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorgven.PurOrgVenGoods.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorgven.PurOrgVenGoodsDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorgven.BasVenRebateGoodsDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorgven.BasVenRebateGoodsDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorgven.BasVenRebateHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorgven.BasVenRebateHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.purorgven.BasVenRebateOrgDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.purorgven.BasVenRebateOrgDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.prilimitmanage.PriceLimitCusRecord.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.prilimitmanage.PriceLimitCusRecordDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.prilimitmanage.PriceLimitCatRecord.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.prilimitmanage.PriceLimitCatRecordDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.prilimitmanage.PriceLimitOperaHead.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.prilimitmanage.PriceLimitOperaHeadDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.prilimitmanage.PriceLimitCusDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.prilimitmanage.PriceLimitCusDetailDTO.class,
+              serializerFactory.getClassLoader()));
+      staticSerializerMap.put(
+          com.pagoda.domain.prilimitmanage.PriceLimitGoodsDetail.class,
+          new DtoSerializer(
+              com.pagoda.api.dto.prilimitmanage.PriceLimitGoodsDetailDTO.class,
               serializerFactory.getClassLoader()));
     } catch (Exception e) {
       log.error("addDubboSerializer", e);

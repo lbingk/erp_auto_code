@@ -1,14 +1,12 @@
 package com.pagoda.api.dto.pripurchase;
 
-import com.pagoda.api.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import io.swagger.annotations.*;
 
 /**
  * 查询方法返回的DTO对象
@@ -30,8 +28,8 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   @FieldMeta(
     name = "effectDate",
     scene = "",
-    nameCN = "生效日期",
-    comment = "生效日期",
+    nameCN = "生效日期(启用时间,追加时间)",
+    comment = "生效日期(启用时间,追加时间)",
     nameEN = "effect_date",
     type = "日期",
     format = "",
@@ -57,7 +55,7 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "effectDate",
-    value = "生效日期",
+    value = "生效日期(启用时间,追加时间)",
     dataType = "",
     notes = "5b35e3459d2feff19b450fad"
   )
@@ -172,6 +170,42 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   private String seqno;
 
   @FieldMeta(
+    name = "auditorName",
+    scene = "price",
+    nameCN = "审核人姓名",
+    comment = "审核人姓名",
+    nameEN = "auditor_name",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @ApiModelProperty(
+    name = "auditorName",
+    value = "审核人姓名",
+    dataType = "",
+    notes = "5b36e62d9d2feff19b2aea97"
+  )
+  private String auditorName;
+
+  @FieldMeta(
     name = "goodsCode",
     scene = "price",
     nameCN = "商品代码",
@@ -206,37 +240,6 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     notes = "5b36e88c9d2feff19b2d5b9d"
   )
   private String goodsCode;
-
-  @FieldMeta(
-    name = "approverName",
-    scene = "",
-    nameCN = "审核人name",
-    comment = "审核人name",
-    nameEN = "",
-    type = "字符串",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = false,
-    readOnly = true,
-    required = true,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = -1
-  )
-  @ApiModelProperty(name = "approverName", value = "审核人name", dataType = "", notes = "")
-  private String approverName;
 
   @FieldMeta(
     name = "goodsId",
@@ -277,8 +280,8 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   @FieldMeta(
     name = "createdAt",
     scene = "",
-    nameCN = "创建时间",
-    comment = "创建时间",
+    nameCN = "录入时间",
+    comment = "录入时间",
     nameEN = "",
     type = "时间",
     format = "",
@@ -302,8 +305,8 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "", notes = "")
-  private java.sql.Timestamp createdAt;
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "", notes = "")
+  private java.util.Date createdAt;
 
   @FieldMeta(
     name = "remark",
@@ -344,8 +347,8 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   @FieldMeta(
     name = "purPrice",
     scene = "price",
-    nameCN = "采购价格",
-    comment = "采购价格",
+    nameCN = "采购单价[含税]",
+    comment = "采购单价[含税]",
     nameEN = "pur_price",
     type = "小数",
     format = "",
@@ -371,7 +374,7 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "purPrice",
-    value = "采购价格",
+    value = "采购单价[含税]",
     dataType = "",
     notes = "5b36e1339d2feff19b25feb5"
   )
@@ -389,11 +392,11 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     formSize = "",
     constraint = "",
     constraintParams = "",
-    persistent = false,
-    canQuery = false,
+    persistent = true,
+    canQuery = true,
     readOnly = false,
     required = false,
-    visible = false,
+    visible = true,
     defaultValue = "",
     tag = "",
     sortable = false,
@@ -403,7 +406,7 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     constraintParamsExtra = "",
     fixed = "",
     sensitive = false,
-    index = -1
+    index = 0
   )
   @ApiModelProperty(
     name = "venOrgName",
@@ -486,11 +489,11 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
   private String unitName;
 
   @FieldMeta(
-    name = "approvalAt",
+    name = "auditTime",
     scene = "",
-    nameCN = "审核时间",
-    comment = "审核时间",
-    nameEN = "",
+    nameCN = "当前审核时间",
+    comment = "当前审核时间",
+    nameEN = "audit_time",
     type = "时间",
     format = "",
     displayLen = 1,
@@ -498,9 +501,9 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     constraint = "",
     constraintParams = "",
     persistent = true,
-    canQuery = false,
-    readOnly = true,
-    required = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
     visible = true,
     defaultValue = "",
     tag = "",
@@ -511,16 +514,21 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     constraintParamsExtra = "",
     fixed = "",
     sensitive = false,
-    index = -1
+    index = 0
   )
-  @ApiModelProperty(name = "approvalAt", value = "审核时间", dataType = "", notes = "")
-  private java.sql.Timestamp approvalAt;
+  @ApiModelProperty(
+    name = "auditTime",
+    value = "当前审核时间",
+    dataType = "",
+    notes = "5b35d1c89d2feff19b40c22f"
+  )
+  private java.util.Date auditTime;
 
   @FieldMeta(
     name = "creatorName",
     scene = "",
-    nameCN = "创建人名称",
-    comment = "创建人名称",
+    nameCN = "录入人名称",
+    comment = "录入人名称",
     nameEN = "",
     type = "字符串",
     format = "",
@@ -544,8 +552,39 @@ public class FindGoodsLastPriceAdjustDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "", notes = "")
   private String creatorName;
+
+  @FieldMeta(
+    name = "id",
+    scene = "",
+    nameCN = "主键id",
+    comment = "主键id",
+    nameEN = "",
+    type = "长整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = false,
+    readOnly = true,
+    required = true,
+    visible = false,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = -1
+  )
+  @ApiModelProperty(name = "id", value = "主键id", dataType = "", notes = "")
+  private Long id;
 
   @FieldMeta(
     name = "goodsSpec",

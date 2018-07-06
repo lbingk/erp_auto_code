@@ -1,20 +1,17 @@
 package com.pagoda.repo.pripurchase;
 
-import com.pagoda.platform.jms.annotation.SqlTemplate;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
+import com.pagoda.platform.jms.annotation.SqlTemplate;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pripurchase.custom.*;
-
 import java.util.*;
 import java.util.concurrent.*;
-
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * PriceAdjustPurDetail 数据访问接口
@@ -46,7 +43,7 @@ public interface PriceAdjustPurDetailRepository
   @SqlTemplate(
     name = "findGoodsLastPriceAdjust",
     sql =
-        "select h.seqno,arr_org_name,ven_org_code,ven_org_name,max(h.effect_date) effect_date,goods_id,goods_code,goods_name,goods_spec,goods_class_name,unit_name,pur_price,d.creator_name,d.created_at,h.approver_name,h.approval_at,d.remark,h.note  from price_adjust_pur_head h,price_adjust_pur_detail d where h.id=d.adjust_id and status='40'{{#seqno}} and h.seqno=:seqno{{/seqno}}{{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}{{#ven_org_code}} and ven_org_code=:ven_org_code{{/ven_org_code}}{{#goods_code}} and goods_code=:goods_code{{/goods_code}}{{#goods_name}} and goods_name like '%{{goods_name}}%'{{/goods_name}}{{#effect_date1}} and effect_date>=:effect_date1{{/effect_date1}}{{#effect_date2}} and effect_date<=:effect_date2{{/effect_date2}}{{#created_at1}} and d.created_at>=:created_at1{{/created_at1}}{{#created_at2}} and d.created_at<=:created_at2{{/created_at2}}{{#last_modified_at1}} and d.last_modified_at>=:last_modified_at1{{/last_modified_at1}}{{#last_modified_at2}} and d.last_modified_at<=:last_modified_at2{{/last_modified_at2}}{{#creator_code}} and creator_code=:creator_code{{/creator_code}} group by d.goods_id"
+        "select h.seqno,arr_org_name,ven_org_code,ven_org_name,max(h.effect_date) effect_date,goods_id,goods_code,goods_name,goods_spec,goods_class_name,unit_name,pur_price,d.id,d.creator_name,d.created_at,h.auditor_name,h.audit_time,d.remark,h.note  from price_adjust_pur_head h,price_adjust_pur_detail d where h.id=d.adjust_id and status='40'{{#seqno}} and h.seqno=:seqno{{/seqno}}{{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}{{#ven_org_code}} and ven_org_code=:ven_org_code{{/ven_org_code}}{{#goods_code}} and goods_code=:goods_code{{/goods_code}}{{#goods_name}} and goods_name like '%{{goods_name}}%'{{/goods_name}}{{#effect_date1}} and effect_date>=:effect_date1{{/effect_date1}}{{#effect_date2}} and effect_date<=:effect_date2{{/effect_date2}}{{#created_at1}} and d.created_at>=:created_at1{{/created_at1}}{{#created_at2}} and d.created_at<=:created_at2{{/created_at2}}{{#last_modified_at1}} and d.last_modified_at>=:last_modified_at1{{/last_modified_at1}}{{#last_modified_at2}} and d.last_modified_at<=:last_modified_at2{{/last_modified_at2}}{{#creator_code}} and creator_code=:creator_code{{/creator_code}} group by d.goods_id"
   )
   Page<FindGoodsLastPriceAdjustDTO> findGoodsLastPriceAdjust(
       @Param("seqno") String seqno,
@@ -56,10 +53,10 @@ public interface PriceAdjustPurDetailRepository
       @Param("goods_name") String goodsName,
       @Param("effect_date1") java.util.Date effectDate1,
       @Param("effect_date2") java.util.Date effectDate2,
-      @Param("created_at1") java.sql.Timestamp createdAt1,
-      @Param("created_at2") java.sql.Timestamp createdAt2,
-      @Param("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @Param("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @Param("created_at1") java.util.Date createdAt1,
+      @Param("created_at2") java.util.Date createdAt2,
+      @Param("last_modified_at1") java.util.Date lastModifiedAt1,
+      @Param("last_modified_at2") java.util.Date lastModifiedAt2,
       @Param("creator_code") String creatorCode,
       @Param("pageable") Pageable pageable);
 
@@ -83,7 +80,7 @@ public interface PriceAdjustPurDetailRepository
   @SqlTemplate(
     name = "findGoodsLastPriceAdjust",
     sql =
-        "select h.seqno,arr_org_name,ven_org_code,ven_org_name,max(h.effect_date) effect_date,goods_id,goods_code,goods_name,goods_spec,goods_class_name,unit_name,pur_price,d.creator_name,d.created_at,h.approver_name,h.approval_at,d.remark,h.note  from price_adjust_pur_head h,price_adjust_pur_detail d where h.id=d.adjust_id and status='40'{{#seqno}} and h.seqno=:seqno{{/seqno}}{{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}{{#ven_org_code}} and ven_org_code=:ven_org_code{{/ven_org_code}}{{#goods_code}} and goods_code=:goods_code{{/goods_code}}{{#goods_name}} and goods_name like '%{{goods_name}}%'{{/goods_name}}{{#effect_date1}} and effect_date>=:effect_date1{{/effect_date1}}{{#effect_date2}} and effect_date<=:effect_date2{{/effect_date2}}{{#created_at1}} and d.created_at>=:created_at1{{/created_at1}}{{#created_at2}} and d.created_at<=:created_at2{{/created_at2}}{{#last_modified_at1}} and d.last_modified_at>=:last_modified_at1{{/last_modified_at1}}{{#last_modified_at2}} and d.last_modified_at<=:last_modified_at2{{/last_modified_at2}}{{#creator_code}} and creator_code=:creator_code{{/creator_code}} group by d.goods_id"
+        "select h.seqno,arr_org_name,ven_org_code,ven_org_name,max(h.effect_date) effect_date,goods_id,goods_code,goods_name,goods_spec,goods_class_name,unit_name,pur_price,d.id,d.creator_name,d.created_at,h.auditor_name,h.audit_time,d.remark,h.note  from price_adjust_pur_head h,price_adjust_pur_detail d where h.id=d.adjust_id and status='40'{{#seqno}} and h.seqno=:seqno{{/seqno}}{{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}{{#ven_org_code}} and ven_org_code=:ven_org_code{{/ven_org_code}}{{#goods_code}} and goods_code=:goods_code{{/goods_code}}{{#goods_name}} and goods_name like '%{{goods_name}}%'{{/goods_name}}{{#effect_date1}} and effect_date>=:effect_date1{{/effect_date1}}{{#effect_date2}} and effect_date<=:effect_date2{{/effect_date2}}{{#created_at1}} and d.created_at>=:created_at1{{/created_at1}}{{#created_at2}} and d.created_at<=:created_at2{{/created_at2}}{{#last_modified_at1}} and d.last_modified_at>=:last_modified_at1{{/last_modified_at1}}{{#last_modified_at2}} and d.last_modified_at<=:last_modified_at2{{/last_modified_at2}}{{#creator_code}} and creator_code=:creator_code{{/creator_code}} group by d.goods_id"
   )
   List<FindGoodsLastPriceAdjustDTO> findGoodsLastPriceAdjust(
       @Param("seqno") String seqno,
@@ -93,10 +90,10 @@ public interface PriceAdjustPurDetailRepository
       @Param("goods_name") String goodsName,
       @Param("effect_date1") java.util.Date effectDate1,
       @Param("effect_date2") java.util.Date effectDate2,
-      @Param("created_at1") java.sql.Timestamp createdAt1,
-      @Param("created_at2") java.sql.Timestamp createdAt2,
-      @Param("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @Param("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @Param("created_at1") java.util.Date createdAt1,
+      @Param("created_at2") java.util.Date createdAt2,
+      @Param("last_modified_at1") java.util.Date lastModifiedAt1,
+      @Param("last_modified_at2") java.util.Date lastModifiedAt2,
       @Param("creator_code") String creatorCode);
 
   /**

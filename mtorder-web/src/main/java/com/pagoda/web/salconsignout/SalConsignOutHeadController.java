@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsignout.SalConsignOutHeadDTO.Getters.*;
 
 /**
  * 模型SalConsignOutHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalConsignOutHeadService")
 @Slf4j
-public class SalConsignOutHeadController {
+public class SalConsignOutHeadController implements InitializingBean {
   @Autowired private SalConsignOutHeadService salConsignOutHeadService;
 
   @Autowired private SalConsignOutHeadValidator salConsignOutHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -172,11 +182,11 @@ public class SalConsignOutHeadController {
       @RequestParam(required = false, value = "stockoutStatus") Integer stockoutStatus,
       @RequestParam(required = false, value = "auditorCode") String auditorCode,
       @RequestParam(required = false, value = "auditorName") String auditorName,
-      @RequestParam(required = false, value = "auditTime") java.sql.Timestamp auditTime,
+      @RequestParam(required = false, value = "auditTime") java.util.Date auditTime,
       @RequestParam(required = false, value = "remark") String remark,
       @RequestParam(required = false, value = "confirmUserCode") String confirmUserCode,
       @RequestParam(required = false, value = "confirmUserName") String confirmUserName,
-      @RequestParam(required = false, value = "confirmTime") java.sql.Timestamp confirmTime,
+      @RequestParam(required = false, value = "confirmTime") java.util.Date confirmTime,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salConsignOutHeadService.findBy(
         seqno,

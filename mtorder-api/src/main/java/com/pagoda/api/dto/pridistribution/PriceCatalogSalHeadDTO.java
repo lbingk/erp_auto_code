@@ -1,14 +1,18 @@
 package com.pagoda.api.dto.pridistribution;
 
-import com.pagoda.api.dto.*;
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pridistribution.PriceCatalogSalHeadDTO.Getters.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.dto.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.lang.reflect.*;
-import java.io.Serializable;
-import java.util.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -33,7 +37,7 @@ import org.springframework.validation.*;
   auditable = true,
   traceable = true,
   approvalRequired = false,
-  requestUrl = "",
+  requestUrl = "/PriceCatalogSalHeadService/actions/query",
   tableMultiSelect = true
 )
 public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable {
@@ -62,90 +66,90 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
 
   @FieldMeta(
     name = "createdAt",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "datetime", notes = "")
   private Date createdAt;
 
   @FieldMeta(
     name = "creatorCode",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorCode", value = "创建人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorCode", value = "录入人代码", dataType = "string", notes = "")
   private String creatorCode;
 
   @FieldMeta(
     name = "creatorName",
-    nameCN = "创建人名称",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "string", notes = "")
   private String creatorName;
 
   @FieldMeta(
     name = "creatorOrgCode",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorOrgCode", value = "创建人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorOrgCode", value = "录入人机构代码", dataType = "string", notes = "")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "lastModifiedAt",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "lastModifiedAt", value = "", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "datetime", notes = "")
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifierCode",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierCode", value = "最近修改人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierCode", value = "最后修改人代码", dataType = "string", notes = "")
   private String modifierCode;
 
   @FieldMeta(
     name = "modifierName",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "string", notes = "")
   private String modifierName;
 
   @FieldMeta(
     name = "modifierOrgCode",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierOrgCode", value = "修改人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierOrgCode", value = "最后修改人机构代码", dataType = "string", notes = "")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -162,8 +166,8 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
   @FieldMeta(
     name = "code",
     scene = "",
-    nameCN = "价格目录代码",
-    comment = "价格目录代码",
+    nameCN = "商品代码[goodsCode]",
+    comment = "商品代码[goodsCode]",
     nameEN = "code",
     type = "字符串",
     format = "",
@@ -189,7 +193,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
   )
   @ApiModelProperty(
     name = "code",
-    value = "价格目录代码",
+    value = "商品代码[goodsCode]",
     dataType = "",
     notes = "5b35d3559d2feff19b40d3cf"
   )
@@ -198,8 +202,8 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
   @FieldMeta(
     name = "name",
     scene = "",
-    nameCN = "价格目录名称",
-    comment = "价格目录名称",
+    nameCN = "商品名称[goodsName]",
+    comment = "商品名称[goodsName]",
     nameEN = "name",
     type = "字符串",
     format = "",
@@ -225,7 +229,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
   )
   @ApiModelProperty(
     name = "name",
-    value = "价格目录名称",
+    value = "商品名称[goodsName]",
     dataType = "",
     notes = "5b35d3559d2feff19b40d3d3"
   )
@@ -245,7 +249,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     constraintParams = "",
     persistent = true,
     canQuery = true,
-    readOnly = false,
+    readOnly = true,
     required = false,
     visible = true,
     defaultValue = "",
@@ -281,7 +285,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     constraintParams = "",
     persistent = true,
     canQuery = true,
-    readOnly = false,
+    readOnly = true,
     required = false,
     visible = true,
     defaultValue = "",
@@ -325,7 +329,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     sortable = false,
     total = false,
     pageTotal = false,
-    enumerationType = false,
+    enumerationType = true,
     constraintParamsExtra = "",
     fixed = "",
     sensitive = false,
@@ -389,7 +393,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     constraintParams = "",
     persistent = true,
     canQuery = true,
-    readOnly = false,
+    readOnly = true,
     required = false,
     visible = true,
     defaultValue = "",
@@ -425,7 +429,7 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     constraintParams = "",
     persistent = true,
     canQuery = true,
-    readOnly = false,
+    readOnly = true,
     required = false,
     visible = true,
     defaultValue = "",
@@ -482,6 +486,48 @@ public class PriceCatalogSalHeadDTO extends AbstractDTO implements Serializable 
     notes = "5b36e6a39d2feff19b2b62b5"
   )
   private String remark;
+
+  /** DTO字段的getter */
+  public static class Getters {
+    public static final Function<PriceCatalogSalHeadDTO, Long> _id = o -> o.getId();
+    public static final Function<PriceCatalogSalHeadDTO, Long> _deleted = o -> o.getDeleted();
+
+    public static final Function<PriceCatalogSalHeadDTO, Date> _createdAt = o -> o.getCreatedAt();
+    public static final Function<PriceCatalogSalHeadDTO, String> _creatorCode =
+        o -> o.getCreatorCode();
+    public static final Function<PriceCatalogSalHeadDTO, String> _creatorName =
+        o -> o.getCreatorName();
+    public static final Function<PriceCatalogSalHeadDTO, String> _creatorOrgCode =
+        o -> o.getCreatorOrgCode();
+    public static final Function<PriceCatalogSalHeadDTO, Date> _lastModifiedAt =
+        o -> o.getLastModifiedAt();
+    public static final Function<PriceCatalogSalHeadDTO, String> _modifierCode =
+        o -> o.getModifierCode();
+    public static final Function<PriceCatalogSalHeadDTO, String> _modifierName =
+        o -> o.getModifierName();
+    public static final Function<PriceCatalogSalHeadDTO, String> _modifierOrgCode =
+        o -> o.getModifierOrgCode();
+
+    public static final Function<PriceCatalogSalHeadDTO, Integer> _version = o -> o.getVersion();
+
+    public static final Function<PriceCatalogSalHeadDTO, String> _code = o -> o.getCode();
+    public static final Function<PriceCatalogSalHeadDTO, String> _name = o -> o.getName();
+    public static final Function<PriceCatalogSalHeadDTO, Long> _balOrgOrgId =
+        o -> o.getBalOrgOrgId();
+    public static final Function<PriceCatalogSalHeadDTO, String> _balOrgOrgCode =
+        o -> o.getBalOrgOrgCode();
+    public static final Function<PriceCatalogSalHeadDTO, String> _balOrgOrgName =
+        o -> o.getBalOrgOrgName();
+    public static final Function<PriceCatalogSalHeadDTO, Long> _entId = o -> o.getEntId();
+    public static final Function<PriceCatalogSalHeadDTO, Integer> _isEnable = o -> o.getIsEnable();
+    public static final Function<PriceCatalogSalHeadDTO, Integer> _isUsed = o -> o.getIsUsed();
+    public static final Function<PriceCatalogSalHeadDTO, String> _remark = o -> o.getRemark();
+  }
+
+  public static ValidatorBuilder<PriceCatalogSalHeadDTO> validatorExample() {
+    ValidatorBuilder<PriceCatalogSalHeadDTO> builder = new ValidatorBuilder<>();
+    return builder;
+  }
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

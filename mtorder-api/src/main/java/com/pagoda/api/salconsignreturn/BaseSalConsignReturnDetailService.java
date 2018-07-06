@@ -1,14 +1,11 @@
 package com.pagoda.api.salconsignreturn;
 
-import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salconsignreturn.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -137,11 +134,29 @@ public interface BaseSalConsignReturnDetailService {
    *
    * @param returnId
    * @param returnSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsName
+   * @param goodsSpec
+   * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
    * @param salRate
    * @param salRetInDepotId
    * @param salRetInDepotCode
    * @param salRetInDepotName
+   * @param returnQty
+   * @param stockinQty
+   * @param stockinNetWeight
+   * @param stockinGrossWeight
+   * @param price
    * @param returnPrice
+   * @param taxRate
+   * @param taxAmt
+   * @param totalReturnAmt
+   * @param totalStockinAmt
+   * @param remark
    * @param pageable
    * @return
    * @throws ServiceException
@@ -150,11 +165,29 @@ public interface BaseSalConsignReturnDetailService {
   Page<SalConsignReturnDetailDTO> findBy(
       @ApiParam("returnId") Long returnId,
       @ApiParam("returnSeqno") String returnSeqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("goodsId") Long goodsId,
+      @ApiParam("goodsCode") String goodsCode,
+      @ApiParam("goodsName") String goodsName,
+      @ApiParam("goodsSpec") String goodsSpec,
+      @ApiParam("salUnitId") Long salUnitId,
+      @ApiParam("salUnitCode") String salUnitCode,
+      @ApiParam("salUnitName") String salUnitName,
       @ApiParam("salRate") java.math.BigDecimal salRate,
       @ApiParam("salRetInDepotId") Long salRetInDepotId,
       @ApiParam("salRetInDepotCode") String salRetInDepotCode,
       @ApiParam("salRetInDepotName") String salRetInDepotName,
+      @ApiParam("returnQty") java.math.BigDecimal returnQty,
+      @ApiParam("stockinQty") java.math.BigDecimal stockinQty,
+      @ApiParam("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @ApiParam("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @ApiParam("price") java.math.BigDecimal price,
       @ApiParam("returnPrice") java.math.BigDecimal returnPrice,
+      @ApiParam("taxRate") java.math.BigDecimal taxRate,
+      @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
+      @ApiParam("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @ApiParam("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @ApiParam("remark") String remark,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -163,7 +196,6 @@ public interface BaseSalConsignReturnDetailService {
    *
    * @param returnId
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -172,7 +204,6 @@ public interface BaseSalConsignReturnDetailService {
   Page<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
       @ApiParam("return_id") Long returnId,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 

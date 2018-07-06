@@ -3,14 +3,10 @@ package com.pagoda.repo.salorderhead.custom;
 import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalOrderHead扩展数据访问接口实现类
@@ -45,9 +41,7 @@ public class SalOrderHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalOrde
       @Param("orderType") Integer orderType,
       @Param("inputMode") Integer inputMode,
       @Param("orderStatus") Integer orderStatus,
-      @Param("isFinish") Integer isFinish,
       @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate,
       @Param("pageable") Pageable pageable) {
     SalOrderHead obj = SalOrderHead.toExample();
     obj.setEntId(entId);
@@ -67,9 +61,7 @@ public class SalOrderHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalOrde
     obj.setOrderType(orderType);
     obj.setInputMode(inputMode);
     obj.setOrderStatus(orderStatus);
-    obj.setIsFinish(isFinish);
     obj.setRemark(remark);
-    obj.setEntryDate(entryDate);
     Example<SalOrderHead> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalOrderHead.DTO_CONVERTER);
@@ -94,9 +86,7 @@ public class SalOrderHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalOrde
       @Param("orderType") Integer orderType,
       @Param("inputMode") Integer inputMode,
       @Param("orderStatus") Integer orderStatus,
-      @Param("isFinish") Integer isFinish,
-      @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate) {
+      @Param("remark") String remark) {
     SalOrderHead obj = SalOrderHead.toExample();
     obj.setEntId(entId);
     obj.setSeqno(seqno);
@@ -115,9 +105,7 @@ public class SalOrderHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalOrde
     obj.setOrderType(orderType);
     obj.setInputMode(inputMode);
     obj.setOrderStatus(orderStatus);
-    obj.setIsFinish(isFinish);
     obj.setRemark(remark);
-    obj.setEntryDate(entryDate);
     Example<SalOrderHead> example = Example.of(obj);
     return findAll(example, null).map(SalOrderHead.DTO_CONVERTER).getContent();
   }
@@ -155,10 +143,10 @@ public class SalOrderHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalOrde
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

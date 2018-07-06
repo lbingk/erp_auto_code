@@ -1,11 +1,10 @@
 package com.pagoda.api;
 
+import java.io.Serializable;
+import javax.validation.constraints.Min;
 import lombok.Data;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
-import javax.validation.constraints.Min;
-import java.io.Serializable;
 
 /**
  * 分页查询的参数，实现Pageable接口

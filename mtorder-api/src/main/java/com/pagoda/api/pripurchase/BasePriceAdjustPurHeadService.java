@@ -1,14 +1,11 @@
 package com.pagoda.api.pripurchase;
 
-import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.pripurchase.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -142,13 +139,14 @@ public interface BasePriceAdjustPurHeadService {
    * @param venOrgId
    * @param venOrgCode
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param auditTime
    * @param note
+   * @param venOrgName
+   * @param commitTime
    * @param pageable
    * @return
    * @throws ServiceException
@@ -163,13 +161,14 @@ public interface BasePriceAdjustPurHeadService {
       @ApiParam("venOrgId") Long venOrgId,
       @ApiParam("venOrgCode") String venOrgCode,
       @ApiParam("status") Integer status,
-      @ApiParam("entryTime") java.sql.Timestamp entryTime,
       @ApiParam("effectDate") java.util.Date effectDate,
       @ApiParam("auditorCode") String auditorCode,
       @ApiParam("auditorName") String auditorName,
       @ApiParam("remark") String remark,
-      @ApiParam("auditTime") java.sql.Timestamp auditTime,
+      @ApiParam("auditTime") java.util.Date auditTime,
       @ApiParam("note") String note,
+      @ApiParam("venOrgName") String venOrgName,
+      @ApiParam("commitTime") java.util.Date commitTime,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -201,10 +200,48 @@ public interface BasePriceAdjustPurHeadService {
       @ApiParam("approve_status") Integer approveStatus,
       @ApiParam("effect_date1") java.util.Date effectDate1,
       @ApiParam("effect_date2") java.util.Date effectDate2,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
+      @ApiParam("goods_name") String goodsName,
+      @ApiParam("goods_code") String goodsCode,
+      @ApiParam("creator_code") String creatorCode,
+      @ApiParam("pageable") Pageable pageable)
+      throws ServiceException;
+
+  /**
+   * 查询录入完成的调价单
+   *
+   * @param seqno
+   * @param arrOrgName
+   * @param venOrgCode
+   * @param approveStatus
+   * @param effectDate1
+   * @param effectDate2
+   * @param createdAt1
+   * @param createdAt2
+   * @param lastModifiedAt1
+   * @param lastModifiedAt2
+   * @param goodsName
+   * @param goodsCode
+   * @param creatorCode
+   * @param pageable
+   * @return
+   * @throws ServiceException
+   */
+  @ApiOperation(value = "findFinishedList", notes = "")
+  Page<FindFinishedListDTO> findFinishedList(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("arr_org_name") String arrOrgName,
+      @ApiParam("ven_org_code") String venOrgCode,
+      @ApiParam("approve_status") Integer approveStatus,
+      @ApiParam("effect_date1") java.util.Date effectDate1,
+      @ApiParam("effect_date2") java.util.Date effectDate2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("goods_name") String goodsName,
       @ApiParam("goods_code") String goodsCode,
       @ApiParam("creator_code") String creatorCode,

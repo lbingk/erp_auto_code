@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsignout.custom;
 import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.domain.salconsignout.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignOutExceptionLog扩展数据访问接口实现类
@@ -29,18 +25,148 @@ public class SalConsignOutExceptionLogRepositoryImpl
 
   @Override
   public Page<SalConsignOutExceptionLogDTO> findBy(
-      @Param("amount") java.math.BigDecimal amount, @Param("pageable") Pageable pageable) {
+      @Param("stockoutId") Long stockoutId,
+      @Param("stockoutSeqno") String stockoutSeqno,
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
+      @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
+      @Param("salUnitRate") java.math.BigDecimal salUnitRate,
+      @Param("salConOutDepotId") Long salConOutDepotId,
+      @Param("salConOutDepotCode") String salConOutDepotCode,
+      @Param("salConOutDepotName") String salConOutDepotName,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
+      @Param("price") java.math.BigDecimal price,
+      @Param("amount") java.math.BigDecimal amount,
+      @Param("shipSeq") Integer shipSeq,
+      @Param("consignTime") java.util.Date consignTime,
+      @Param("consignerId") Long consignerId,
+      @Param("consignerName") String consignerName,
+      @Param("stockoutStatus") Integer stockoutStatus,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("remark") String remark,
+      @Param("note") String note,
+      @Param("pageable") Pageable pageable) {
     SalConsignOutExceptionLog obj = SalConsignOutExceptionLog.toExample();
+    obj.setStockoutId(stockoutId);
+    obj.setStockoutSeqno(stockoutSeqno);
+    obj.setConId(conId);
+    obj.setConSeqno(conSeqno);
+    obj.setOrderId(orderId);
+    obj.setOrderSeqno(orderSeqno);
+    obj.setEntId(entId);
+    obj.setGoodsId(goodsId);
+    obj.setGoodsCode(goodsCode);
+    obj.setGoodsSpec(goodsSpec);
+    obj.setSalUnitId(salUnitId);
+    obj.setSalUnitCode(salUnitCode);
+    obj.setSalUnitName(salUnitName);
+    obj.setSalUnitRate(salUnitRate);
+    obj.setSalConOutDepotId(salConOutDepotId);
+    obj.setSalConOutDepotCode(salConOutDepotCode);
+    obj.setSalConOutDepotName(salConOutDepotName);
+    obj.setShippedQty(shippedQty);
+    obj.setShippedNetWeight(shippedNetWeight);
+    obj.setShippedGrossWeight(shippedGrossWeight);
+    obj.setShippedVolume(shippedVolume);
+    obj.setPrice(price);
     obj.setAmount(amount);
+    obj.setShipSeq(shipSeq);
+    obj.setConsignTime(consignTime);
+    obj.setConsignerId(consignerId);
+    obj.setConsignerName(consignerName);
+    obj.setStockoutStatus(stockoutStatus);
+    obj.setAuditTime(auditTime);
+    obj.setAuditorCode(auditorCode);
+    obj.setAuditorName(auditorName);
+    obj.setRemark(remark);
+    obj.setNote(note);
     Example<SalConsignOutExceptionLog> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalConsignOutExceptionLog.DTO_CONVERTER);
   }
 
   @Override
-  public List<SalConsignOutExceptionLogDTO> findBy(@Param("amount") java.math.BigDecimal amount) {
+  public List<SalConsignOutExceptionLogDTO> findBy(
+      @Param("stockoutId") Long stockoutId,
+      @Param("stockoutSeqno") String stockoutSeqno,
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
+      @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
+      @Param("salUnitRate") java.math.BigDecimal salUnitRate,
+      @Param("salConOutDepotId") Long salConOutDepotId,
+      @Param("salConOutDepotCode") String salConOutDepotCode,
+      @Param("salConOutDepotName") String salConOutDepotName,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
+      @Param("price") java.math.BigDecimal price,
+      @Param("amount") java.math.BigDecimal amount,
+      @Param("shipSeq") Integer shipSeq,
+      @Param("consignTime") java.util.Date consignTime,
+      @Param("consignerId") Long consignerId,
+      @Param("consignerName") String consignerName,
+      @Param("stockoutStatus") Integer stockoutStatus,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("remark") String remark,
+      @Param("note") String note) {
     SalConsignOutExceptionLog obj = SalConsignOutExceptionLog.toExample();
+    obj.setStockoutId(stockoutId);
+    obj.setStockoutSeqno(stockoutSeqno);
+    obj.setConId(conId);
+    obj.setConSeqno(conSeqno);
+    obj.setOrderId(orderId);
+    obj.setOrderSeqno(orderSeqno);
+    obj.setEntId(entId);
+    obj.setGoodsId(goodsId);
+    obj.setGoodsCode(goodsCode);
+    obj.setGoodsSpec(goodsSpec);
+    obj.setSalUnitId(salUnitId);
+    obj.setSalUnitCode(salUnitCode);
+    obj.setSalUnitName(salUnitName);
+    obj.setSalUnitRate(salUnitRate);
+    obj.setSalConOutDepotId(salConOutDepotId);
+    obj.setSalConOutDepotCode(salConOutDepotCode);
+    obj.setSalConOutDepotName(salConOutDepotName);
+    obj.setShippedQty(shippedQty);
+    obj.setShippedNetWeight(shippedNetWeight);
+    obj.setShippedGrossWeight(shippedGrossWeight);
+    obj.setShippedVolume(shippedVolume);
+    obj.setPrice(price);
     obj.setAmount(amount);
+    obj.setShipSeq(shipSeq);
+    obj.setConsignTime(consignTime);
+    obj.setConsignerId(consignerId);
+    obj.setConsignerName(consignerName);
+    obj.setStockoutStatus(stockoutStatus);
+    obj.setAuditTime(auditTime);
+    obj.setAuditorCode(auditorCode);
+    obj.setAuditorName(auditorName);
+    obj.setRemark(remark);
+    obj.setNote(note);
     Example<SalConsignOutExceptionLog> example = Example.of(obj);
     return findAll(example, null).map(SalConsignOutExceptionLog.DTO_CONVERTER).getContent();
   }
@@ -83,10 +209,10 @@ public class SalConsignOutExceptionLogRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

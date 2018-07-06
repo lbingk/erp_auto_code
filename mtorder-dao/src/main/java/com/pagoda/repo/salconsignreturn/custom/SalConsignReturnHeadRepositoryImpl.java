@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsignreturn.custom;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignReturnHead扩展数据访问接口实现类
@@ -29,9 +25,18 @@ public class SalConsignReturnHeadRepositoryImpl
 
   @Override
   public Page<SalConsignReturnHeadDTO> findBy(
+      @Param("seqno") String seqno,
+      @Param("entId") Long entId,
+      @Param("arrOrgId") Long arrOrgId,
+      @Param("arrOrgCode") String arrOrgCode,
+      @Param("arrOrgName") String arrOrgName,
+      @Param("cusOrgId") Long cusOrgId,
+      @Param("cusOrgCode") String cusOrgCode,
+      @Param("cusOrgName") String cusOrgName,
       @Param("returnType") Integer returnType,
-      @Param("returnDate") java.sql.Timestamp returnDate,
+      @Param("returnDate") java.util.Date returnDate,
       @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("transitLineNo") String transitLineNo,
       @Param("stockinQty") java.math.BigDecimal stockinQty,
       @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
@@ -39,11 +44,26 @@ public class SalConsignReturnHeadRepositoryImpl
       @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
       @Param("status") Integer status,
+      @Param("printCount") Integer printCount,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("remark") String remark,
+      @Param("note") String note,
       @Param("pageable") Pageable pageable) {
     SalConsignReturnHead obj = SalConsignReturnHead.toExample();
+    obj.setSeqno(seqno);
+    obj.setEntId(entId);
+    obj.setArrOrgId(arrOrgId);
+    obj.setArrOrgCode(arrOrgCode);
+    obj.setArrOrgName(arrOrgName);
+    obj.setCusOrgId(cusOrgId);
+    obj.setCusOrgCode(cusOrgCode);
+    obj.setCusOrgName(cusOrgName);
     obj.setReturnType(returnType);
     obj.setReturnDate(returnDate);
     obj.setReturnQty(returnQty);
+    obj.setTransitLineNo(transitLineNo);
     obj.setStockinQty(stockinQty);
     obj.setStockinGrossWeight(stockinGrossWeight);
     obj.setStockinNetWeight(stockinNetWeight);
@@ -51,6 +71,12 @@ public class SalConsignReturnHeadRepositoryImpl
     obj.setTotalReturnAmt(totalReturnAmt);
     obj.setTotalStockinAmt(totalStockinAmt);
     obj.setStatus(status);
+    obj.setPrintCount(printCount);
+    obj.setAuditorCode(auditorCode);
+    obj.setAuditorName(auditorName);
+    obj.setAuditTime(auditTime);
+    obj.setRemark(remark);
+    obj.setNote(note);
     Example<SalConsignReturnHead> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalConsignReturnHead.DTO_CONVERTER);
@@ -58,20 +84,44 @@ public class SalConsignReturnHeadRepositoryImpl
 
   @Override
   public List<SalConsignReturnHeadDTO> findBy(
+      @Param("seqno") String seqno,
+      @Param("entId") Long entId,
+      @Param("arrOrgId") Long arrOrgId,
+      @Param("arrOrgCode") String arrOrgCode,
+      @Param("arrOrgName") String arrOrgName,
+      @Param("cusOrgId") Long cusOrgId,
+      @Param("cusOrgCode") String cusOrgCode,
+      @Param("cusOrgName") String cusOrgName,
       @Param("returnType") Integer returnType,
-      @Param("returnDate") java.sql.Timestamp returnDate,
+      @Param("returnDate") java.util.Date returnDate,
       @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("transitLineNo") String transitLineNo,
       @Param("stockinQty") java.math.BigDecimal stockinQty,
       @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
       @Param("totalTaxAmt") java.math.BigDecimal totalTaxAmt,
       @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
-      @Param("status") Integer status) {
+      @Param("status") Integer status,
+      @Param("printCount") Integer printCount,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("remark") String remark,
+      @Param("note") String note) {
     SalConsignReturnHead obj = SalConsignReturnHead.toExample();
+    obj.setSeqno(seqno);
+    obj.setEntId(entId);
+    obj.setArrOrgId(arrOrgId);
+    obj.setArrOrgCode(arrOrgCode);
+    obj.setArrOrgName(arrOrgName);
+    obj.setCusOrgId(cusOrgId);
+    obj.setCusOrgCode(cusOrgCode);
+    obj.setCusOrgName(cusOrgName);
     obj.setReturnType(returnType);
     obj.setReturnDate(returnDate);
     obj.setReturnQty(returnQty);
+    obj.setTransitLineNo(transitLineNo);
     obj.setStockinQty(stockinQty);
     obj.setStockinGrossWeight(stockinGrossWeight);
     obj.setStockinNetWeight(stockinNetWeight);
@@ -79,6 +129,12 @@ public class SalConsignReturnHeadRepositoryImpl
     obj.setTotalReturnAmt(totalReturnAmt);
     obj.setTotalStockinAmt(totalStockinAmt);
     obj.setStatus(status);
+    obj.setPrintCount(printCount);
+    obj.setAuditorCode(auditorCode);
+    obj.setAuditorName(auditorName);
+    obj.setAuditTime(auditTime);
+    obj.setRemark(remark);
+    obj.setNote(note);
     Example<SalConsignReturnHead> example = Example.of(obj);
     return findAll(example, null).map(SalConsignReturnHead.DTO_CONVERTER).getContent();
   }
@@ -118,10 +174,10 @@ public class SalConsignReturnHeadRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

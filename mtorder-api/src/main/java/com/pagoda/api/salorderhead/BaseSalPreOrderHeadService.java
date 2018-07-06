@@ -1,14 +1,11 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salorderhead.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -143,7 +140,6 @@ public interface BaseSalPreOrderHeadService {
    * @param cusOrgCode
    * @param cusOrgName
    * @param remark
-   * @param entryDate
    * @param totalAmt
    * @param totalRequestQty
    * @param pageable
@@ -163,7 +159,6 @@ public interface BaseSalPreOrderHeadService {
       @ApiParam("cusOrgCode") String cusOrgCode,
       @ApiParam("cusOrgName") String cusOrgName,
       @ApiParam("remark") String remark,
-      @ApiParam("entryDate") java.sql.Timestamp entryDate,
       @ApiParam("totalAmt") java.math.BigDecimal totalAmt,
       @ApiParam("totalRequestQty") java.math.BigDecimal totalRequestQty,
       @ApiParam("pageable") Pageable pageable)

@@ -3,12 +3,10 @@ package com.pagoda.repo.salconsign.custom;
 import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalConsignDetail扩展数据访问接口
@@ -21,7 +19,11 @@ public interface SalConsignDetailRepositoryCustom {
   /**
    * 包含所有可查询的字段
    *
+   * @param conId
+   * @param conSeqno
+   * @param orderId
    * @param orderSeqno
+   * @param entId
    * @param goodsId
    * @param goodsCode
    * @param goodsName
@@ -34,21 +36,33 @@ public interface SalConsignDetailRepositoryCustom {
    * @param salConOutDepotCode
    * @param salConOutDepotName
    * @param grossWeight
+   * @param shippedGrossWeight
    * @param netWeight
+   * @param shippedNetWeight
    * @param qty
+   * @param shippedQty
    * @param volume
+   * @param shippedVolume
    * @param taxRate
+   * @param taxAmt
    * @param price
+   * @param totalAmt
    * @param discountRate
    * @param actualAmt
    * @param discountPrice
    * @param shippedPrice
    * @param shippedCount
+   * @param shippedAmt
+   * @param remark
    * @param pageable
    * @return
    */
   Page<SalConsignDetailDTO> findBy(
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
       @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
       @Param("goodsId") Long goodsId,
       @Param("goodsCode") String goodsCode,
       @Param("goodsName") String goodsName,
@@ -61,22 +75,34 @@ public interface SalConsignDetailRepositoryCustom {
       @Param("salConOutDepotCode") String salConOutDepotCode,
       @Param("salConOutDepotName") String salConOutDepotName,
       @Param("grossWeight") java.math.BigDecimal grossWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
       @Param("netWeight") java.math.BigDecimal netWeight,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
       @Param("qty") java.math.BigDecimal qty,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("volume") java.math.BigDecimal volume,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
       @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
       @Param("price") java.math.BigDecimal price,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("discountRate") java.math.BigDecimal discountRate,
       @Param("actualAmt") java.math.BigDecimal actualAmt,
       @Param("discountPrice") java.math.BigDecimal discountPrice,
       @Param("shippedPrice") java.math.BigDecimal shippedPrice,
       @Param("shippedCount") Integer shippedCount,
+      @Param("shippedAmt") java.math.BigDecimal shippedAmt,
+      @Param("remark") String remark,
       @Param("pageable") Pageable pageable);
 
   /**
    * 包含所有可查询的字段
    *
+   * @param conId
+   * @param conSeqno
+   * @param orderId
    * @param orderSeqno
+   * @param entId
    * @param goodsId
    * @param goodsCode
    * @param goodsName
@@ -89,20 +115,32 @@ public interface SalConsignDetailRepositoryCustom {
    * @param salConOutDepotCode
    * @param salConOutDepotName
    * @param grossWeight
+   * @param shippedGrossWeight
    * @param netWeight
+   * @param shippedNetWeight
    * @param qty
+   * @param shippedQty
    * @param volume
+   * @param shippedVolume
    * @param taxRate
+   * @param taxAmt
    * @param price
+   * @param totalAmt
    * @param discountRate
    * @param actualAmt
    * @param discountPrice
    * @param shippedPrice
    * @param shippedCount
+   * @param shippedAmt
+   * @param remark
    * @return
    */
   List<SalConsignDetailDTO> findBy(
+      @Param("conId") Long conId,
+      @Param("conSeqno") String conSeqno,
+      @Param("orderId") Long orderId,
       @Param("orderSeqno") String orderSeqno,
+      @Param("entId") Long entId,
       @Param("goodsId") Long goodsId,
       @Param("goodsCode") String goodsCode,
       @Param("goodsName") String goodsName,
@@ -115,16 +153,24 @@ public interface SalConsignDetailRepositoryCustom {
       @Param("salConOutDepotCode") String salConOutDepotCode,
       @Param("salConOutDepotName") String salConOutDepotName,
       @Param("grossWeight") java.math.BigDecimal grossWeight,
+      @Param("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
       @Param("netWeight") java.math.BigDecimal netWeight,
+      @Param("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
       @Param("qty") java.math.BigDecimal qty,
+      @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("volume") java.math.BigDecimal volume,
+      @Param("shippedVolume") java.math.BigDecimal shippedVolume,
       @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
       @Param("price") java.math.BigDecimal price,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("discountRate") java.math.BigDecimal discountRate,
       @Param("actualAmt") java.math.BigDecimal actualAmt,
       @Param("discountPrice") java.math.BigDecimal discountPrice,
       @Param("shippedPrice") java.math.BigDecimal shippedPrice,
-      @Param("shippedCount") Integer shippedCount);
+      @Param("shippedCount") Integer shippedCount,
+      @Param("shippedAmt") java.math.BigDecimal shippedAmt,
+      @Param("remark") String remark);
 
   /**
    * 通用分页查询，用于后台查询
@@ -168,7 +214,7 @@ public interface SalConsignDetailRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

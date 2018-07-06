@@ -3,12 +3,10 @@ package com.pagoda.repo.salconsign.custom;
 import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalConsignHead扩展数据访问接口
@@ -21,110 +19,106 @@ public interface SalConsignHeadRepositoryCustom {
   /**
    * 包含所有可查询的字段
    *
-   * @param orderId
-   * @param orderNo
-   * @param waveNo
-   * @param tatalQty
-   * @param totalAmt
-   * @param entryDate
-   * @param conStatus
-   * @param printStatus
-   * @param printCount
    * @param seqno
    * @param entId
+   * @param orderId
+   * @param orderNo
    * @param conOrgId
    * @param conOrgCode
    * @param conOrgName
    * @param cusOrgId
    * @param cusOrgCode
    * @param cusOrgName
+   * @param waveNo
    * @param transitLineNo
    * @param taxAmt
+   * @param totalAmt
    * @param shippedQty
    * @param shippedAmt
    * @param preArrivalDate
+   * @param conStatus
+   * @param printStatus
+   * @param printCount
    * @param remark
+   * @param totalQty
    * @param pageable
    * @return
    */
   Page<SalConsignHeadDTO> findBy(
-      @Param("orderId") Long orderId,
-      @Param("orderNo") String orderNo,
-      @Param("waveNo") String waveNo,
-      @Param("tatalQty") java.math.BigDecimal tatalQty,
-      @Param("totalAmt") java.math.BigDecimal totalAmt,
-      @Param("entryDate") java.sql.Timestamp entryDate,
-      @Param("conStatus") Integer conStatus,
-      @Param("printStatus") Integer printStatus,
-      @Param("printCount") Integer printCount,
       @Param("seqno") String seqno,
       @Param("entId") Long entId,
+      @Param("orderId") Long orderId,
+      @Param("orderNo") String orderNo,
       @Param("conOrgId") Long conOrgId,
       @Param("conOrgCode") String conOrgCode,
       @Param("conOrgName") String conOrgName,
       @Param("cusOrgId") Long cusOrgId,
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
+      @Param("waveNo") String waveNo,
       @Param("transitLineNo") String transitLineNo,
       @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("shippedAmt") java.math.BigDecimal shippedAmt,
       @Param("preArrivalDate") java.util.Date preArrivalDate,
+      @Param("conStatus") Integer conStatus,
+      @Param("printStatus") Integer printStatus,
+      @Param("printCount") Integer printCount,
       @Param("remark") String remark,
+      @Param("totalQty") java.math.BigDecimal totalQty,
       @Param("pageable") Pageable pageable);
 
   /**
    * 包含所有可查询的字段
    *
-   * @param orderId
-   * @param orderNo
-   * @param waveNo
-   * @param tatalQty
-   * @param totalAmt
-   * @param entryDate
-   * @param conStatus
-   * @param printStatus
-   * @param printCount
    * @param seqno
    * @param entId
+   * @param orderId
+   * @param orderNo
    * @param conOrgId
    * @param conOrgCode
    * @param conOrgName
    * @param cusOrgId
    * @param cusOrgCode
    * @param cusOrgName
+   * @param waveNo
    * @param transitLineNo
    * @param taxAmt
+   * @param totalAmt
    * @param shippedQty
    * @param shippedAmt
    * @param preArrivalDate
+   * @param conStatus
+   * @param printStatus
+   * @param printCount
    * @param remark
+   * @param totalQty
    * @return
    */
   List<SalConsignHeadDTO> findBy(
-      @Param("orderId") Long orderId,
-      @Param("orderNo") String orderNo,
-      @Param("waveNo") String waveNo,
-      @Param("tatalQty") java.math.BigDecimal tatalQty,
-      @Param("totalAmt") java.math.BigDecimal totalAmt,
-      @Param("entryDate") java.sql.Timestamp entryDate,
-      @Param("conStatus") Integer conStatus,
-      @Param("printStatus") Integer printStatus,
-      @Param("printCount") Integer printCount,
       @Param("seqno") String seqno,
       @Param("entId") Long entId,
+      @Param("orderId") Long orderId,
+      @Param("orderNo") String orderNo,
       @Param("conOrgId") Long conOrgId,
       @Param("conOrgCode") String conOrgCode,
       @Param("conOrgName") String conOrgName,
       @Param("cusOrgId") Long cusOrgId,
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
+      @Param("waveNo") String waveNo,
       @Param("transitLineNo") String transitLineNo,
       @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("shippedAmt") java.math.BigDecimal shippedAmt,
       @Param("preArrivalDate") java.util.Date preArrivalDate,
-      @Param("remark") String remark);
+      @Param("conStatus") Integer conStatus,
+      @Param("printStatus") Integer printStatus,
+      @Param("printCount") Integer printCount,
+      @Param("remark") String remark,
+      @Param("totalQty") java.math.BigDecimal totalQty);
 
   /**
    * 通用分页查询，用于后台查询
@@ -168,7 +162,7 @@ public interface SalConsignHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pridistribution.PriceAdjustSalHeadDTO.Getters.*;
 
 /**
  * 模型PriceAdjustSalHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/PriceAdjustSalHeadService")
 @Slf4j
-public class PriceAdjustSalHeadController {
+public class PriceAdjustSalHeadController implements InitializingBean {
   @Autowired private PriceAdjustSalHeadService priceAdjustSalHeadService;
 
   @Autowired private PriceAdjustSalHeadValidator priceAdjustSalHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -122,13 +132,13 @@ public class PriceAdjustSalHeadController {
    * @param priceCatCode
    * @param priceCatId
    * @param status
-   * @param entryTime
    * @param effectDate
    * @param auditTime
    * @param auditorCode
    * @param auditorName
    * @param remark
    * @param note
+   * @param commitTime
    * @param pageable
    * @return
    */
@@ -142,13 +152,13 @@ public class PriceAdjustSalHeadController {
       @RequestParam(required = false, value = "priceCatCode") String priceCatCode,
       @RequestParam(required = false, value = "priceCatId") Long priceCatId,
       @RequestParam(required = false, value = "status") Integer status,
-      @RequestParam(required = false, value = "entryTime") java.sql.Timestamp entryTime,
       @RequestParam(required = false, value = "effectDate") java.util.Date effectDate,
-      @RequestParam(required = false, value = "auditTime") java.sql.Timestamp auditTime,
+      @RequestParam(required = false, value = "auditTime") java.util.Date auditTime,
       @RequestParam(required = false, value = "auditorCode") String auditorCode,
       @RequestParam(required = false, value = "auditorName") String auditorName,
       @RequestParam(required = false, value = "remark") String remark,
       @RequestParam(required = false, value = "note") String note,
+      @RequestParam(required = false, value = "commitTime") java.util.Date commitTime,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return priceAdjustSalHeadService.findBy(
         seqno,
@@ -157,13 +167,13 @@ public class PriceAdjustSalHeadController {
         priceCatCode,
         priceCatId,
         status,
-        entryTime,
         effectDate,
         auditTime,
         auditorCode,
         auditorName,
         remark,
         note,
+        commitTime,
         pageable);
   }
 }

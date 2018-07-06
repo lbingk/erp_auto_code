@@ -1,14 +1,18 @@
 package com.pagoda.api.dto.pridistribution;
 
-import com.pagoda.api.dto.*;
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pridistribution.PriceAdjustSalDetailDTO.Getters.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.dto.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.lang.reflect.*;
-import java.io.Serializable;
-import java.util.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -62,90 +66,90 @@ public class PriceAdjustSalDetailDTO extends AbstractDTO implements Serializable
 
   @FieldMeta(
     name = "createdAt",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "datetime", notes = "")
   private Date createdAt;
 
   @FieldMeta(
     name = "creatorCode",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorCode", value = "创建人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorCode", value = "录入人代码", dataType = "string", notes = "")
   private String creatorCode;
 
   @FieldMeta(
     name = "creatorName",
-    nameCN = "创建人名称",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "string", notes = "")
   private String creatorName;
 
   @FieldMeta(
     name = "creatorOrgCode",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorOrgCode", value = "创建人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorOrgCode", value = "录入人机构代码", dataType = "string", notes = "")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "lastModifiedAt",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "lastModifiedAt", value = "", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "datetime", notes = "")
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifierCode",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierCode", value = "最近修改人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierCode", value = "最后修改人代码", dataType = "string", notes = "")
   private String modifierCode;
 
   @FieldMeta(
     name = "modifierName",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "string", notes = "")
   private String modifierName;
 
   @FieldMeta(
     name = "modifierOrgCode",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierOrgCode", value = "修改人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierOrgCode", value = "最后修改人机构代码", dataType = "string", notes = "")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -702,8 +706,8 @@ public class PriceAdjustSalDetailDTO extends AbstractDTO implements Serializable
   @FieldMeta(
     name = "returnPrice",
     scene = "",
-    nameCN = "退货价格",
-    comment = "退货价格",
+    nameCN = "退货单价",
+    comment = "退货单价",
     nameEN = "return_price",
     type = "小数",
     format = "",
@@ -729,7 +733,7 @@ public class PriceAdjustSalDetailDTO extends AbstractDTO implements Serializable
   )
   @ApiModelProperty(
     name = "returnPrice",
-    value = "退货价格",
+    value = "退货单价",
     dataType = "",
     notes = "5b35de169d2feff19b42dc46"
   )
@@ -842,6 +846,66 @@ public class PriceAdjustSalDetailDTO extends AbstractDTO implements Serializable
     notes = "5b36e56a9d2feff19b2a262e"
   )
   private Integer status;
+
+  /** DTO字段的getter */
+  public static class Getters {
+    public static final Function<PriceAdjustSalDetailDTO, Long> _id = o -> o.getId();
+    public static final Function<PriceAdjustSalDetailDTO, Long> _deleted = o -> o.getDeleted();
+
+    public static final Function<PriceAdjustSalDetailDTO, Date> _createdAt = o -> o.getCreatedAt();
+    public static final Function<PriceAdjustSalDetailDTO, String> _creatorCode =
+        o -> o.getCreatorCode();
+    public static final Function<PriceAdjustSalDetailDTO, String> _creatorName =
+        o -> o.getCreatorName();
+    public static final Function<PriceAdjustSalDetailDTO, String> _creatorOrgCode =
+        o -> o.getCreatorOrgCode();
+    public static final Function<PriceAdjustSalDetailDTO, Date> _lastModifiedAt =
+        o -> o.getLastModifiedAt();
+    public static final Function<PriceAdjustSalDetailDTO, String> _modifierCode =
+        o -> o.getModifierCode();
+    public static final Function<PriceAdjustSalDetailDTO, String> _modifierName =
+        o -> o.getModifierName();
+    public static final Function<PriceAdjustSalDetailDTO, String> _modifierOrgCode =
+        o -> o.getModifierOrgCode();
+
+    public static final Function<PriceAdjustSalDetailDTO, Integer> _version = o -> o.getVersion();
+
+    public static final Function<PriceAdjustSalDetailDTO, Long> _adjustId = o -> o.getAdjustId();
+    public static final Function<PriceAdjustSalDetailDTO, String> _adjustSeqno =
+        o -> o.getAdjustSeqno();
+    public static final Function<PriceAdjustSalDetailDTO, Long> _entId = o -> o.getEntId();
+    public static final Function<PriceAdjustSalDetailDTO, Long> _goodsId = o -> o.getGoodsId();
+    public static final Function<PriceAdjustSalDetailDTO, String> _goodsCode =
+        o -> o.getGoodsCode();
+    public static final Function<PriceAdjustSalDetailDTO, String> _goodsName =
+        o -> o.getGoodsName();
+    public static final Function<PriceAdjustSalDetailDTO, String> _goodsSpec =
+        o -> o.getGoodsSpec();
+    public static final Function<PriceAdjustSalDetailDTO, Long> _goodsClassId =
+        o -> o.getGoodsClassId();
+    public static final Function<PriceAdjustSalDetailDTO, String> _goodsClassCode =
+        o -> o.getGoodsClassCode();
+    public static final Function<PriceAdjustSalDetailDTO, String> _goodsClassName =
+        o -> o.getGoodsClassName();
+    public static final Function<PriceAdjustSalDetailDTO, Long> _unitId = o -> o.getUnitId();
+    public static final Function<PriceAdjustSalDetailDTO, String> _unitCode = o -> o.getUnitCode();
+    public static final Function<PriceAdjustSalDetailDTO, String> _unitName = o -> o.getUnitName();
+    public static final Function<PriceAdjustSalDetailDTO, java.math.BigDecimal> _unitRate =
+        o -> o.getUnitRate();
+    public static final Function<PriceAdjustSalDetailDTO, java.math.BigDecimal> _salPrice =
+        o -> o.getSalPrice();
+    public static final Function<PriceAdjustSalDetailDTO, java.math.BigDecimal> _returnPrice =
+        o -> o.getReturnPrice();
+    public static final Function<PriceAdjustSalDetailDTO, String> _remark = o -> o.getRemark();
+    public static final Function<PriceAdjustSalDetailDTO, String> _venOrgName =
+        o -> o.getVenOrgName();
+    public static final Function<PriceAdjustSalDetailDTO, Integer> _status = o -> o.getStatus();
+  }
+
+  public static ValidatorBuilder<PriceAdjustSalDetailDTO> validatorExample() {
+    ValidatorBuilder<PriceAdjustSalDetailDTO> builder = new ValidatorBuilder<>();
+    return builder;
+  }
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

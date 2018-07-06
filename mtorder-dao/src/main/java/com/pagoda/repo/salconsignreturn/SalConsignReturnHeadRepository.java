@@ -1,20 +1,17 @@
 package com.pagoda.repo.salconsignreturn;
 
-import com.pagoda.platform.jms.annotation.SqlTemplate;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
+import com.pagoda.platform.jms.annotation.SqlTemplate;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignreturn.custom.*;
-
 import java.util.*;
 import java.util.concurrent.*;
-
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * SalConsignReturnHead 数据访问接口
@@ -39,14 +36,13 @@ public interface SalConsignReturnHeadRepository
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    */
   @SqlTemplate(
     name = "findSalConsignReturnHead",
     sql =
-        "select id,seqno,arr_org_code,arr_org_name,cus_org_code,cus_org_name,return_type,return_date,return_qty,total_tax_amt, total_return_amt,total_stockin_amt,status,creator_name,created_at,modifier_name,last_modified_at,remark,note, transit_line_no,print_count,version from sal_consign_return_head  where deleted = 0  {{#seqno}} and seqno like '{{seqno}}%'{{/seqno}}  {{#arr_org_code}} and arr_org_code=:arr_org_code{{/arr_org_code}}  {{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}  {{#cus_org_code}}  and cus_org_code=:cus_org_code{{/cus_org_code}}  {{#cus_org_name}} and cus_org_name=:cus_org_name{{/cus_org_name}}  {{#return_type}} and return_type=:return_type{{/return_type}}  {{#status}} and status=:status{{/status}}  {{#transit_line_no}} and transit_line_no=:transit_line_no{{/transit_line_no}}  {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1{{/pre_arrival_date1}}  {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2{{/pre_arrival_date2}}  {{#creator_org_code}} and creator_org_code in ({{#codeList}}{{^-first}}, {{/-first}}\"{{this}}\"{{/codeList}}) {{/creator_org_code}}"
+        "select id,seqno,arr_org_code,arr_org_name,cus_org_code,cus_org_name,return_type,return_date,return_qty,total_tax_amt, total_return_amt,total_stockin_amt,status,creator_name,created_at,modifier_name,last_modified_at,remark,note, transit_line_no,print_count,version from sal_consign_return_head where deleted = 0 {{#seqno}} and seqno like '{{seqno}}%'{{/seqno}} {{#arr_org_code}} and arr_org_code=:arr_org_code{{/arr_org_code}} {{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}} {{#cus_org_code}} and cus_org_code=:cus_org_code{{/cus_org_code}} {{#cus_org_name}} and cus_org_name=:cus_org_name{{/cus_org_name}} {{#return_type}} and return_type=:return_type{{/return_type}} {{#status}} and status=:status{{/status}} {{#transit_line_no}} and transit_line_no=:transit_line_no{{/transit_line_no}} {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1{{/pre_arrival_date1}} {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2{{/pre_arrival_date2}} {{#creator_org_code}} and creator_org_code in ({{#creator_org_code}}{{^-first}}, {{/-first}}\"{{this}}\"{{/creator_org_code}}) {{/creator_org_code}}"
   )
   Page<SalConsignReturnHeadDTO> findSalConsignReturnHead(
       @Param("seqno") String seqno,
@@ -60,7 +56,6 @@ public interface SalConsignReturnHeadRepository
       @Param("pre_arrival_date1") java.util.Date preArrivalDate1,
       @Param("pre_arrival_date2") java.util.Date preArrivalDate2,
       @Param("creator_org_code") String creatorOrgCode,
-      @Param("codeList") String codeList,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -77,13 +72,12 @@ public interface SalConsignReturnHeadRepository
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param creatorOrgCode
-   * @param codeList
    * @return
    */
   @SqlTemplate(
     name = "findSalConsignReturnHead",
     sql =
-        "select id,seqno,arr_org_code,arr_org_name,cus_org_code,cus_org_name,return_type,return_date,return_qty,total_tax_amt, total_return_amt,total_stockin_amt,status,creator_name,created_at,modifier_name,last_modified_at,remark,note, transit_line_no,print_count,version from sal_consign_return_head  where deleted = 0  {{#seqno}} and seqno like '{{seqno}}%'{{/seqno}}  {{#arr_org_code}} and arr_org_code=:arr_org_code{{/arr_org_code}}  {{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}}  {{#cus_org_code}}  and cus_org_code=:cus_org_code{{/cus_org_code}}  {{#cus_org_name}} and cus_org_name=:cus_org_name{{/cus_org_name}}  {{#return_type}} and return_type=:return_type{{/return_type}}  {{#status}} and status=:status{{/status}}  {{#transit_line_no}} and transit_line_no=:transit_line_no{{/transit_line_no}}  {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1{{/pre_arrival_date1}}  {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2{{/pre_arrival_date2}}  {{#creator_org_code}} and creator_org_code in ({{#codeList}}{{^-first}}, {{/-first}}\"{{this}}\"{{/codeList}}) {{/creator_org_code}}"
+        "select id,seqno,arr_org_code,arr_org_name,cus_org_code,cus_org_name,return_type,return_date,return_qty,total_tax_amt, total_return_amt,total_stockin_amt,status,creator_name,created_at,modifier_name,last_modified_at,remark,note, transit_line_no,print_count,version from sal_consign_return_head where deleted = 0 {{#seqno}} and seqno like '{{seqno}}%'{{/seqno}} {{#arr_org_code}} and arr_org_code=:arr_org_code{{/arr_org_code}} {{#arr_org_name}} and arr_org_name=:arr_org_name{{/arr_org_name}} {{#cus_org_code}} and cus_org_code=:cus_org_code{{/cus_org_code}} {{#cus_org_name}} and cus_org_name=:cus_org_name{{/cus_org_name}} {{#return_type}} and return_type=:return_type{{/return_type}} {{#status}} and status=:status{{/status}} {{#transit_line_no}} and transit_line_no=:transit_line_no{{/transit_line_no}} {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1{{/pre_arrival_date1}} {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2{{/pre_arrival_date2}} {{#creator_org_code}} and creator_org_code in ({{#creator_org_code}}{{^-first}}, {{/-first}}\"{{this}}\"{{/creator_org_code}}) {{/creator_org_code}}"
   )
   List<SalConsignReturnHeadDTO> findSalConsignReturnHead(
       @Param("seqno") String seqno,
@@ -96,8 +90,7 @@ public interface SalConsignReturnHeadRepository
       @Param("transit_line_no") String transitLineNo,
       @Param("pre_arrival_date1") java.util.Date preArrivalDate1,
       @Param("pre_arrival_date2") java.util.Date preArrivalDate2,
-      @Param("creator_org_code") String creatorOrgCode,
-      @Param("codeList") String codeList);
+      @Param("creator_org_code") String creatorOrgCode);
 
   /**
    * 修改打印次数
@@ -113,13 +106,12 @@ public interface SalConsignReturnHeadRepository
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param creatorOrgCode
-   * @param codeList
    * @return
    */
   @SqlTemplate(
     name = "updatePrintCount",
     sql =
-        " update sal_consign_return_head set print_count = print_count+1   where  deleted = 0 {{#seqno}} and seqno=:seqno {{/seqno}}   {{#arr_org_code}} and arr_org_code=:arr_org_code {{/arr_org_code}}   {{#arr_org_name}} and arr_org_name=:arr_org_name  {{/arr_org_name}}   {{#cus_org_code}} and cus_org_code=:cus_org_code  {{/cus_org_code}}   {{#cus_org_name}} and cus_org_name=:cus_org_name  {{/cus_org_name}}   {{#return_type}} and return_type=:return_type  {{/return_type}}   {{#status}} and status=:status {{/status}}   {{#transit_line_no}} and transit_line_no=:transit_line_no  {{/transit_line_no}}   {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1  {{/pre_arrival_date1}}   {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2  {{/pre_arrival_date2}}  {{#creator_org_code}} and creator_org_code in ({{#codeList}}{{^-first}}, {{/-first}}\"{{this}}\"{{/codeList}}) {{/creator_org_code}}"
+        "update sal_consign_return_head set print_count = print_count+1 where deleted = 0 {{#seqno}} and seqno=:seqno {{/seqno}} {{#arr_org_code}} and arr_org_code=:arr_org_code {{/arr_org_code}} {{#arr_org_name}} and arr_org_name=:arr_org_name {{/arr_org_name}} {{#cus_org_code}} and cus_org_code=:cus_org_code {{/cus_org_code}} {{#cus_org_name}} and cus_org_name=:cus_org_name {{/cus_org_name}} {{#return_type}} and return_type=:return_type {{/return_type}} {{#status}} and status=:status {{/status}} {{#transit_line_no}} and transit_line_no=:transit_line_no {{/transit_line_no}} {{#pre_arrival_date1}} and pre_arrival_date>=:pre_arrival_date1 {{/pre_arrival_date1}} {{#pre_arrival_date2}} and pre_arrival_date<=:pre_arrival_date2 {{/pre_arrival_date2}} {{#creator_org_code}} and creator_org_code in ({{#creator_org_code}}{{^-first}}, {{/-first}}\"{{this}}\"{{/creator_org_code}}) {{/creator_org_code}}"
   )
   @Modifying
   Integer updatePrintCount(
@@ -133,8 +125,7 @@ public interface SalConsignReturnHeadRepository
       @Param("transit_line_no") String transitLineNo,
       @Param("pre_arrival_date1") java.util.Date preArrivalDate1,
       @Param("pre_arrival_date2") java.util.Date preArrivalDate2,
-      @Param("creator_org_code") String creatorOrgCode,
-      @Param("codeList") String codeList);
+      @Param("creator_org_code") String creatorOrgCode);
 
   /**
    * 动态执行一个无参数的sql,返回分页的结果

@@ -1,14 +1,11 @@
 package com.pagoda.api.salconsignout;
 
-import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salconsignout.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -186,11 +183,11 @@ public interface BaseSalConsignOutHeadService {
       @ApiParam("stockoutStatus") Integer stockoutStatus,
       @ApiParam("auditorCode") String auditorCode,
       @ApiParam("auditorName") String auditorName,
-      @ApiParam("auditTime") java.sql.Timestamp auditTime,
+      @ApiParam("auditTime") java.util.Date auditTime,
       @ApiParam("remark") String remark,
       @ApiParam("confirmUserCode") String confirmUserCode,
       @ApiParam("confirmUserName") String confirmUserName,
-      @ApiParam("confirmTime") java.sql.Timestamp confirmTime,
+      @ApiParam("confirmTime") java.util.Date confirmTime,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -210,7 +207,6 @@ public interface BaseSalConsignOutHeadService {
    * @param goodsName
    * @param stockoutStatus
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -230,7 +226,6 @@ public interface BaseSalConsignOutHeadService {
       @ApiParam("goods_name") String goodsName,
       @ApiParam("stockout_status") Integer stockoutStatus,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -246,7 +241,6 @@ public interface BaseSalConsignOutHeadService {
    * @param preArrivalDate2
    * @param stockoutStatus
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -262,7 +256,6 @@ public interface BaseSalConsignOutHeadService {
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("stockout_status") Integer stockoutStatus,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

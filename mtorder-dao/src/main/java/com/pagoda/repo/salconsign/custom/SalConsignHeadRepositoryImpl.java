@@ -3,14 +3,10 @@ package com.pagoda.repo.salconsign.custom;
 import com.pagoda.api.dto.salconsign.*;
 import com.pagoda.domain.salconsign.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * SalConsignHead扩展数据访问接口实现类
@@ -28,54 +24,52 @@ public class SalConsignHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalCo
 
   @Override
   public Page<SalConsignHeadDTO> findBy(
-      @Param("orderId") Long orderId,
-      @Param("orderNo") String orderNo,
-      @Param("waveNo") String waveNo,
-      @Param("tatalQty") java.math.BigDecimal tatalQty,
-      @Param("totalAmt") java.math.BigDecimal totalAmt,
-      @Param("entryDate") java.sql.Timestamp entryDate,
-      @Param("conStatus") Integer conStatus,
-      @Param("printStatus") Integer printStatus,
-      @Param("printCount") Integer printCount,
       @Param("seqno") String seqno,
       @Param("entId") Long entId,
+      @Param("orderId") Long orderId,
+      @Param("orderNo") String orderNo,
       @Param("conOrgId") Long conOrgId,
       @Param("conOrgCode") String conOrgCode,
       @Param("conOrgName") String conOrgName,
       @Param("cusOrgId") Long cusOrgId,
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
+      @Param("waveNo") String waveNo,
       @Param("transitLineNo") String transitLineNo,
       @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("shippedAmt") java.math.BigDecimal shippedAmt,
       @Param("preArrivalDate") java.util.Date preArrivalDate,
+      @Param("conStatus") Integer conStatus,
+      @Param("printStatus") Integer printStatus,
+      @Param("printCount") Integer printCount,
       @Param("remark") String remark,
+      @Param("totalQty") java.math.BigDecimal totalQty,
       @Param("pageable") Pageable pageable) {
     SalConsignHead obj = SalConsignHead.toExample();
-    obj.setOrderId(orderId);
-    obj.setOrderNo(orderNo);
-    obj.setWaveNo(waveNo);
-    obj.setTatalQty(tatalQty);
-    obj.setTotalAmt(totalAmt);
-    obj.setEntryDate(entryDate);
-    obj.setConStatus(conStatus);
-    obj.setPrintStatus(printStatus);
-    obj.setPrintCount(printCount);
     obj.setSeqno(seqno);
     obj.setEntId(entId);
+    obj.setOrderId(orderId);
+    obj.setOrderNo(orderNo);
     obj.setConOrgId(conOrgId);
     obj.setConOrgCode(conOrgCode);
     obj.setConOrgName(conOrgName);
     obj.setCusOrgId(cusOrgId);
     obj.setCusOrgCode(cusOrgCode);
     obj.setCusOrgName(cusOrgName);
+    obj.setWaveNo(waveNo);
     obj.setTransitLineNo(transitLineNo);
     obj.setTaxAmt(taxAmt);
+    obj.setTotalAmt(totalAmt);
     obj.setShippedQty(shippedQty);
     obj.setShippedAmt(shippedAmt);
     obj.setPreArrivalDate(preArrivalDate);
+    obj.setConStatus(conStatus);
+    obj.setPrintStatus(printStatus);
+    obj.setPrintCount(printCount);
     obj.setRemark(remark);
+    obj.setTotalQty(totalQty);
     Example<SalConsignHead> example = Example.of(obj);
 
     return findAll(example, pageable).map(SalConsignHead.DTO_CONVERTER);
@@ -83,53 +77,51 @@ public class SalConsignHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalCo
 
   @Override
   public List<SalConsignHeadDTO> findBy(
-      @Param("orderId") Long orderId,
-      @Param("orderNo") String orderNo,
-      @Param("waveNo") String waveNo,
-      @Param("tatalQty") java.math.BigDecimal tatalQty,
-      @Param("totalAmt") java.math.BigDecimal totalAmt,
-      @Param("entryDate") java.sql.Timestamp entryDate,
-      @Param("conStatus") Integer conStatus,
-      @Param("printStatus") Integer printStatus,
-      @Param("printCount") Integer printCount,
       @Param("seqno") String seqno,
       @Param("entId") Long entId,
+      @Param("orderId") Long orderId,
+      @Param("orderNo") String orderNo,
       @Param("conOrgId") Long conOrgId,
       @Param("conOrgCode") String conOrgCode,
       @Param("conOrgName") String conOrgName,
       @Param("cusOrgId") Long cusOrgId,
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
+      @Param("waveNo") String waveNo,
       @Param("transitLineNo") String transitLineNo,
       @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("shippedQty") java.math.BigDecimal shippedQty,
       @Param("shippedAmt") java.math.BigDecimal shippedAmt,
       @Param("preArrivalDate") java.util.Date preArrivalDate,
-      @Param("remark") String remark) {
+      @Param("conStatus") Integer conStatus,
+      @Param("printStatus") Integer printStatus,
+      @Param("printCount") Integer printCount,
+      @Param("remark") String remark,
+      @Param("totalQty") java.math.BigDecimal totalQty) {
     SalConsignHead obj = SalConsignHead.toExample();
-    obj.setOrderId(orderId);
-    obj.setOrderNo(orderNo);
-    obj.setWaveNo(waveNo);
-    obj.setTatalQty(tatalQty);
-    obj.setTotalAmt(totalAmt);
-    obj.setEntryDate(entryDate);
-    obj.setConStatus(conStatus);
-    obj.setPrintStatus(printStatus);
-    obj.setPrintCount(printCount);
     obj.setSeqno(seqno);
     obj.setEntId(entId);
+    obj.setOrderId(orderId);
+    obj.setOrderNo(orderNo);
     obj.setConOrgId(conOrgId);
     obj.setConOrgCode(conOrgCode);
     obj.setConOrgName(conOrgName);
     obj.setCusOrgId(cusOrgId);
     obj.setCusOrgCode(cusOrgCode);
     obj.setCusOrgName(cusOrgName);
+    obj.setWaveNo(waveNo);
     obj.setTransitLineNo(transitLineNo);
     obj.setTaxAmt(taxAmt);
+    obj.setTotalAmt(totalAmt);
     obj.setShippedQty(shippedQty);
     obj.setShippedAmt(shippedAmt);
     obj.setPreArrivalDate(preArrivalDate);
+    obj.setConStatus(conStatus);
+    obj.setPrintStatus(printStatus);
+    obj.setPrintCount(printCount);
     obj.setRemark(remark);
+    obj.setTotalQty(totalQty);
     Example<SalConsignHead> example = Example.of(obj);
     return findAll(example, null).map(SalConsignHead.DTO_CONVERTER).getContent();
   }
@@ -168,10 +160,10 @@ public class SalConsignHeadRepositoryImpl extends BaseRepositoryCustomImpl<SalCo
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

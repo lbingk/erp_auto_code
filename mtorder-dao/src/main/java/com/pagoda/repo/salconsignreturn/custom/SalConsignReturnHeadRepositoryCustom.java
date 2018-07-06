@@ -3,12 +3,10 @@ package com.pagoda.repo.salconsignreturn.custom;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalConsignReturnHead扩展数据访问接口
@@ -21,9 +19,18 @@ public interface SalConsignReturnHeadRepositoryCustom {
   /**
    * 包含所有可查询的字段
    *
+   * @param seqno
+   * @param entId
+   * @param arrOrgId
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgId
+   * @param cusOrgCode
+   * @param cusOrgName
    * @param returnType
    * @param returnDate
    * @param returnQty
+   * @param transitLineNo
    * @param stockinQty
    * @param stockinGrossWeight
    * @param stockinNetWeight
@@ -31,13 +38,28 @@ public interface SalConsignReturnHeadRepositoryCustom {
    * @param totalReturnAmt
    * @param totalStockinAmt
    * @param status
+   * @param printCount
+   * @param auditorCode
+   * @param auditorName
+   * @param auditTime
+   * @param remark
+   * @param note
    * @param pageable
    * @return
    */
   Page<SalConsignReturnHeadDTO> findBy(
+      @Param("seqno") String seqno,
+      @Param("entId") Long entId,
+      @Param("arrOrgId") Long arrOrgId,
+      @Param("arrOrgCode") String arrOrgCode,
+      @Param("arrOrgName") String arrOrgName,
+      @Param("cusOrgId") Long cusOrgId,
+      @Param("cusOrgCode") String cusOrgCode,
+      @Param("cusOrgName") String cusOrgName,
       @Param("returnType") Integer returnType,
-      @Param("returnDate") java.sql.Timestamp returnDate,
+      @Param("returnDate") java.util.Date returnDate,
       @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("transitLineNo") String transitLineNo,
       @Param("stockinQty") java.math.BigDecimal stockinQty,
       @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
@@ -45,14 +67,29 @@ public interface SalConsignReturnHeadRepositoryCustom {
       @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
       @Param("status") Integer status,
+      @Param("printCount") Integer printCount,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("remark") String remark,
+      @Param("note") String note,
       @Param("pageable") Pageable pageable);
 
   /**
    * 包含所有可查询的字段
    *
+   * @param seqno
+   * @param entId
+   * @param arrOrgId
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgId
+   * @param cusOrgCode
+   * @param cusOrgName
    * @param returnType
    * @param returnDate
    * @param returnQty
+   * @param transitLineNo
    * @param stockinQty
    * @param stockinGrossWeight
    * @param stockinNetWeight
@@ -60,19 +97,40 @@ public interface SalConsignReturnHeadRepositoryCustom {
    * @param totalReturnAmt
    * @param totalStockinAmt
    * @param status
+   * @param printCount
+   * @param auditorCode
+   * @param auditorName
+   * @param auditTime
+   * @param remark
+   * @param note
    * @return
    */
   List<SalConsignReturnHeadDTO> findBy(
+      @Param("seqno") String seqno,
+      @Param("entId") Long entId,
+      @Param("arrOrgId") Long arrOrgId,
+      @Param("arrOrgCode") String arrOrgCode,
+      @Param("arrOrgName") String arrOrgName,
+      @Param("cusOrgId") Long cusOrgId,
+      @Param("cusOrgCode") String cusOrgCode,
+      @Param("cusOrgName") String cusOrgName,
       @Param("returnType") Integer returnType,
-      @Param("returnDate") java.sql.Timestamp returnDate,
+      @Param("returnDate") java.util.Date returnDate,
       @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("transitLineNo") String transitLineNo,
       @Param("stockinQty") java.math.BigDecimal stockinQty,
       @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
       @Param("totalTaxAmt") java.math.BigDecimal totalTaxAmt,
       @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
-      @Param("status") Integer status);
+      @Param("status") Integer status,
+      @Param("printCount") Integer printCount,
+      @Param("auditorCode") String auditorCode,
+      @Param("auditorName") String auditorName,
+      @Param("auditTime") java.util.Date auditTime,
+      @Param("remark") String remark,
+      @Param("note") String note);
 
   /**
    * 通用分页查询，用于后台查询
@@ -116,7 +174,7 @@ public interface SalConsignReturnHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

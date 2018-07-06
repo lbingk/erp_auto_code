@@ -1,10 +1,16 @@
 package com.pagoda.domain.salconsign;
 
-import com.pagoda.platform.jms.annotation.*;
-import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salconsign.*;
-
+import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.jpa.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -16,16 +22,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.domain.AbstractAggregateRoot;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.lang.reflect.*;
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * 发货单头表实体定义
@@ -54,7 +50,7 @@ import java.util.List;
   auditable = true,
   traceable = true,
   approvalRequired = false,
-  requestUrl = "",
+  requestUrl = "/SalConsignHeadService/findSalConsignHeadList",
   tableMultiSelect = false
 )
 public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
@@ -88,94 +84,94 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
 
   @FieldMeta(
     name = "created_at",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '创建时间'")
+  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '录入时间'")
   @CreatedDate
   private Date createdAt;
 
   @FieldMeta(
     name = "creator_code",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '创建人code'")
+  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '录入人代码'")
   @CreatedBy
   private String creatorCode;
 
   @FieldMeta(
     name = "creator_name",
-    nameCN = "创建人name",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '创建人name'")
+  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '录入人名称'")
   private String creatorName;
 
   @FieldMeta(
     name = "creator_org_code",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '创建人所属部门'")
+  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '录入人机构代码'")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "last_modified_at",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最近修改时间'")
+  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最后修改时间'")
   @LastModifiedDate
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifier_code",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最近修改人code'")
+  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最后修改人代码'")
   @LastModifiedBy
   private String modifierCode;
 
   @FieldMeta(
     name = "modifier_name",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最近修改人name'")
+  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最后修改人名称'")
   private String modifierName;
 
   @FieldMeta(
     name = "modifier_org_code",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '修改人所属部门'")
+  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '最后修改人机构代码'")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -189,6 +185,80 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   @Column(name = "version", columnDefinition = "int(11) COMMENT '版本号'")
   @Version
   private Integer version;
+
+  @FieldMeta(
+    name = "seqno",
+    scene = "price",
+    nameCN = "调价单号",
+    comment = "调价单号",
+    nameEN = "seqno",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"seqno\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "varchar(35)   COMMENT '调价单号'"
+  )
+  private String seqno;
+
+  @FieldMeta(
+    name = "entId",
+    scene = "price",
+    nameCN = "企业id",
+    comment = "企业id",
+    nameEN = "ent_id",
+    type = "长整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = true,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"ent_id\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "BIGINT   COMMENT '企业id'"
+  )
+  private Long entId;
 
   @FieldMeta(
     name = "orderId",
@@ -263,339 +333,6 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     columnDefinition = "varchar(35)   COMMENT '订单号[冗余]'"
   )
   private String orderNo;
-
-  @FieldMeta(
-    name = "waveNo",
-    scene = "",
-    nameCN = "波次号",
-    comment = "波次号",
-    nameEN = "wave_no",
-    type = "字符串",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"wave_no\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '波次号'"
-  )
-  private String waveNo;
-
-  @FieldMeta(
-    name = "tatalQty",
-    scene = "",
-    nameCN = "总数量",
-    comment = "总数量",
-    nameEN = "tatal_qty",
-    type = "小数",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"tatal_qty\"",
-    nullable = true,
-    precision = 0,
-    scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总数量'"
-  )
-  private java.math.BigDecimal tatalQty;
-
-  @FieldMeta(
-    name = "totalAmt",
-    scene = "",
-    nameCN = "总金额[配送价*数量]",
-    comment = "总金额[配送价*数量]",
-    nameEN = "total_amt",
-    type = "小数",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"total_amt\"",
-    nullable = true,
-    precision = 0,
-    scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
-  )
-  private java.math.BigDecimal totalAmt;
-
-  @FieldMeta(
-    name = "entryDate",
-    scene = "",
-    nameCN = "录入完成日期",
-    comment = "录入完成日期",
-    nameEN = "entry_date",
-    type = "时间",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"entry_date\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "TIMESTAMP   COMMENT '录入完成日期'"
-  )
-  private java.sql.Timestamp entryDate;
-
-  @FieldMeta(
-    name = "conStatus",
-    scene = "",
-    nameCN = "发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}",
-    comment = "发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}",
-    nameEN = "con_status",
-    type = "整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"con_status\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "INTEGER   COMMENT '发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}'"
-  )
-  private Integer conStatus;
-
-  @FieldMeta(
-    name = "printStatus",
-    scene = "",
-    nameCN = "打印状态{10:未打印,20:已打印}",
-    comment = "打印状态{10:未打印,20:已打印}",
-    nameEN = "print_status",
-    type = "整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"print_status\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "INTEGER   COMMENT '打印状态{10:未打印,20:已打印}'"
-  )
-  private Integer printStatus;
-
-  @FieldMeta(
-    name = "printCount",
-    scene = "",
-    nameCN = "打印次数",
-    comment = "打印次数",
-    nameEN = "print_count",
-    type = "整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"print_count\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "INTEGER   COMMENT '打印次数'"
-  )
-  private Integer printCount;
-
-  @FieldMeta(
-    name = "seqno",
-    scene = "",
-    nameCN = "调价单号[adjustNo]",
-    comment = "调价单号[adjustNo]",
-    nameEN = "seqno",
-    type = "字符串",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"seqno\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '调价单号[adjustNo]'"
-  )
-  private String seqno;
-
-  @FieldMeta(
-    name = "entId",
-    scene = "",
-    nameCN = "企业ID",
-    comment = "企业ID",
-    nameEN = "ent_id",
-    type = "长整型",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = true,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @Column(
-    name = "\"ent_id\"",
-    nullable = true,
-    precision = 0,
-    scale = 0,
-    columnDefinition = "BIGINT   COMMENT '企业ID'"
-  )
-  private Long entId;
 
   @FieldMeta(
     name = "conOrgId",
@@ -820,6 +557,43 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   private String cusOrgName;
 
   @FieldMeta(
+    name = "waveNo",
+    scene = "",
+    nameCN = "波次号",
+    comment = "波次号",
+    nameEN = "wave_no",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"wave_no\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "varchar(35)   COMMENT '波次号'"
+  )
+  private String waveNo;
+
+  @FieldMeta(
     name = "transitLineNo",
     scene = "",
     nameCN = "线路号",
@@ -859,8 +633,8 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   @FieldMeta(
     name = "taxAmt",
     scene = "",
-    nameCN = "税金[税率*实际总金额]",
-    comment = "税金[税率*实际总金额]",
+    nameCN = "税金",
+    comment = "税金",
     nameEN = "tax_amt",
     type = "小数",
     format = "",
@@ -889,15 +663,52 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '税金[税率*实际总金额]'"
+    columnDefinition = "decimal(18,10)   COMMENT '税金'"
   )
   private java.math.BigDecimal taxAmt;
 
   @FieldMeta(
+    name = "totalAmt",
+    scene = "",
+    nameCN = "总金额[配送价*数量]",
+    comment = "总金额[配送价*数量]",
+    nameEN = "total_amt",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"total_amt\"",
+    nullable = true,
+    precision = 0,
+    scale = 6,
+    columnDefinition = "decimal(18,10)   COMMENT '总金额[配送价*数量]'"
+  )
+  private java.math.BigDecimal totalAmt;
+
+  @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "已发数量",
-    comment = "已发数量",
+    nameCN = "实发数量",
+    comment = "实发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -926,15 +737,15 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发数量'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发数量'"
   )
   private java.math.BigDecimal shippedQty;
 
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
-    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    nameCN = "实发金额[实发数量*实发单价]",
+    comment = "实发金额[实发数量*实发单价]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -963,7 +774,7 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]'"
+    columnDefinition = "decimal(18,10)   COMMENT '实发金额[实发数量*实发单价]'"
   )
   private java.math.BigDecimal shippedAmt;
 
@@ -1006,8 +817,119 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   private java.util.Date preArrivalDate;
 
   @FieldMeta(
-    name = "remark",
+    name = "conStatus",
     scene = "",
+    nameCN = "发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}",
+    comment = "发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}",
+    nameEN = "con_status",
+    type = "整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"con_status\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "INTEGER   COMMENT '发货单状态{10:未发货,20:已发货,30:已作废,40:已结算}'"
+  )
+  private Integer conStatus;
+
+  @FieldMeta(
+    name = "printStatus",
+    scene = "",
+    nameCN = "打印状态{10:未打印,20:已打印}",
+    comment = "打印状态{10:未打印,20:已打印}",
+    nameEN = "print_status",
+    type = "整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"print_status\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "INTEGER   COMMENT '打印状态{10:未打印,20:已打印}'"
+  )
+  private Integer printStatus;
+
+  @FieldMeta(
+    name = "printCount",
+    scene = "",
+    nameCN = "打印次数",
+    comment = "打印次数",
+    nameEN = "print_count",
+    type = "整型",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "0",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"print_count\"",
+    nullable = true,
+    precision = 0,
+    scale = 0,
+    columnDefinition = "INTEGER  default 0 COMMENT '打印次数'"
+  )
+  private Integer printCount = 0;
+
+  @FieldMeta(
+    name = "remark",
+    scene = "price",
     nameCN = "备注",
     comment = "备注",
     nameEN = "remark",
@@ -1042,6 +964,43 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   )
   private String remark;
 
+  @FieldMeta(
+    name = "totalQty",
+    scene = "",
+    nameCN = "总数量",
+    comment = "总数量",
+    nameEN = "total_qty",
+    type = "小数",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @Column(
+    name = "\"total_qty\"",
+    nullable = true,
+    precision = 0,
+    scale = 6,
+    columnDefinition = "decimal(18,10)   COMMENT '总数量'"
+  )
+  private java.math.BigDecimal totalQty;
+
   static MapperFacade mapper;
 
   static {
@@ -1066,6 +1025,7 @@ public class SalConsignHead extends SalConsignHeadDTO implements Serializable {
   public static SalConsignHead toExample() {
     SalConsignHead example = new SalConsignHead();
     // example.deleted = null;
+    example.printCount = null;
     return example;
   }
 

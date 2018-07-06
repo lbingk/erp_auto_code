@@ -1,10 +1,8 @@
 package com.pagoda.domain.pripurchase.sql;
 
-import lombok.Data;
+import com.pagoda.domain.pripurchase.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.pripurchase.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -36,13 +34,14 @@ public class PriceAdjustPurHeadDynamicSqlSupport {
   public static SqlColumn<Long> venOrgId = priceAdjustPurHeadTable.venOrgId;
   public static SqlColumn<String> venOrgCode = priceAdjustPurHeadTable.venOrgCode;
   public static SqlColumn<Integer> status = priceAdjustPurHeadTable.status;
-  public static SqlColumn<java.sql.Timestamp> entryTime = priceAdjustPurHeadTable.entryTime;
   public static SqlColumn<java.util.Date> effectDate = priceAdjustPurHeadTable.effectDate;
   public static SqlColumn<String> auditorCode = priceAdjustPurHeadTable.auditorCode;
   public static SqlColumn<String> auditorName = priceAdjustPurHeadTable.auditorName;
   public static SqlColumn<String> remark = priceAdjustPurHeadTable.remark;
-  public static SqlColumn<java.sql.Timestamp> auditTime = priceAdjustPurHeadTable.auditTime;
+  public static SqlColumn<java.util.Date> auditTime = priceAdjustPurHeadTable.auditTime;
   public static SqlColumn<String> note = priceAdjustPurHeadTable.note;
+  public static SqlColumn<String> venOrgName = priceAdjustPurHeadTable.venOrgName;
+  public static SqlColumn<java.util.Date> commitTime = priceAdjustPurHeadTable.commitTime;
 
   public static final class PriceAdjustPurHeadTable extends SqlTable {
     public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -67,13 +66,14 @@ public class PriceAdjustPurHeadDynamicSqlSupport {
     public final SqlColumn<Long> venOrgId = column("ven_org_id", JDBCType.BIGINT);
     public final SqlColumn<String> venOrgCode = column("ven_org_code", JDBCType.VARCHAR);
     public final SqlColumn<Integer> status = column("status", JDBCType.INTEGER);
-    public final SqlColumn<java.sql.Timestamp> entryTime = column("entry_time", JDBCType.TIMESTAMP);
     public final SqlColumn<java.util.Date> effectDate = column("effect_date", JDBCType.DATE);
     public final SqlColumn<String> auditorCode = column("auditor_code", JDBCType.VARCHAR);
     public final SqlColumn<String> auditorName = column("auditor_name", JDBCType.VARCHAR);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
-    public final SqlColumn<java.sql.Timestamp> auditTime = column("audit_time", JDBCType.TIMESTAMP);
+    public final SqlColumn<java.util.Date> auditTime = column("audit_time", JDBCType.DATE);
     public final SqlColumn<String> note = column("note", JDBCType.VARCHAR);
+    public final SqlColumn<String> venOrgName = column("ven_org_name", JDBCType.VARCHAR);
+    public final SqlColumn<java.util.Date> commitTime = column("commit_time", JDBCType.DATE);
 
     public PriceAdjustPurHeadTable() {
       super("PriceAdjustPurHead");

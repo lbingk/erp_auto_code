@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pridistribution.PriceCatalogSalDetailDTO.Getters.*;
 
 /**
  * 模型PriceCatalogSalDetail对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/PriceCatalogSalDetailService")
 @Slf4j
-public class PriceCatalogSalDetailController {
+public class PriceCatalogSalDetailController implements InitializingBean {
   @Autowired private PriceCatalogSalDetailService priceCatalogSalDetailService;
 
   @Autowired private PriceCatalogSalDetailValidator priceCatalogSalDetailValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {

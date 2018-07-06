@@ -1,14 +1,11 @@
 package com.pagoda.api.pridistribution;
 
-import com.pagoda.api.dto.pridistribution.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.pridistribution.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -183,10 +180,10 @@ public interface BasePriceCatalogSalHeadService {
       @ApiParam("name") String name,
       @ApiParam("bal_org_org_code") String balOrgOrgCode,
       @ApiParam("is_enable") Integer isEnable,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("creator_org_code") String creatorOrgCode,
       @ApiParam("creator_org_code_list") String creatorOrgCodeList,
       @ApiParam("code") String code,

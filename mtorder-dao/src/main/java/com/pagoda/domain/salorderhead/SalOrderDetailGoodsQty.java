@@ -1,10 +1,16 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.platform.jms.annotation.*;
-import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salorderhead.*;
-
+import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.jpa.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -16,16 +22,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.domain.AbstractAggregateRoot;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.lang.reflect.*;
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * 销售订单明细来源商品数量表实体定义
@@ -93,94 +89,94 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
 
   @FieldMeta(
     name = "created_at",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '创建时间'")
+  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '录入时间'")
   @CreatedDate
   private Date createdAt;
 
   @FieldMeta(
     name = "creator_code",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '创建人code'")
+  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '录入人代码'")
   @CreatedBy
   private String creatorCode;
 
   @FieldMeta(
     name = "creator_name",
-    nameCN = "创建人name",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '创建人name'")
+  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '录入人名称'")
   private String creatorName;
 
   @FieldMeta(
     name = "creator_org_code",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '创建人所属部门'")
+  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '录入人机构代码'")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "last_modified_at",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最近修改时间'")
+  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最后修改时间'")
   @LastModifiedDate
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifier_code",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最近修改人code'")
+  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最后修改人代码'")
   @LastModifiedBy
   private String modifierCode;
 
   @FieldMeta(
     name = "modifier_name",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最近修改人name'")
+  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最后修改人名称'")
   private String modifierName;
 
   @FieldMeta(
     name = "modifier_org_code",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '修改人所属部门'")
+  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '最后修改人机构代码'")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -346,8 +342,8 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
   @FieldMeta(
     name = "orderSeqno",
     scene = "",
-    nameCN = "订单号[冗余]",
-    comment = "订单号[冗余]",
+    nameCN = "采购订单号",
+    comment = "采购订单号",
     nameEN = "order_seqno",
     type = "字符串",
     format = "",
@@ -376,7 +372,7 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '订单号[冗余]'"
+    columnDefinition = "varchar(35)   COMMENT '采购订单号'"
   )
   private String orderSeqno;
 
@@ -420,8 +416,8 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
   @FieldMeta(
     name = "sourceType",
     scene = "",
-    nameCN = "订单来源{1:手工录入,2:订单追加,3:商品分货,4:周期发货,5 必上果品 6:普通预订单}",
-    comment = "订单来源{1:手工录入,2:订单追加,3:商品分货,4:周期发货,5 必上果品 6:普通预订单}",
+    nameCN = "数据来源{1:手工录入,2:请购单}",
+    comment = "数据来源{1:手工录入,2:请购单}",
     nameEN = "source_type",
     type = "整型",
     format = "",
@@ -450,15 +446,15 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "INTEGER   COMMENT '订单来源{1:手工录入,2:订单追加,3:商品分货,4:周期发货,5 必上果品 6:普通预订单}'"
+    columnDefinition = "INTEGER   COMMENT '数据来源{1:手工录入,2:请购单}'"
   )
   private Integer sourceType;
 
   @FieldMeta(
     name = "requestQty",
     scene = "",
-    nameCN = "需求量",
-    comment = "需求量",
+    nameCN = "需求数量",
+    comment = "需求数量",
     nameEN = "request_qty",
     type = "小数",
     format = "",
@@ -487,15 +483,15 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '需求量'"
+    columnDefinition = "decimal(18,10)   COMMENT '需求数量'"
   )
   private java.math.BigDecimal requestQty;
 
   @FieldMeta(
     name = "remark",
     scene = "",
-    nameCN = "备注",
-    comment = "备注",
+    nameCN = "备注,需要时可由程序写值",
+    comment = "备注,需要时可由程序写值",
     nameEN = "remark",
     type = "字符串",
     format = "",
@@ -524,7 +520,7 @@ public class SalOrderDetailGoodsQty extends SalOrderDetailGoodsQtyDTO implements
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(300)   COMMENT '备注'"
+    columnDefinition = "varchar(300)   COMMENT '备注,需要时可由程序写值'"
   )
   private String remark;
 

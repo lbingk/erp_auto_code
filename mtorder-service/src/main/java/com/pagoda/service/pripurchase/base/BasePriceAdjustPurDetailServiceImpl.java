@@ -1,19 +1,17 @@
 package com.pagoda.service.pripurchase.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.pripurchase.*;
 import com.pagoda.api.dto.pripurchase.*;
+import com.pagoda.api.pripurchase.*;
 import com.pagoda.domain.pripurchase.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pripurchase.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BasePriceAdjustPurDetailServiceImpl
-    implements PriceAdjustPurDetailService, InitializingBean {
+    implements BasePriceAdjustPurDetailService, InitializingBean {
 
   @Autowired protected PriceAdjustPurDetailRepository repository;
 
@@ -273,10 +271,10 @@ public abstract class BasePriceAdjustPurDetailServiceImpl
       @ApiParam("goods_name") String goodsName,
       @ApiParam("effect_date1") java.util.Date effectDate1,
       @ApiParam("effect_date2") java.util.Date effectDate2,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("creator_code") String creatorCode,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {

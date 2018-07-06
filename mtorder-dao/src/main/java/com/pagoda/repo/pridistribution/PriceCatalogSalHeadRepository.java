@@ -1,20 +1,17 @@
 package com.pagoda.repo.pridistribution;
 
-import com.pagoda.platform.jms.annotation.SqlTemplate;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
+import com.pagoda.platform.jms.annotation.SqlTemplate;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pridistribution.custom.*;
-
 import java.util.*;
 import java.util.concurrent.*;
-
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * PriceCatalogSalHead 数据访问接口
@@ -50,10 +47,10 @@ public interface PriceCatalogSalHeadRepository
       @Param("name") String name,
       @Param("bal_org_org_code") String balOrgOrgCode,
       @Param("is_enable") Integer isEnable,
-      @Param("created_at1") java.sql.Timestamp createdAt1,
-      @Param("created_at2") java.sql.Timestamp createdAt2,
-      @Param("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @Param("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @Param("created_at1") java.util.Date createdAt1,
+      @Param("created_at2") java.util.Date createdAt2,
+      @Param("last_modified_at1") java.util.Date lastModifiedAt1,
+      @Param("last_modified_at2") java.util.Date lastModifiedAt2,
       @Param("creator_org_code") String creatorOrgCode,
       @Param("creator_org_code_list") String creatorOrgCodeList,
       @Param("code") String code,
@@ -83,10 +80,10 @@ public interface PriceCatalogSalHeadRepository
       @Param("name") String name,
       @Param("bal_org_org_code") String balOrgOrgCode,
       @Param("is_enable") Integer isEnable,
-      @Param("created_at1") java.sql.Timestamp createdAt1,
-      @Param("created_at2") java.sql.Timestamp createdAt2,
-      @Param("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @Param("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @Param("created_at1") java.util.Date createdAt1,
+      @Param("created_at2") java.util.Date createdAt2,
+      @Param("last_modified_at1") java.util.Date lastModifiedAt1,
+      @Param("last_modified_at2") java.util.Date lastModifiedAt2,
       @Param("creator_org_code") String creatorOrgCode,
       @Param("creator_org_code_list") String creatorOrgCodeList,
       @Param("code") String code);

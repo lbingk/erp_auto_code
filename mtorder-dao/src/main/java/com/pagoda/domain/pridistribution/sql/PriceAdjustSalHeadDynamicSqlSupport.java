@@ -1,10 +1,8 @@
 package com.pagoda.domain.pridistribution.sql;
 
-import lombok.Data;
+import com.pagoda.domain.pridistribution.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.pridistribution.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -34,13 +32,13 @@ public class PriceAdjustSalHeadDynamicSqlSupport {
   public static SqlColumn<String> priceCatCode = priceAdjustSalHeadTable.priceCatCode;
   public static SqlColumn<Long> priceCatId = priceAdjustSalHeadTable.priceCatId;
   public static SqlColumn<Integer> status = priceAdjustSalHeadTable.status;
-  public static SqlColumn<java.sql.Timestamp> entryTime = priceAdjustSalHeadTable.entryTime;
   public static SqlColumn<java.util.Date> effectDate = priceAdjustSalHeadTable.effectDate;
-  public static SqlColumn<java.sql.Timestamp> auditTime = priceAdjustSalHeadTable.auditTime;
+  public static SqlColumn<java.util.Date> auditTime = priceAdjustSalHeadTable.auditTime;
   public static SqlColumn<String> auditorCode = priceAdjustSalHeadTable.auditorCode;
   public static SqlColumn<String> auditorName = priceAdjustSalHeadTable.auditorName;
   public static SqlColumn<String> remark = priceAdjustSalHeadTable.remark;
   public static SqlColumn<String> note = priceAdjustSalHeadTable.note;
+  public static SqlColumn<java.util.Date> commitTime = priceAdjustSalHeadTable.commitTime;
 
   public static final class PriceAdjustSalHeadTable extends SqlTable {
     public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -63,13 +61,13 @@ public class PriceAdjustSalHeadDynamicSqlSupport {
     public final SqlColumn<String> priceCatCode = column("price_cat_code", JDBCType.VARCHAR);
     public final SqlColumn<Long> priceCatId = column("price_cat_id", JDBCType.BIGINT);
     public final SqlColumn<Integer> status = column("status", JDBCType.INTEGER);
-    public final SqlColumn<java.sql.Timestamp> entryTime = column("entry_time", JDBCType.TIMESTAMP);
     public final SqlColumn<java.util.Date> effectDate = column("effect_date", JDBCType.DATE);
-    public final SqlColumn<java.sql.Timestamp> auditTime = column("audit_time", JDBCType.TIMESTAMP);
+    public final SqlColumn<java.util.Date> auditTime = column("audit_time", JDBCType.DATE);
     public final SqlColumn<String> auditorCode = column("auditor_code", JDBCType.VARCHAR);
     public final SqlColumn<String> auditorName = column("auditor_name", JDBCType.VARCHAR);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
     public final SqlColumn<String> note = column("note", JDBCType.VARCHAR);
+    public final SqlColumn<java.util.Date> commitTime = column("commit_time", JDBCType.DATE);
 
     public PriceAdjustSalHeadTable() {
       super("PriceAdjustSalHead");

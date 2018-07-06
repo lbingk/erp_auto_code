@@ -1,14 +1,11 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salorderhead.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -147,9 +144,7 @@ public interface BaseSalOrderHeadService {
    * @param orderType
    * @param inputMode
    * @param orderStatus
-   * @param isFinish
    * @param remark
-   * @param entryDate
    * @param pageable
    * @return
    * @throws ServiceException
@@ -173,9 +168,7 @@ public interface BaseSalOrderHeadService {
       @ApiParam("orderType") Integer orderType,
       @ApiParam("inputMode") Integer inputMode,
       @ApiParam("orderStatus") Integer orderStatus,
-      @ApiParam("isFinish") Integer isFinish,
       @ApiParam("remark") String remark,
-      @ApiParam("entryDate") java.sql.Timestamp entryDate,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -192,8 +185,8 @@ public interface BaseSalOrderHeadService {
   @ApiOperation(value = "findSalOrderHeadBetween", notes = "")
   Page<SalOrderHeadDTO> findSalOrderHeadBetween(
       @ApiParam("version") Integer version,
-      @ApiParam("calDateTimeSub") java.sql.Timestamp calDateTimeSub,
-      @ApiParam("calDateTimeAdd") java.sql.Timestamp calDateTimeAdd,
+      @ApiParam("calDateTimeSub") java.util.Date calDateTimeSub,
+      @ApiParam("calDateTimeAdd") java.util.Date calDateTimeAdd,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

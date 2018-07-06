@@ -1,10 +1,8 @@
 package com.pagoda.api.salorderhead;
 
-import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.api.*;
+import com.pagoda.api.dto.salorderhead.*;
 import io.swagger.annotations.*;
-
-import java.io.Serializable;
 import java.rmi.Remote;
 import org.springframework.validation.annotation.Validated;
 

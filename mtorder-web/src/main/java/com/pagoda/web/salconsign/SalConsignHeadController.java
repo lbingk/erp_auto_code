@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsign.SalConsignHeadDTO.Getters.*;
 
 /**
  * 模型SalConsignHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalConsignHeadService")
 @Slf4j
-public class SalConsignHeadController {
+public class SalConsignHeadController implements InitializingBean {
   @Autowired private SalConsignHeadService salConsignHeadService;
 
   @Autowired private SalConsignHeadValidator salConsignHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -116,29 +126,28 @@ public class SalConsignHeadController {
    * "说明") @RequiresResource(@ResourceFilter(resourceCode = "资源属性代码", model = "需要权限过滤的模型", field =
    * "资源属性对应的模型字段"))
    *
-   * @param orderId
-   * @param orderNo
-   * @param waveNo
-   * @param tatalQty
-   * @param totalAmt
-   * @param entryDate
-   * @param conStatus
-   * @param printStatus
-   * @param printCount
    * @param seqno
    * @param entId
+   * @param orderId
+   * @param orderNo
    * @param conOrgId
    * @param conOrgCode
    * @param conOrgName
    * @param cusOrgId
    * @param cusOrgCode
    * @param cusOrgName
+   * @param waveNo
    * @param transitLineNo
    * @param taxAmt
+   * @param totalAmt
    * @param shippedQty
    * @param shippedAmt
    * @param preArrivalDate
+   * @param conStatus
+   * @param printStatus
+   * @param printCount
    * @param remark
+   * @param totalQty
    * @param pageable
    * @return
    */
@@ -146,54 +155,52 @@ public class SalConsignHeadController {
   @ApiOperation(value = "findBy", notes = "前端页面查询接口, 包含所有可查询的字段")
   @GetMapping(value = "/findBy")
   public Page<SalConsignHeadDTO> findBy(
-      @RequestParam(required = false, value = "orderId") Long orderId,
-      @RequestParam(required = false, value = "orderNo") String orderNo,
-      @RequestParam(required = false, value = "waveNo") String waveNo,
-      @RequestParam(required = false, value = "tatalQty") java.math.BigDecimal tatalQty,
-      @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
-      @RequestParam(required = false, value = "entryDate") java.sql.Timestamp entryDate,
-      @RequestParam(required = false, value = "conStatus") Integer conStatus,
-      @RequestParam(required = false, value = "printStatus") Integer printStatus,
-      @RequestParam(required = false, value = "printCount") Integer printCount,
       @RequestParam(required = false, value = "seqno") String seqno,
       @RequestParam(required = false, value = "entId") Long entId,
+      @RequestParam(required = false, value = "orderId") Long orderId,
+      @RequestParam(required = false, value = "orderNo") String orderNo,
       @RequestParam(required = false, value = "conOrgId") Long conOrgId,
       @RequestParam(required = false, value = "conOrgCode") String conOrgCode,
       @RequestParam(required = false, value = "conOrgName") String conOrgName,
       @RequestParam(required = false, value = "cusOrgId") Long cusOrgId,
       @RequestParam(required = false, value = "cusOrgCode") String cusOrgCode,
       @RequestParam(required = false, value = "cusOrgName") String cusOrgName,
+      @RequestParam(required = false, value = "waveNo") String waveNo,
       @RequestParam(required = false, value = "transitLineNo") String transitLineNo,
       @RequestParam(required = false, value = "taxAmt") java.math.BigDecimal taxAmt,
+      @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
       @RequestParam(required = false, value = "shippedQty") java.math.BigDecimal shippedQty,
       @RequestParam(required = false, value = "shippedAmt") java.math.BigDecimal shippedAmt,
       @RequestParam(required = false, value = "preArrivalDate") java.util.Date preArrivalDate,
+      @RequestParam(required = false, value = "conStatus") Integer conStatus,
+      @RequestParam(required = false, value = "printStatus") Integer printStatus,
+      @RequestParam(required = false, value = "printCount") Integer printCount,
       @RequestParam(required = false, value = "remark") String remark,
+      @RequestParam(required = false, value = "totalQty") java.math.BigDecimal totalQty,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salConsignHeadService.findBy(
-        orderId,
-        orderNo,
-        waveNo,
-        tatalQty,
-        totalAmt,
-        entryDate,
-        conStatus,
-        printStatus,
-        printCount,
         seqno,
         entId,
+        orderId,
+        orderNo,
         conOrgId,
         conOrgCode,
         conOrgName,
         cusOrgId,
         cusOrgCode,
         cusOrgName,
+        waveNo,
         transitLineNo,
         taxAmt,
+        totalAmt,
         shippedQty,
         shippedAmt,
         preArrivalDate,
+        conStatus,
+        printStatus,
+        printCount,
         remark,
+        totalQty,
         pageable);
   }
 }

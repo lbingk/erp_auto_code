@@ -1,10 +1,8 @@
 package com.pagoda.domain.salorderhead.sql;
 
-import lombok.Data;
+import com.pagoda.domain.salorderhead.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.salorderhead.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 
@@ -45,9 +43,7 @@ public class SalOrderHeadDynamicSqlSupport {
   public static SqlColumn<Integer> orderType = salOrderHeadTable.orderType;
   public static SqlColumn<Integer> inputMode = salOrderHeadTable.inputMode;
   public static SqlColumn<Integer> orderStatus = salOrderHeadTable.orderStatus;
-  public static SqlColumn<Integer> isFinish = salOrderHeadTable.isFinish;
   public static SqlColumn<String> remark = salOrderHeadTable.remark;
-  public static SqlColumn<java.sql.Timestamp> entryDate = salOrderHeadTable.entryDate;
 
   public static final class SalOrderHeadTable extends SqlTable {
     public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -83,9 +79,7 @@ public class SalOrderHeadDynamicSqlSupport {
     public final SqlColumn<Integer> orderType = column("order_type", JDBCType.INTEGER);
     public final SqlColumn<Integer> inputMode = column("input_mode", JDBCType.INTEGER);
     public final SqlColumn<Integer> orderStatus = column("order_status", JDBCType.INTEGER);
-    public final SqlColumn<Integer> isFinish = column("is_finish", JDBCType.INTEGER);
     public final SqlColumn<String> remark = column("remark", JDBCType.VARCHAR);
-    public final SqlColumn<java.sql.Timestamp> entryDate = column("entry_date", JDBCType.TIMESTAMP);
 
     public SalOrderHeadTable() {
       super("SalOrderHead");

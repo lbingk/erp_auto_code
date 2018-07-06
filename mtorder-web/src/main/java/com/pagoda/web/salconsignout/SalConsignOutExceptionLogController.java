@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salconsignout.SalConsignOutExceptionLogDTO.Getters.*;
 
 /**
  * 模型SalConsignOutExceptionLog对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalConsignOutExceptionLogService")
 @Slf4j
-public class SalConsignOutExceptionLogController {
+public class SalConsignOutExceptionLogController implements InitializingBean {
   @Autowired private SalConsignOutExceptionLogService salConsignOutExceptionLogService;
 
   @Autowired private SalConsignOutExceptionLogValidator salConsignOutExceptionLogValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -117,7 +127,39 @@ public class SalConsignOutExceptionLogController {
    * "说明") @RequiresResource(@ResourceFilter(resourceCode = "资源属性代码", model = "需要权限过滤的模型", field =
    * "资源属性对应的模型字段"))
    *
+   * @param stockoutId
+   * @param stockoutSeqno
+   * @param conId
+   * @param conSeqno
+   * @param orderId
+   * @param orderSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsSpec
+   * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
+   * @param salUnitRate
+   * @param salConOutDepotId
+   * @param salConOutDepotCode
+   * @param salConOutDepotName
+   * @param shippedQty
+   * @param shippedNetWeight
+   * @param shippedGrossWeight
+   * @param shippedVolume
+   * @param price
    * @param amount
+   * @param shipSeq
+   * @param consignTime
+   * @param consignerId
+   * @param consignerName
+   * @param stockoutStatus
+   * @param auditTime
+   * @param auditorCode
+   * @param auditorName
+   * @param remark
+   * @param note
    * @param pageable
    * @return
    */
@@ -125,8 +167,76 @@ public class SalConsignOutExceptionLogController {
   @ApiOperation(value = "findBy", notes = "前端页面查询接口, 包含所有可查询的字段")
   @GetMapping(value = "/findBy")
   public Page<SalConsignOutExceptionLogDTO> findBy(
+      @RequestParam(required = false, value = "stockoutId") Long stockoutId,
+      @RequestParam(required = false, value = "stockoutSeqno") String stockoutSeqno,
+      @RequestParam(required = false, value = "conId") Long conId,
+      @RequestParam(required = false, value = "conSeqno") String conSeqno,
+      @RequestParam(required = false, value = "orderId") Long orderId,
+      @RequestParam(required = false, value = "orderSeqno") String orderSeqno,
+      @RequestParam(required = false, value = "entId") Long entId,
+      @RequestParam(required = false, value = "goodsId") Long goodsId,
+      @RequestParam(required = false, value = "goodsCode") String goodsCode,
+      @RequestParam(required = false, value = "goodsSpec") String goodsSpec,
+      @RequestParam(required = false, value = "salUnitId") Long salUnitId,
+      @RequestParam(required = false, value = "salUnitCode") String salUnitCode,
+      @RequestParam(required = false, value = "salUnitName") String salUnitName,
+      @RequestParam(required = false, value = "salUnitRate") java.math.BigDecimal salUnitRate,
+      @RequestParam(required = false, value = "salConOutDepotId") Long salConOutDepotId,
+      @RequestParam(required = false, value = "salConOutDepotCode") String salConOutDepotCode,
+      @RequestParam(required = false, value = "salConOutDepotName") String salConOutDepotName,
+      @RequestParam(required = false, value = "shippedQty") java.math.BigDecimal shippedQty,
+      @RequestParam(required = false, value = "shippedNetWeight")
+          java.math.BigDecimal shippedNetWeight,
+      @RequestParam(required = false, value = "shippedGrossWeight")
+          java.math.BigDecimal shippedGrossWeight,
+      @RequestParam(required = false, value = "shippedVolume") java.math.BigDecimal shippedVolume,
+      @RequestParam(required = false, value = "price") java.math.BigDecimal price,
       @RequestParam(required = false, value = "amount") java.math.BigDecimal amount,
+      @RequestParam(required = false, value = "shipSeq") Integer shipSeq,
+      @RequestParam(required = false, value = "consignTime") java.util.Date consignTime,
+      @RequestParam(required = false, value = "consignerId") Long consignerId,
+      @RequestParam(required = false, value = "consignerName") String consignerName,
+      @RequestParam(required = false, value = "stockoutStatus") Integer stockoutStatus,
+      @RequestParam(required = false, value = "auditTime") java.util.Date auditTime,
+      @RequestParam(required = false, value = "auditorCode") String auditorCode,
+      @RequestParam(required = false, value = "auditorName") String auditorName,
+      @RequestParam(required = false, value = "remark") String remark,
+      @RequestParam(required = false, value = "note") String note,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
-    return salConsignOutExceptionLogService.findBy(amount, pageable);
+    return salConsignOutExceptionLogService.findBy(
+        stockoutId,
+        stockoutSeqno,
+        conId,
+        conSeqno,
+        orderId,
+        orderSeqno,
+        entId,
+        goodsId,
+        goodsCode,
+        goodsSpec,
+        salUnitId,
+        salUnitCode,
+        salUnitName,
+        salUnitRate,
+        salConOutDepotId,
+        salConOutDepotCode,
+        salConOutDepotName,
+        shippedQty,
+        shippedNetWeight,
+        shippedGrossWeight,
+        shippedVolume,
+        price,
+        amount,
+        shipSeq,
+        consignTime,
+        consignerId,
+        consignerName,
+        stockoutStatus,
+        auditTime,
+        auditorCode,
+        auditorName,
+        remark,
+        note,
+        pageable);
   }
 }

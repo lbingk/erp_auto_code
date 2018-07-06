@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salorderhead.SalOrderHeadDTO.Getters.*;
 
 /**
  * 模型SalOrderHead对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalOrderHeadService")
 @Slf4j
-public class SalOrderHeadController {
+public class SalOrderHeadController implements InitializingBean {
   @Autowired private SalOrderHeadService salOrderHeadService;
 
   @Autowired private SalOrderHeadValidator salOrderHeadValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -133,9 +143,7 @@ public class SalOrderHeadController {
    * @param orderType
    * @param inputMode
    * @param orderStatus
-   * @param isFinish
    * @param remark
-   * @param entryDate
    * @param pageable
    * @return
    */
@@ -161,9 +169,7 @@ public class SalOrderHeadController {
       @RequestParam(required = false, value = "orderType") Integer orderType,
       @RequestParam(required = false, value = "inputMode") Integer inputMode,
       @RequestParam(required = false, value = "orderStatus") Integer orderStatus,
-      @RequestParam(required = false, value = "isFinish") Integer isFinish,
       @RequestParam(required = false, value = "remark") String remark,
-      @RequestParam(required = false, value = "entryDate") java.sql.Timestamp entryDate,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salOrderHeadService.findBy(
         entId,
@@ -183,9 +189,7 @@ public class SalOrderHeadController {
         orderType,
         inputMode,
         orderStatus,
-        isFinish,
         remark,
-        entryDate,
         pageable);
   }
 }

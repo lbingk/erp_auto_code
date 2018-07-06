@@ -1,10 +1,16 @@
 package com.pagoda.domain.salorderhead;
 
-import com.pagoda.platform.jms.annotation.*;
-import com.pagoda.platform.jms.hibernate.SnowflakeGenerator;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salorderhead.*;
-
+import com.pagoda.platform.jms.annotation.*;
+import com.pagoda.platform.jms.jpa.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import ma.glasnost.orika.*;
@@ -16,16 +22,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.domain.AbstractAggregateRoot;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.lang.reflect.*;
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * 销售预订单明细表实体定义
@@ -88,94 +84,94 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
 
   @FieldMeta(
     name = "created_at",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '创建时间'")
+  @Column(name = "created_at", updatable = false, columnDefinition = "datetime COMMENT '录入时间'")
   @CreatedDate
   private Date createdAt;
 
   @FieldMeta(
     name = "creator_code",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '创建人code'")
+  @Column(name = "creator_code", columnDefinition = "varchar(30) COMMENT '录入人代码'")
   @CreatedBy
   private String creatorCode;
 
   @FieldMeta(
     name = "creator_name",
-    nameCN = "创建人name",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '创建人name'")
+  @Column(name = "creator_name", columnDefinition = "varchar(30) COMMENT '录入人名称'")
   private String creatorName;
 
   @FieldMeta(
     name = "creator_org_code",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '创建人所属部门'")
+  @Column(name = "creator_org_code", columnDefinition = "varchar(200) COMMENT '录入人机构代码'")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "last_modified_at",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最近修改时间'")
+  @Column(name = "last_modified_at", columnDefinition = "datetime COMMENT '最后修改时间'")
   @LastModifiedDate
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifier_code",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最近修改人code'")
+  @Column(name = "modifier_code", columnDefinition = "varchar(30) COMMENT '最后修改人代码'")
   @LastModifiedBy
   private String modifierCode;
 
   @FieldMeta(
     name = "modifier_name",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最近修改人name'")
+  @Column(name = "modifier_name", columnDefinition = "varchar(30) COMMENT '最后修改人名称'")
   private String modifierName;
 
   @FieldMeta(
     name = "modifier_org_code",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '修改人所属部门'")
+  @Column(name = "modifier_org_code", columnDefinition = "varchar(200) COMMENT '最后修改人机构代码'")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -822,8 +818,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "salUnitCode",
     scene = "",
-    nameCN = "销售计量单位代码[冗余]",
-    comment = "销售计量单位代码[冗余]",
+    nameCN = "销售单位代码[冗余]",
+    comment = "销售单位代码[冗余]",
     nameEN = "sal_unit_code",
     type = "字符串",
     format = "",
@@ -852,15 +848,15 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '销售计量单位代码[冗余]'"
+    columnDefinition = "varchar(35)   COMMENT '销售单位代码[冗余]'"
   )
   private String salUnitCode;
 
   @FieldMeta(
     name = "salUnitName",
     scene = "",
-    nameCN = "销售计量单位名称[冗余]",
-    comment = "销售计量单位名称[冗余]",
+    nameCN = "销售单位名称[冗余]",
+    comment = "销售单位名称[冗余]",
     nameEN = "sal_unit_name",
     type = "字符串",
     format = "",
@@ -889,7 +885,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(60)   COMMENT '销售计量单位名称[冗余]'"
+    columnDefinition = "varchar(60)   COMMENT '销售单位名称[冗余]'"
   )
   private String salUnitName;
 
@@ -933,8 +929,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "basUnitId",
     scene = "",
-    nameCN = "基本单位ID(即最小单位)",
-    comment = "基本单位ID(即最小单位)",
+    nameCN = "基础计量单位ID",
+    comment = "基础计量单位ID",
     nameEN = "bas_unit_id",
     type = "长整型",
     format = "",
@@ -963,15 +959,15 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "BIGINT   COMMENT '基本单位ID(即最小单位)'"
+    columnDefinition = "BIGINT   COMMENT '基础计量单位ID'"
   )
   private Long basUnitId;
 
   @FieldMeta(
     name = "basUnitCode",
     scene = "",
-    nameCN = "基本单位代码[冗余]",
-    comment = "基本单位代码[冗余]",
+    nameCN = "基础计量单位代码[冗余]",
+    comment = "基础计量单位代码[冗余]",
     nameEN = "bas_unit_code",
     type = "字符串",
     format = "",
@@ -1000,15 +996,15 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(35)   COMMENT '基本单位代码[冗余]'"
+    columnDefinition = "varchar(35)   COMMENT '基础计量单位代码[冗余]'"
   )
   private String basUnitCode;
 
   @FieldMeta(
     name = "basUnitName",
     scene = "",
-    nameCN = "基本单位名称[冗余]",
-    comment = "基本单位名称[冗余]",
+    nameCN = "基础计量单位名称[冗余]",
+    comment = "基础计量单位名称[冗余]",
     nameEN = "bas_unit_name",
     type = "字符串",
     format = "",
@@ -1037,7 +1033,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(60)   COMMENT '基本单位名称[冗余]'"
+    columnDefinition = "varchar(60)   COMMENT '基础计量单位名称[冗余]'"
   )
   private String basUnitName;
 
@@ -1118,8 +1114,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "price",
     scene = "",
-    nameCN = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
-    comment = "配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]",
+    nameCN = "报价(采购价)",
+    comment = "报价(采购价)",
     nameEN = "price",
     type = "小数",
     format = "",
@@ -1148,7 +1144,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 6,
-    columnDefinition = "decimal(18,10)   COMMENT '配送价(含税)[数据来源价格管理的配送价格的最新价格，同订单价格]'"
+    columnDefinition = "decimal(18,10)   COMMENT '报价(采购价)'"
   )
   private java.math.BigDecimal price;
 
@@ -1230,8 +1226,8 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
   @FieldMeta(
     name = "remark",
     scene = "",
-    nameCN = "备注",
-    comment = "备注",
+    nameCN = "备注,需要时可由程序写值",
+    comment = "备注,需要时可由程序写值",
     nameEN = "remark",
     type = "字符串",
     format = "",
@@ -1260,7 +1256,7 @@ public class SalPreOrderDetail extends SalPreOrderDetailDTO implements Serializa
     nullable = true,
     precision = 0,
     scale = 0,
-    columnDefinition = "varchar(300)   COMMENT '备注'"
+    columnDefinition = "varchar(300)   COMMENT '备注,需要时可由程序写值'"
   )
   private String remark;
 

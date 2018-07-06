@@ -1,14 +1,12 @@
 package com.pagoda.api.dto.salconsignout;
 
-import com.pagoda.api.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import io.swagger.annotations.*;
 
 /**
  * 查询方法返回的DTO对象
@@ -66,8 +64,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "shippedQty",
     scene = "",
-    nameCN = "已发数量",
-    comment = "已发数量",
+    nameCN = "实发数量",
+    comment = "实发数量",
     nameEN = "shipped_qty",
     type = "小数",
     format = "",
@@ -93,7 +91,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedQty",
-    value = "已发数量",
+    value = "实发数量",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c21d"
   )
@@ -138,8 +136,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "conSeqno",
     scene = "",
-    nameCN = "发货单号",
-    comment = "发货单号",
+    nameCN = "发货单号[冗余]",
+    comment = "发货单号[冗余]",
     nameEN = "con_seqno",
     type = "字符串",
     format = "",
@@ -165,7 +163,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "conSeqno",
-    value = "发货单号",
+    value = "发货单号[冗余]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c20b"
   )
@@ -173,9 +171,9 @@ public class FindSalConsignOutHeadDTO implements Serializable {
 
   @FieldMeta(
     name = "seqno",
-    scene = "",
-    nameCN = "调价单号[adjustNo]",
-    comment = "调价单号[adjustNo]",
+    scene = "price",
+    nameCN = "调价单号",
+    comment = "调价单号",
     nameEN = "seqno",
     type = "字符串",
     format = "",
@@ -201,15 +199,15 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "seqno",
-    value = "调价单号[adjustNo]",
+    value = "调价单号",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c207"
+    notes = "5b36e3bf9d2feff19b287d2f"
   )
   private String seqno;
 
   @FieldMeta(
     name = "auditorName",
-    scene = "",
+    scene = "price",
     nameCN = "审核人姓名",
     comment = "审核人姓名",
     nameEN = "auditor_name",
@@ -239,7 +237,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
     name = "auditorName",
     value = "审核人姓名",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c22d"
+    notes = "5b36e62d9d2feff19b2aea97"
   )
   private String auditorName;
 
@@ -282,8 +280,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "createdAt",
     scene = "",
-    nameCN = "创建时间",
-    comment = "创建时间",
+    nameCN = "录入时间",
+    comment = "录入时间",
     nameEN = "",
     type = "时间",
     format = "",
@@ -307,12 +305,12 @@ public class FindSalConsignOutHeadDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "", notes = "")
-  private java.sql.Timestamp createdAt;
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "", notes = "")
+  private java.util.Date createdAt;
 
   @FieldMeta(
     name = "remark",
-    scene = "",
+    scene = "price",
     nameCN = "备注",
     comment = "备注",
     nameEN = "remark",
@@ -342,7 +340,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
     name = "remark",
     value = "备注",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c231"
+    notes = "5b36e6a39d2feff19b2b62b5"
   )
   private String remark;
 
@@ -384,7 +382,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
 
   @FieldMeta(
     name = "auditTime",
-    scene = "",
+    scene = "purt",
     nameCN = "审核时间",
     comment = "审核时间",
     nameEN = "audit_time",
@@ -414,9 +412,9 @@ public class FindSalConsignOutHeadDTO implements Serializable {
     name = "auditTime",
     value = "审核时间",
     dataType = "",
-    notes = "5b35d1c89d2feff19b40c22f"
+    notes = "5b36e5e69d2feff19b2aa2d9"
   )
-  private java.sql.Timestamp auditTime;
+  private java.util.Date auditTime;
 
   @FieldMeta(
     name = "cusOrgName",
@@ -457,8 +455,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "taxAmt",
     scene = "",
-    nameCN = "税金[税率*实际总金额]",
-    comment = "税金[税率*实际总金额]",
+    nameCN = "税金",
+    comment = "税金",
     nameEN = "tax_amt",
     type = "小数",
     format = "",
@@ -484,7 +482,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "taxAmt",
-    value = "税金[税率*实际总金额]",
+    value = "税金",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c225"
   )
@@ -493,8 +491,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "shippedAmt",
     scene = "",
-    nameCN = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
-    comment = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    nameCN = "实发金额[实发数量*实发单价]",
+    comment = "实发金额[实发数量*实发单价]",
     nameEN = "shipped_amt",
     type = "小数",
     format = "",
@@ -520,7 +518,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "shippedAmt",
-    value = "已发货总金额[=(第n次发货数量*第n次发货单价+第n+1次发货数量*第n+1次发货单价)]",
+    value = "实发金额[实发数量*实发单价]",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c227"
   )
@@ -601,8 +599,8 @@ public class FindSalConsignOutHeadDTO implements Serializable {
   @FieldMeta(
     name = "creatorName",
     scene = "",
-    nameCN = "创建人名称",
-    comment = "创建人名称",
+    nameCN = "录入人名称",
+    comment = "录入人名称",
     nameEN = "",
     type = "字符串",
     format = "",
@@ -626,7 +624,7 @@ public class FindSalConsignOutHeadDTO implements Serializable {
     sensitive = false,
     index = -1
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "", notes = "")
   private String creatorName;
 
   @FieldMeta(

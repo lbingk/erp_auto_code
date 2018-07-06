@@ -1,10 +1,8 @@
 package com.pagoda.domain.pridistribution.sql;
 
-import lombok.Data;
+import com.pagoda.domain.pridistribution.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.pridistribution.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 

@@ -1,14 +1,18 @@
 package com.pagoda.api.dto.pripurchase;
 
-import com.pagoda.api.dto.*;
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.pripurchase.PriceAdjustPurHeadDTO.Getters.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pagoda.api.dto.*;
 import com.pagoda.platform.jms.annotation.*;
+import io.swagger.annotations.*;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.lang.reflect.*;
-import java.io.Serializable;
-import java.util.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.*;
 
@@ -62,90 +66,90 @@ public class PriceAdjustPurHeadDTO extends AbstractDTO implements Serializable {
 
   @FieldMeta(
     name = "createdAt",
-    nameCN = "创建时间",
+    nameCN = "录入时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "createdAt", value = "创建时间", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "createdAt", value = "录入时间", dataType = "datetime", notes = "")
   private Date createdAt;
 
   @FieldMeta(
     name = "creatorCode",
-    nameCN = "创建人code",
+    nameCN = "录入人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorCode", value = "创建人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorCode", value = "录入人代码", dataType = "string", notes = "")
   private String creatorCode;
 
   @FieldMeta(
     name = "creatorName",
-    nameCN = "创建人名称",
+    nameCN = "录入人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorName", value = "创建人名称", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorName", value = "录入人名称", dataType = "string", notes = "")
   private String creatorName;
 
   @FieldMeta(
     name = "creatorOrgCode",
-    nameCN = "创建人所属部门",
+    nameCN = "录入人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "creatorOrgCode", value = "创建人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "creatorOrgCode", value = "录入人机构代码", dataType = "string", notes = "")
   private String creatorOrgCode;
 
   @FieldMeta(
     name = "lastModifiedAt",
-    nameCN = "最近修改时间",
+    nameCN = "最后修改时间",
     type = "datetime",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "lastModifiedAt", value = "", dataType = "datetime", notes = "")
+  @ApiModelProperty(name = "lastModifiedAt", value = "最后修改时间", dataType = "datetime", notes = "")
   private Date lastModifiedAt;
 
   @FieldMeta(
     name = "modifierCode",
-    nameCN = "最近修改人code",
+    nameCN = "最后修改人代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierCode", value = "最近修改人code", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierCode", value = "最后修改人代码", dataType = "string", notes = "")
   private String modifierCode;
 
   @FieldMeta(
     name = "modifierName",
-    nameCN = "最近修改人name",
+    nameCN = "最后修改人名称",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierName", value = "最近修改人name", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierName", value = "最后修改人名称", dataType = "string", notes = "")
   private String modifierName;
 
   @FieldMeta(
     name = "modifierOrgCode",
-    nameCN = "修改人所属部门",
+    nameCN = "最后修改人机构代码",
     type = "string",
     visible = true,
     canQuery = false,
     readOnly = true
   )
-  @ApiModelProperty(name = "modifierOrgCode", value = "修改人所属部门", dataType = "string", notes = "")
+  @ApiModelProperty(name = "modifierOrgCode", value = "最后修改人机构代码", dataType = "string", notes = "")
   private String modifierOrgCode;
 
   @FieldMeta(
@@ -448,42 +452,6 @@ public class PriceAdjustPurHeadDTO extends AbstractDTO implements Serializable {
   private Integer status;
 
   @FieldMeta(
-    name = "entryTime",
-    scene = "price",
-    nameCN = "录入完成时间",
-    comment = "录入完成时间",
-    nameEN = "entry_time",
-    type = "时间",
-    format = "",
-    displayLen = 1,
-    formSize = "",
-    constraint = "",
-    constraintParams = "",
-    persistent = true,
-    canQuery = true,
-    readOnly = false,
-    required = false,
-    visible = true,
-    defaultValue = "",
-    tag = "",
-    sortable = false,
-    total = false,
-    pageTotal = false,
-    enumerationType = false,
-    constraintParamsExtra = "",
-    fixed = "",
-    sensitive = false,
-    index = 0
-  )
-  @ApiModelProperty(
-    name = "entryTime",
-    value = "录入完成时间",
-    dataType = "",
-    notes = "5b36e5949d2feff19b2a4fdc"
-  )
-  private java.sql.Timestamp entryTime;
-
-  @FieldMeta(
     name = "effectDate",
     scene = "price",
     nameCN = "生效日期",
@@ -630,8 +598,8 @@ public class PriceAdjustPurHeadDTO extends AbstractDTO implements Serializable {
   @FieldMeta(
     name = "auditTime",
     scene = "",
-    nameCN = "审核时间",
-    comment = "审核时间",
+    nameCN = "当前审核时间",
+    comment = "当前审核时间",
     nameEN = "audit_time",
     type = "时间",
     format = "",
@@ -657,11 +625,11 @@ public class PriceAdjustPurHeadDTO extends AbstractDTO implements Serializable {
   )
   @ApiModelProperty(
     name = "auditTime",
-    value = "审核时间",
+    value = "当前审核时间",
     dataType = "",
     notes = "5b35d1c89d2feff19b40c22f"
   )
-  private java.sql.Timestamp auditTime;
+  private java.util.Date auditTime;
 
   @FieldMeta(
     name = "note",
@@ -698,6 +666,133 @@ public class PriceAdjustPurHeadDTO extends AbstractDTO implements Serializable {
     notes = "5b36e6c79d2feff19b2b865c"
   )
   private String note;
+
+  @FieldMeta(
+    name = "venOrgName",
+    scene = "price",
+    nameCN = "供应商名称",
+    comment = "供应商名称",
+    nameEN = "ven_org_name",
+    type = "字符串",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @ApiModelProperty(
+    name = "venOrgName",
+    value = "供应商名称",
+    dataType = "",
+    notes = "5b36e5409d2feff19b29fb44"
+  )
+  private String venOrgName;
+
+  @FieldMeta(
+    name = "commitTime",
+    scene = "price",
+    nameCN = "提交时间",
+    comment = "提交时间",
+    nameEN = "commit time ",
+    type = "时间",
+    format = "",
+    displayLen = 1,
+    formSize = "",
+    constraint = "",
+    constraintParams = "",
+    persistent = true,
+    canQuery = true,
+    readOnly = false,
+    required = false,
+    visible = true,
+    defaultValue = "",
+    tag = "",
+    sortable = false,
+    total = false,
+    pageTotal = false,
+    enumerationType = false,
+    constraintParamsExtra = "",
+    fixed = "",
+    sensitive = false,
+    index = 0
+  )
+  @ApiModelProperty(
+    name = "commitTime",
+    value = "提交时间",
+    dataType = "",
+    notes = "5b3d769f9d2feff19bd2c2ce"
+  )
+  private java.util.Date commitTime;
+
+  /** DTO字段的getter */
+  public static class Getters {
+    public static final Function<PriceAdjustPurHeadDTO, Long> _id = o -> o.getId();
+    public static final Function<PriceAdjustPurHeadDTO, Long> _deleted = o -> o.getDeleted();
+
+    public static final Function<PriceAdjustPurHeadDTO, Date> _createdAt = o -> o.getCreatedAt();
+    public static final Function<PriceAdjustPurHeadDTO, String> _creatorCode =
+        o -> o.getCreatorCode();
+    public static final Function<PriceAdjustPurHeadDTO, String> _creatorName =
+        o -> o.getCreatorName();
+    public static final Function<PriceAdjustPurHeadDTO, String> _creatorOrgCode =
+        o -> o.getCreatorOrgCode();
+    public static final Function<PriceAdjustPurHeadDTO, Date> _lastModifiedAt =
+        o -> o.getLastModifiedAt();
+    public static final Function<PriceAdjustPurHeadDTO, String> _modifierCode =
+        o -> o.getModifierCode();
+    public static final Function<PriceAdjustPurHeadDTO, String> _modifierName =
+        o -> o.getModifierName();
+    public static final Function<PriceAdjustPurHeadDTO, String> _modifierOrgCode =
+        o -> o.getModifierOrgCode();
+
+    public static final Function<PriceAdjustPurHeadDTO, Integer> _version = o -> o.getVersion();
+
+    public static final Function<PriceAdjustPurHeadDTO, String> _seqno = o -> o.getSeqno();
+    public static final Function<PriceAdjustPurHeadDTO, Long> _entId = o -> o.getEntId();
+    public static final Function<PriceAdjustPurHeadDTO, Long> _arrOrgId = o -> o.getArrOrgId();
+    public static final Function<PriceAdjustPurHeadDTO, String> _arrOrgCode =
+        o -> o.getArrOrgCode();
+    public static final Function<PriceAdjustPurHeadDTO, String> _arrOrgName =
+        o -> o.getArrOrgName();
+    public static final Function<PriceAdjustPurHeadDTO, Long> _venOrgId = o -> o.getVenOrgId();
+    public static final Function<PriceAdjustPurHeadDTO, String> _venOrgCode =
+        o -> o.getVenOrgCode();
+    public static final Function<PriceAdjustPurHeadDTO, Integer> _status = o -> o.getStatus();
+    public static final Function<PriceAdjustPurHeadDTO, java.util.Date> _effectDate =
+        o -> o.getEffectDate();
+    public static final Function<PriceAdjustPurHeadDTO, String> _auditorCode =
+        o -> o.getAuditorCode();
+    public static final Function<PriceAdjustPurHeadDTO, String> _auditorName =
+        o -> o.getAuditorName();
+    public static final Function<PriceAdjustPurHeadDTO, String> _remark = o -> o.getRemark();
+    public static final Function<PriceAdjustPurHeadDTO, java.util.Date> _auditTime =
+        o -> o.getAuditTime();
+    public static final Function<PriceAdjustPurHeadDTO, String> _note = o -> o.getNote();
+    public static final Function<PriceAdjustPurHeadDTO, String> _venOrgName =
+        o -> o.getVenOrgName();
+    public static final Function<PriceAdjustPurHeadDTO, java.util.Date> _commitTime =
+        o -> o.getCommitTime();
+  }
+
+  public static ValidatorBuilder<PriceAdjustPurHeadDTO> validatorExample() {
+    ValidatorBuilder<PriceAdjustPurHeadDTO> builder = new ValidatorBuilder<>();
+    return builder;
+  }
 
   /** 存储页面post请求的分页参数 */
   private Pageable pageable;

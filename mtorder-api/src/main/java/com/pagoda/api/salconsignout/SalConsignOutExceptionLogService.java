@@ -1,10 +1,8 @@
 package com.pagoda.api.salconsignout;
 
-import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.api.*;
+import com.pagoda.api.dto.salconsignout.*;
 import io.swagger.annotations.*;
-
-import java.io.Serializable;
 import java.rmi.Remote;
 import org.springframework.validation.annotation.Validated;
 

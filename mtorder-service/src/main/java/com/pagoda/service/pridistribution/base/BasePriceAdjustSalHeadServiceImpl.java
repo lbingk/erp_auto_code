@@ -1,19 +1,17 @@
 package com.pagoda.service.pridistribution.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.pridistribution.*;
 import com.pagoda.api.dto.pridistribution.*;
+import com.pagoda.api.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.pridistribution.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BasePriceAdjustSalHeadServiceImpl
-    implements PriceAdjustSalHeadService, InitializingBean {
+    implements BasePriceAdjustSalHeadService, InitializingBean {
 
   @Autowired protected PriceAdjustSalHeadRepository repository;
 
@@ -207,13 +205,13 @@ public abstract class BasePriceAdjustSalHeadServiceImpl
       @ApiParam("priceCatCode") String priceCatCode,
       @ApiParam("priceCatId") Long priceCatId,
       @ApiParam("status") Integer status,
-      @ApiParam("entryTime") java.sql.Timestamp entryTime,
       @ApiParam("effectDate") java.util.Date effectDate,
-      @ApiParam("auditTime") java.sql.Timestamp auditTime,
+      @ApiParam("auditTime") java.util.Date auditTime,
       @ApiParam("auditorCode") String auditorCode,
       @ApiParam("auditorName") String auditorName,
       @ApiParam("remark") String remark,
       @ApiParam("note") String note,
+      @ApiParam("commitTime") java.util.Date commitTime,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
@@ -224,13 +222,13 @@ public abstract class BasePriceAdjustSalHeadServiceImpl
           priceCatCode,
           priceCatId,
           status,
-          entryTime,
           effectDate,
           auditTime,
           auditorCode,
           auditorName,
           remark,
           note,
+          commitTime,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -265,10 +263,10 @@ public abstract class BasePriceAdjustSalHeadServiceImpl
       @ApiParam("price_cat_code") String priceCatCode,
       @ApiParam("price_cat_name") String priceCatName,
       @ApiParam("status") Integer status,
-      @ApiParam("created_at1") java.sql.Timestamp createdAt1,
-      @ApiParam("created_at2") java.sql.Timestamp createdAt2,
-      @ApiParam("last_modified_at1") java.sql.Timestamp lastModifiedAt1,
-      @ApiParam("last_modified_at2") java.sql.Timestamp lastModifiedAt2,
+      @ApiParam("created_at1") java.util.Date createdAt1,
+      @ApiParam("created_at2") java.util.Date createdAt2,
+      @ApiParam("last_modified_at1") java.util.Date lastModifiedAt1,
+      @ApiParam("last_modified_at2") java.util.Date lastModifiedAt2,
       @ApiParam("creator_org_code") String creatorOrgCode,
       @ApiParam("creator_org_code_list") String creatorOrgCodeList,
       @ApiParam("seqno") String seqno,

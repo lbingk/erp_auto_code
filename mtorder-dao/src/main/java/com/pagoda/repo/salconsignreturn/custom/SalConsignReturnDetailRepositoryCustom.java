@@ -3,12 +3,10 @@ package com.pagoda.repo.salconsignreturn.custom;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalConsignReturnDetail扩展数据访问接口
@@ -23,22 +21,58 @@ public interface SalConsignReturnDetailRepositoryCustom {
    *
    * @param returnId
    * @param returnSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsName
+   * @param goodsSpec
+   * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
    * @param salRate
    * @param salRetInDepotId
    * @param salRetInDepotCode
    * @param salRetInDepotName
+   * @param returnQty
+   * @param stockinQty
+   * @param stockinNetWeight
+   * @param stockinGrossWeight
+   * @param price
    * @param returnPrice
+   * @param taxRate
+   * @param taxAmt
+   * @param totalReturnAmt
+   * @param totalStockinAmt
+   * @param remark
    * @param pageable
    * @return
    */
   Page<SalConsignReturnDetailDTO> findBy(
       @Param("returnId") Long returnId,
       @Param("returnSeqno") String returnSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsName") String goodsName,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
       @Param("salRate") java.math.BigDecimal salRate,
       @Param("salRetInDepotId") Long salRetInDepotId,
       @Param("salRetInDepotCode") String salRetInDepotCode,
       @Param("salRetInDepotName") String salRetInDepotName,
+      @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("stockinQty") java.math.BigDecimal stockinQty,
+      @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @Param("price") java.math.BigDecimal price,
       @Param("returnPrice") java.math.BigDecimal returnPrice,
+      @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @Param("remark") String remark,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -46,21 +80,57 @@ public interface SalConsignReturnDetailRepositoryCustom {
    *
    * @param returnId
    * @param returnSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsName
+   * @param goodsSpec
+   * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
    * @param salRate
    * @param salRetInDepotId
    * @param salRetInDepotCode
    * @param salRetInDepotName
+   * @param returnQty
+   * @param stockinQty
+   * @param stockinNetWeight
+   * @param stockinGrossWeight
+   * @param price
    * @param returnPrice
+   * @param taxRate
+   * @param taxAmt
+   * @param totalReturnAmt
+   * @param totalStockinAmt
+   * @param remark
    * @return
    */
   List<SalConsignReturnDetailDTO> findBy(
       @Param("returnId") Long returnId,
       @Param("returnSeqno") String returnSeqno,
+      @Param("entId") Long entId,
+      @Param("goodsId") Long goodsId,
+      @Param("goodsCode") String goodsCode,
+      @Param("goodsName") String goodsName,
+      @Param("goodsSpec") String goodsSpec,
+      @Param("salUnitId") Long salUnitId,
+      @Param("salUnitCode") String salUnitCode,
+      @Param("salUnitName") String salUnitName,
       @Param("salRate") java.math.BigDecimal salRate,
       @Param("salRetInDepotId") Long salRetInDepotId,
       @Param("salRetInDepotCode") String salRetInDepotCode,
       @Param("salRetInDepotName") String salRetInDepotName,
-      @Param("returnPrice") java.math.BigDecimal returnPrice);
+      @Param("returnQty") java.math.BigDecimal returnQty,
+      @Param("stockinQty") java.math.BigDecimal stockinQty,
+      @Param("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @Param("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @Param("price") java.math.BigDecimal price,
+      @Param("returnPrice") java.math.BigDecimal returnPrice,
+      @Param("taxRate") java.math.BigDecimal taxRate,
+      @Param("taxAmt") java.math.BigDecimal taxAmt,
+      @Param("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @Param("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @Param("remark") String remark);
 
   /**
    * 通用分页查询，用于后台查询
@@ -104,7 +174,7 @@ public interface SalConsignReturnDetailRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

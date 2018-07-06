@@ -1,20 +1,17 @@
 package com.pagoda.repo.salconsignreturn;
 
-import com.pagoda.platform.jms.annotation.SqlTemplate;
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
+import com.pagoda.platform.jms.annotation.SqlTemplate;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignreturn.custom.*;
-
 import java.util.*;
 import java.util.concurrent.*;
-
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * SalConsignReturnDetail 数据访问接口
@@ -31,19 +28,17 @@ public interface SalConsignReturnDetailRepository
    *
    * @param returnId
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    */
   @SqlTemplate(
     name = "getSCRDetailsByReturnId",
     sql =
-        "select id,goods_code,goods_name,goods_spec,sal_unit_name,return_qty,stockin_qty, return_price,tax_rate,tax_amt,total_return_amt,total_stockin_amt,remark,sal_ret_in_depot_name,stockin_net_weight, stockin_gross_weight,version from sal_consign_return_detail  where deleted = 0 {{#return_id}} and return_id=:return_id{{/return_id}} {{#creator_org_code}} and creator_org_code in ({{#codeList}}{{^-first}}, {{/-first}}\"{{this}}\"{{/codeList}}) {{/creator_org_code}}"
+        "select id,goods_code,goods_name,goods_spec,sal_unit_name,return_qty,stockin_qty, return_price,tax_rate,tax_amt,total_return_amt,total_stockin_amt,remark,sal_ret_in_depot_name,stockin_net_weight, stockin_gross_weight,version from sal_consign_return_detail where deleted = 0 {{#return_id}} and return_id=:return_id{{/return_id}} {{#creator_org_code}} and creator_org_code in ({{#creator_org_code}}{{^-first}}, {{/-first}}\"{{this}}\"{{/creator_org_code}}) {{/creator_org_code}}"
   )
   Page<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
       @Param("return_id") Long returnId,
       @Param("creator_org_code") String creatorOrgCode,
-      @Param("codeList") String codeList,
       @Param("pageable") Pageable pageable);
 
   /**
@@ -51,18 +46,15 @@ public interface SalConsignReturnDetailRepository
    *
    * @param returnId
    * @param creatorOrgCode
-   * @param codeList
    * @return
    */
   @SqlTemplate(
     name = "getSCRDetailsByReturnId",
     sql =
-        "select id,goods_code,goods_name,goods_spec,sal_unit_name,return_qty,stockin_qty, return_price,tax_rate,tax_amt,total_return_amt,total_stockin_amt,remark,sal_ret_in_depot_name,stockin_net_weight, stockin_gross_weight,version from sal_consign_return_detail  where deleted = 0 {{#return_id}} and return_id=:return_id{{/return_id}} {{#creator_org_code}} and creator_org_code in ({{#codeList}}{{^-first}}, {{/-first}}\"{{this}}\"{{/codeList}}) {{/creator_org_code}}"
+        "select id,goods_code,goods_name,goods_spec,sal_unit_name,return_qty,stockin_qty, return_price,tax_rate,tax_amt,total_return_amt,total_stockin_amt,remark,sal_ret_in_depot_name,stockin_net_weight, stockin_gross_weight,version from sal_consign_return_detail where deleted = 0 {{#return_id}} and return_id=:return_id{{/return_id}} {{#creator_org_code}} and creator_org_code in ({{#creator_org_code}}{{^-first}}, {{/-first}}\"{{this}}\"{{/creator_org_code}}) {{/creator_org_code}}"
   )
   List<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
-      @Param("return_id") Long returnId,
-      @Param("creator_org_code") String creatorOrgCode,
-      @Param("codeList") String codeList);
+      @Param("return_id") Long returnId, @Param("creator_org_code") String creatorOrgCode);
 
   /**
    * 根据returnId删除退货单明细

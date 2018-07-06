@@ -1,10 +1,8 @@
 package com.pagoda.domain.pripurchase.sql;
 
-import lombok.Data;
+import com.pagoda.domain.pripurchase.*;
 import java.sql.JDBCType;
 import java.util.Date;
-
-import com.pagoda.domain.pripurchase.*;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.SqlTable;
 

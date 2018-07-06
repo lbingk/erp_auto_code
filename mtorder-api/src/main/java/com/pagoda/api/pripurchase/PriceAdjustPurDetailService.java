@@ -1,10 +1,8 @@
 package com.pagoda.api.pripurchase;
 
-import com.pagoda.api.dto.pripurchase.*;
 import com.pagoda.api.*;
+import com.pagoda.api.dto.pripurchase.*;
 import io.swagger.annotations.*;
-
-import java.io.Serializable;
 import java.rmi.Remote;
 import org.springframework.validation.annotation.Validated;
 

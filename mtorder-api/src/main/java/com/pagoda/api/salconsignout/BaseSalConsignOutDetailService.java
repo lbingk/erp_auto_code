@@ -1,14 +1,11 @@
 package com.pagoda.api.salconsignout;
 
-import com.pagoda.api.dto.salconsignout.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salconsignout.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -136,11 +133,39 @@ public interface BaseSalConsignOutDetailService {
    *
    * @param stockoutId
    * @param stockoutSeqno
+   * @param conId
+   * @param conSeqno
+   * @param orderId
+   * @param orderSeqno
+   * @param entId
+   * @param goodsId
+   * @param goodsCode
+   * @param goodsName
+   * @param goodsSpec
    * @param salUnitId
+   * @param salUnitCode
+   * @param salUnitName
+   * @param salUnitRate
+   * @param salConOutDepotId
+   * @param salConOutDepotCode
+   * @param salConOutDepotName
+   * @param shippedQty
+   * @param shippedNetWeight
+   * @param shippedGrossWeight
+   * @param shippedVolume
+   * @param shippedPrice
+   * @param shippedAmt
+   * @param taxRate
+   * @param taxAmt
    * @param shipSeq
    * @param consignTime
    * @param consignerId
    * @param consignerName
+   * @param stockoutStatus
+   * @param auditTime
+   * @param auditorCode
+   * @param auditorName
+   * @param remark
    * @param note
    * @param pageable
    * @return
@@ -150,11 +175,39 @@ public interface BaseSalConsignOutDetailService {
   Page<SalConsignOutDetailDTO> findBy(
       @ApiParam("stockoutId") Long stockoutId,
       @ApiParam("stockoutSeqno") String stockoutSeqno,
+      @ApiParam("conId") Long conId,
+      @ApiParam("conSeqno") String conSeqno,
+      @ApiParam("orderId") Long orderId,
+      @ApiParam("orderSeqno") String orderSeqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("goodsId") Long goodsId,
+      @ApiParam("goodsCode") String goodsCode,
+      @ApiParam("goodsName") String goodsName,
+      @ApiParam("goodsSpec") String goodsSpec,
       @ApiParam("salUnitId") Long salUnitId,
+      @ApiParam("salUnitCode") String salUnitCode,
+      @ApiParam("salUnitName") String salUnitName,
+      @ApiParam("salUnitRate") java.math.BigDecimal salUnitRate,
+      @ApiParam("salConOutDepotId") Long salConOutDepotId,
+      @ApiParam("salConOutDepotCode") String salConOutDepotCode,
+      @ApiParam("salConOutDepotName") String salConOutDepotName,
+      @ApiParam("shippedQty") java.math.BigDecimal shippedQty,
+      @ApiParam("shippedNetWeight") java.math.BigDecimal shippedNetWeight,
+      @ApiParam("shippedGrossWeight") java.math.BigDecimal shippedGrossWeight,
+      @ApiParam("shippedVolume") java.math.BigDecimal shippedVolume,
+      @ApiParam("shippedPrice") java.math.BigDecimal shippedPrice,
+      @ApiParam("shippedAmt") java.math.BigDecimal shippedAmt,
+      @ApiParam("taxRate") java.math.BigDecimal taxRate,
+      @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
       @ApiParam("shipSeq") Integer shipSeq,
-      @ApiParam("consignTime") java.sql.Timestamp consignTime,
+      @ApiParam("consignTime") java.util.Date consignTime,
       @ApiParam("consignerId") Long consignerId,
       @ApiParam("consignerName") String consignerName,
+      @ApiParam("stockoutStatus") Integer stockoutStatus,
+      @ApiParam("auditTime") java.util.Date auditTime,
+      @ApiParam("auditorCode") String auditorCode,
+      @ApiParam("auditorName") String auditorName,
+      @ApiParam("remark") String remark,
       @ApiParam("note") String note,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
@@ -164,7 +217,6 @@ public interface BaseSalConsignOutDetailService {
    *
    * @param stockoutSeqno
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -173,7 +225,6 @@ public interface BaseSalConsignOutDetailService {
   Page<SalConsignOutDetailDTO> findSalConsignOutDetail(
       @ApiParam("stockout_seqno") String stockoutSeqno,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -183,7 +234,6 @@ public interface BaseSalConsignOutDetailService {
    * @param conId
    * @param goodsId
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -193,7 +243,6 @@ public interface BaseSalConsignOutDetailService {
       @ApiParam("con_id") Long conId,
       @ApiParam("goods_id") Long goodsId,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 }

@@ -1,14 +1,11 @@
 package com.pagoda.api.salconsignreturn;
 
-import com.pagoda.api.dto.salconsignreturn.*;
 import com.pagoda.api.*;
-
-import java.io.Serializable;
-import java.rmi.Remote;
+import com.pagoda.api.dto.salconsignreturn.*;
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -134,9 +131,18 @@ public interface BaseSalConsignReturnHeadService {
   /**
    * 所有可查询的字段
    *
+   * @param seqno
+   * @param entId
+   * @param arrOrgId
+   * @param arrOrgCode
+   * @param arrOrgName
+   * @param cusOrgId
+   * @param cusOrgCode
+   * @param cusOrgName
    * @param returnType
    * @param returnDate
    * @param returnQty
+   * @param transitLineNo
    * @param stockinQty
    * @param stockinGrossWeight
    * @param stockinNetWeight
@@ -144,15 +150,30 @@ public interface BaseSalConsignReturnHeadService {
    * @param totalReturnAmt
    * @param totalStockinAmt
    * @param status
+   * @param printCount
+   * @param auditorCode
+   * @param auditorName
+   * @param auditTime
+   * @param remark
+   * @param note
    * @param pageable
    * @return
    * @throws ServiceException
    */
   @ApiOperation(value = "findBy", notes = "根据非空字段查询")
   Page<SalConsignReturnHeadDTO> findBy(
+      @ApiParam("seqno") String seqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("arrOrgId") Long arrOrgId,
+      @ApiParam("arrOrgCode") String arrOrgCode,
+      @ApiParam("arrOrgName") String arrOrgName,
+      @ApiParam("cusOrgId") Long cusOrgId,
+      @ApiParam("cusOrgCode") String cusOrgCode,
+      @ApiParam("cusOrgName") String cusOrgName,
       @ApiParam("returnType") Integer returnType,
-      @ApiParam("returnDate") java.sql.Timestamp returnDate,
+      @ApiParam("returnDate") java.util.Date returnDate,
       @ApiParam("returnQty") java.math.BigDecimal returnQty,
+      @ApiParam("transitLineNo") String transitLineNo,
       @ApiParam("stockinQty") java.math.BigDecimal stockinQty,
       @ApiParam("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
       @ApiParam("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
@@ -160,6 +181,12 @@ public interface BaseSalConsignReturnHeadService {
       @ApiParam("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
       @ApiParam("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
       @ApiParam("status") Integer status,
+      @ApiParam("printCount") Integer printCount,
+      @ApiParam("auditorCode") String auditorCode,
+      @ApiParam("auditorName") String auditorName,
+      @ApiParam("auditTime") java.util.Date auditTime,
+      @ApiParam("remark") String remark,
+      @ApiParam("note") String note,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -177,7 +204,6 @@ public interface BaseSalConsignReturnHeadService {
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param creatorOrgCode
-   * @param codeList
    * @param pageable
    * @return
    * @throws ServiceException
@@ -195,7 +221,6 @@ public interface BaseSalConsignReturnHeadService {
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException;
 
@@ -213,7 +238,6 @@ public interface BaseSalConsignReturnHeadService {
    * @param preArrivalDate1
    * @param preArrivalDate2
    * @param creatorOrgCode
-   * @param codeList
    * @return
    * @throws ServiceException
    */
@@ -229,7 +253,6 @@ public interface BaseSalConsignReturnHeadService {
       @ApiParam("transit_line_no") String transitLineNo,
       @ApiParam("pre_arrival_date1") java.util.Date preArrivalDate1,
       @ApiParam("pre_arrival_date2") java.util.Date preArrivalDate2,
-      @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList)
+      @ApiParam("creator_org_code") String creatorOrgCode)
       throws ServiceException;
 }

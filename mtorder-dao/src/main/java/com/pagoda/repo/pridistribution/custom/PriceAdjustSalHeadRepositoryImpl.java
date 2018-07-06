@@ -3,14 +3,10 @@ package com.pagoda.repo.pridistribution.custom;
 import com.pagoda.api.dto.pridistribution.*;
 import com.pagoda.domain.pridistribution.*;
 import com.pagoda.platform.jms.jpa.*;
+import java.util.List;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * PriceAdjustSalHead扩展数据访问接口实现类
@@ -35,13 +31,13 @@ public class PriceAdjustSalHeadRepositoryImpl
       @Param("priceCatCode") String priceCatCode,
       @Param("priceCatId") Long priceCatId,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
       @Param("note") String note,
+      @Param("commitTime") java.util.Date commitTime,
       @Param("pageable") Pageable pageable) {
     PriceAdjustSalHead obj = PriceAdjustSalHead.toExample();
     obj.setSeqno(seqno);
@@ -50,13 +46,13 @@ public class PriceAdjustSalHeadRepositoryImpl
     obj.setPriceCatCode(priceCatCode);
     obj.setPriceCatId(priceCatId);
     obj.setStatus(status);
-    obj.setEntryTime(entryTime);
     obj.setEffectDate(effectDate);
     obj.setAuditTime(auditTime);
     obj.setAuditorCode(auditorCode);
     obj.setAuditorName(auditorName);
     obj.setRemark(remark);
     obj.setNote(note);
+    obj.setCommitTime(commitTime);
     Example<PriceAdjustSalHead> example = Example.of(obj);
 
     return findAll(example, pageable).map(PriceAdjustSalHead.DTO_CONVERTER);
@@ -70,13 +66,13 @@ public class PriceAdjustSalHeadRepositoryImpl
       @Param("priceCatCode") String priceCatCode,
       @Param("priceCatId") Long priceCatId,
       @Param("status") Integer status,
-      @Param("entryTime") java.sql.Timestamp entryTime,
       @Param("effectDate") java.util.Date effectDate,
-      @Param("auditTime") java.sql.Timestamp auditTime,
+      @Param("auditTime") java.util.Date auditTime,
       @Param("auditorCode") String auditorCode,
       @Param("auditorName") String auditorName,
       @Param("remark") String remark,
-      @Param("note") String note) {
+      @Param("note") String note,
+      @Param("commitTime") java.util.Date commitTime) {
     PriceAdjustSalHead obj = PriceAdjustSalHead.toExample();
     obj.setSeqno(seqno);
     obj.setEntId(entId);
@@ -84,13 +80,13 @@ public class PriceAdjustSalHeadRepositoryImpl
     obj.setPriceCatCode(priceCatCode);
     obj.setPriceCatId(priceCatId);
     obj.setStatus(status);
-    obj.setEntryTime(entryTime);
     obj.setEffectDate(effectDate);
     obj.setAuditTime(auditTime);
     obj.setAuditorCode(auditorCode);
     obj.setAuditorName(auditorName);
     obj.setRemark(remark);
     obj.setNote(note);
+    obj.setCommitTime(commitTime);
     Example<PriceAdjustSalHead> example = Example.of(obj);
     return findAll(example, null).map(PriceAdjustSalHead.DTO_CONVERTER).getContent();
   }
@@ -129,10 +125,10 @@ public class PriceAdjustSalHeadRepositoryImpl
         .getContent();
   }
 
-  //  @Override
-  //  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
-  //    return executeUpdate(builder);
-  //  }
+  @Override
+  public int updateByBuilder(@Param("builder") JpaUpdateBuilder builder) {
+    return executeUpdate(builder);
+  }
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

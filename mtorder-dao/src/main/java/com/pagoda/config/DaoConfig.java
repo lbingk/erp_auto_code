@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.*;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.*;
-import org.springframework.data.domain.AuditorAware;
 
 /**
  * JPA配置

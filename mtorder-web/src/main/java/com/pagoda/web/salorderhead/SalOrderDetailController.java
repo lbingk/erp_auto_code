@@ -10,12 +10,16 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.pagoda.api.dto.ValidatorBuilder.Predicates.*;
+import static com.pagoda.api.dto.salorderhead.SalOrderDetailDTO.Getters.*;
 
 /**
  * 模型SalOrderDetail对应的Controller
@@ -26,10 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/SalOrderDetailService")
 @Slf4j
-public class SalOrderDetailController {
+public class SalOrderDetailController implements InitializingBean {
   @Autowired private SalOrderDetailService salOrderDetailService;
 
   @Autowired private SalOrderDetailValidator salOrderDetailValidator;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    // 初始化自定义验证器
+
+  }
 
   @InitBinder()
   public void setupBinder(WebDataBinder binder) {
@@ -141,9 +151,6 @@ public class SalOrderDetailController {
    * @param goodsAmt
    * @param totalAmt
    * @param remark
-   * @param sourceType
-   * @param sourceId
-   * @param sourceNo
    * @param pageable
    * @return
    */
@@ -176,9 +183,6 @@ public class SalOrderDetailController {
       @RequestParam(required = false, value = "goodsAmt") java.math.BigDecimal goodsAmt,
       @RequestParam(required = false, value = "totalAmt") java.math.BigDecimal totalAmt,
       @RequestParam(required = false, value = "remark") String remark,
-      @RequestParam(required = false, value = "sourceType") Integer sourceType,
-      @RequestParam(required = false, value = "sourceId") Long sourceId,
-      @RequestParam(required = false, value = "sourceNo") String sourceNo,
       @RequestParam(required = false, value = "pageable") Pageable pageable) {
     return salOrderDetailService.findBy(
         orderId,
@@ -206,9 +210,6 @@ public class SalOrderDetailController {
         goodsAmt,
         totalAmt,
         remark,
-        sourceType,
-        sourceId,
-        sourceNo,
         pageable);
   }
 }

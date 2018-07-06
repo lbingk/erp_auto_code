@@ -3,12 +3,10 @@ package com.pagoda.repo.salorderhead.custom;
 import com.pagoda.api.dto.salorderhead.*;
 import com.pagoda.domain.salorderhead.*;
 import com.pagoda.platform.jms.jpa.*;
-
+import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
-
-import java.util.*;
 
 /**
  * SalPreOrderHead扩展数据访问接口
@@ -32,7 +30,6 @@ public interface SalPreOrderHeadRepositoryCustom {
    * @param cusOrgCode
    * @param cusOrgName
    * @param remark
-   * @param entryDate
    * @param totalAmt
    * @param totalRequestQty
    * @param pageable
@@ -50,7 +47,6 @@ public interface SalPreOrderHeadRepositoryCustom {
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
       @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate,
       @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("totalRequestQty") java.math.BigDecimal totalRequestQty,
       @Param("pageable") Pageable pageable);
@@ -69,7 +65,6 @@ public interface SalPreOrderHeadRepositoryCustom {
    * @param cusOrgCode
    * @param cusOrgName
    * @param remark
-   * @param entryDate
    * @param totalAmt
    * @param totalRequestQty
    * @return
@@ -86,7 +81,6 @@ public interface SalPreOrderHeadRepositoryCustom {
       @Param("cusOrgCode") String cusOrgCode,
       @Param("cusOrgName") String cusOrgName,
       @Param("remark") String remark,
-      @Param("entryDate") java.sql.Timestamp entryDate,
       @Param("totalAmt") java.math.BigDecimal totalAmt,
       @Param("totalRequestQty") java.math.BigDecimal totalRequestQty);
 
@@ -132,7 +126,7 @@ public interface SalPreOrderHeadRepositoryCustom {
    * @param builder
    * @return
    */
-  // int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
+  int updateByBuilder(@Param("builder") JpaUpdateBuilder builder);
 
   /**
    * 使用模糊查找方式，注意可能导致全表扫描

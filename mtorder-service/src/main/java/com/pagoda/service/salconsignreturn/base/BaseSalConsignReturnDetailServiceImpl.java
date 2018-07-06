@@ -1,19 +1,17 @@
 package com.pagoda.service.salconsignreturn.base;
 
-import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.api.*;
-import com.pagoda.api.salconsignreturn.*;
 import com.pagoda.api.dto.salconsignreturn.*;
+import com.pagoda.api.salconsignreturn.*;
 import com.pagoda.domain.salconsignreturn.*;
+import com.pagoda.platform.jms.jpa.*;
 import com.pagoda.repo.salconsignreturn.*;
-
+import io.swagger.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 import javax.validation.*;
-import io.swagger.annotations.*;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
@@ -28,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public abstract class BaseSalConsignReturnDetailServiceImpl
-    implements SalConsignReturnDetailService, InitializingBean {
+    implements BaseSalConsignReturnDetailService, InitializingBean {
 
   @Autowired protected SalConsignReturnDetailRepository repository;
 
@@ -203,22 +201,58 @@ public abstract class BaseSalConsignReturnDetailServiceImpl
   public Page<SalConsignReturnDetailDTO> findBy(
       @ApiParam("returnId") Long returnId,
       @ApiParam("returnSeqno") String returnSeqno,
+      @ApiParam("entId") Long entId,
+      @ApiParam("goodsId") Long goodsId,
+      @ApiParam("goodsCode") String goodsCode,
+      @ApiParam("goodsName") String goodsName,
+      @ApiParam("goodsSpec") String goodsSpec,
+      @ApiParam("salUnitId") Long salUnitId,
+      @ApiParam("salUnitCode") String salUnitCode,
+      @ApiParam("salUnitName") String salUnitName,
       @ApiParam("salRate") java.math.BigDecimal salRate,
       @ApiParam("salRetInDepotId") Long salRetInDepotId,
       @ApiParam("salRetInDepotCode") String salRetInDepotCode,
       @ApiParam("salRetInDepotName") String salRetInDepotName,
+      @ApiParam("returnQty") java.math.BigDecimal returnQty,
+      @ApiParam("stockinQty") java.math.BigDecimal stockinQty,
+      @ApiParam("stockinNetWeight") java.math.BigDecimal stockinNetWeight,
+      @ApiParam("stockinGrossWeight") java.math.BigDecimal stockinGrossWeight,
+      @ApiParam("price") java.math.BigDecimal price,
       @ApiParam("returnPrice") java.math.BigDecimal returnPrice,
+      @ApiParam("taxRate") java.math.BigDecimal taxRate,
+      @ApiParam("taxAmt") java.math.BigDecimal taxAmt,
+      @ApiParam("totalReturnAmt") java.math.BigDecimal totalReturnAmt,
+      @ApiParam("totalStockinAmt") java.math.BigDecimal totalStockinAmt,
+      @ApiParam("remark") String remark,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
       return repository.findBy(
           returnId,
           returnSeqno,
+          entId,
+          goodsId,
+          goodsCode,
+          goodsName,
+          goodsSpec,
+          salUnitId,
+          salUnitCode,
+          salUnitName,
           salRate,
           salRetInDepotId,
           salRetInDepotCode,
           salRetInDepotName,
+          returnQty,
+          stockinQty,
+          stockinNetWeight,
+          stockinGrossWeight,
+          price,
           returnPrice,
+          taxRate,
+          taxAmt,
+          totalReturnAmt,
+          totalStockinAmt,
+          remark,
           pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
@@ -251,11 +285,10 @@ public abstract class BaseSalConsignReturnDetailServiceImpl
   public Page<SalConsignReturnDetailDTO> getSCRDetailsByReturnId(
       @ApiParam("return_id") Long returnId,
       @ApiParam("creator_org_code") String creatorOrgCode,
-      @ApiParam("codeList") String codeList,
       @ApiParam("pageable") Pageable pageable)
       throws ServiceException {
     try {
-      return repository.getSCRDetailsByReturnId(returnId, creatorOrgCode, codeList, pageable);
+      return repository.getSCRDetailsByReturnId(returnId, creatorOrgCode, pageable);
     } catch (Exception e) {
       throw new ServiceException(e);
     }
